@@ -10,5 +10,11 @@ namespace TripometerAPI.Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+       // public virtual List<Vehicle> Vehicles {get: set;}
+
+       // public virtual List<Trips> Trips {get: set;}
+
+
     }   
 }
