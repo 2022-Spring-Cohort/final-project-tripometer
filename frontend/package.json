@@ -1,12 +1,12 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "index.js",
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack-cli --mode production --config webpack.config.js",
-    "start": "webpack-cli serve --mode development --config webpack.config.js --open"
+    "start": "webpack-cli serve --mode development --open"
   },
   "keywords": [],
   "author": "",
