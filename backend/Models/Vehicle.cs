@@ -14,8 +14,6 @@ namespace TripometerAPI.Models
 
         public string Year { get; set; }
 
-        
-
         public int OwnerId { get; set; }
 
         public virtual Owner Owner { get; set; }
