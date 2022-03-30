@@ -17,7 +17,7 @@ namespace TripometerAPI
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = BlogRun; Trusted_connection=True");
+            builder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = TripometerAPI; Trusted_connection=True");
             builder.UseLazyLoadingProxies();
         }
 
