@@ -34,7 +34,7 @@ function setup(){
 
     myprofileButton.addEventListener('click', function(){
         //ToDo: Link an user id to get the specific profile
-        Owner.AddOwnerView();
-        Owner.SetupForSubmitProfile();
+        let id = Owner.GetId();
+        Owner.GetProfile(id);
     });
 }
