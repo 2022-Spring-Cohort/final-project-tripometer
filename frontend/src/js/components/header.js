@@ -2,6 +2,7 @@
 //import constants from "../constants";
 import trip from "./trip";
 import Owner from "./owner";
+import vehicle from "./vehicle";
 
 export default {
     setup
@@ -16,6 +17,8 @@ const html = `
             <li>
                 <button id="new-trip-button">New Trip</button>
                 <button id="my-profile-button">My Profile</button>
+                <button id="Add-Vehicle-button">Add New Vehicle</button>
+                <button id="Veiw-Vehicle-button">My Vehicle</button>
             </li>
         </ul>
     </nav>
@@ -25,7 +28,8 @@ function setup(){
     element.innerHTML = html;
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
-
+    const NewVehicleButton = document.getElementById('Add-Vehicle-button');
+    const ViewVehicleButton = document.getElementById('Veiw-Vehicle-button');
 
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
@@ -37,4 +41,17 @@ function setup(){
         let id = Owner.GetId();
         Owner.GetProfile(id);
     });
+
+    NewVehicleButton.addEventListener('click', function(){
+        console.log("works");
+        vehicle.AddVehicle();
+        vehicle.SumbitVehicle();
+        
+    })
+    ViewVehicleButton.addEventListener('click', function(){
+
+         
+        vehicle.vehicleView(NewVehicle);
+    })
+
 }

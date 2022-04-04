@@ -32,6 +32,7 @@ namespace TripometerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
+           
             var vehicle = await _context.Vehicles.FindAsync(id);
 
             if (vehicle == null)
@@ -40,6 +41,14 @@ namespace TripometerAPI.Controllers
             }
 
             return vehicle;
+        }
+
+        [HttpGet("{id}")]
+        public List<Vehicle> GetVehicles(int id)
+        {
+            var vehicles = _context.Vehicles.Where(v => v.OwnerId == id).ToList();
+
+            return vehicles;
         }
 
         // PUT: api/Vehicle/5
@@ -81,7 +90,7 @@ namespace TripometerAPI.Controllers
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
+            return vehicle;
         }
 
         // DELETE: api/Vehicle/5
