@@ -12,7 +12,7 @@ namespace TripometerAPI
         public DbSet<Trip> Trips { get; set; }
 
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<MileageHistory> MileageHistories { get; set; }
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
@@ -46,6 +46,8 @@ namespace TripometerAPI
                 Id = 1,
                 StartAddress = "Cleveland",
                 EndAddress = "Columbus",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
                 ETA = 60,
                 Distance = 200,
                 EstimatedGasCost = 5,
@@ -53,14 +55,7 @@ namespace TripometerAPI
                 VehicleId = 1,
                 OwnerId = 1,
             }) ;
-            modelBuilder.Entity<MileageHistory>().HasData(new MileageHistory
-            {
-                Id = 1,
-                VehicleId = 1,
-                Mileage = 0,
-                Date = DateTime.Now
 
-            });
 
             modelBuilder.Entity<Receipt>().HasData(new Receipt
             {
