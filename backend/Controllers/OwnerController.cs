@@ -45,24 +45,20 @@ namespace TripometerAPI.Controllers
         // PUT: api/Owner/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOwner(int id, Owner owner)
+        public Owner PutOwner(Owner owner)
         {
-            if (id != owner.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(owner).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Owners.Update(owner);
+                _context.SaveChanges();
+                return _context.Owners.Find(owner.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OwnerExists(id))
+                if (!OwnerExists(owner.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
@@ -70,7 +66,7 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return NoContent();
+            
         }
 
         // POST: api/Owner
@@ -81,7 +77,7 @@ namespace TripometerAPI.Controllers
             _context.Owners.Add(owner);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOwner", new { id = owner.Id }, owner);
+            return owner;
         }
 
         // DELETE: api/Owner/5
