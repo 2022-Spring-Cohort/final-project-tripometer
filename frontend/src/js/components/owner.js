@@ -123,7 +123,7 @@ function SetupForUpdateProfile(owner){
 }
 
 
-//Get Id from coockies later
+//Todo: Get Id from coockies later
 function GetId(){
     return 1;
 }
