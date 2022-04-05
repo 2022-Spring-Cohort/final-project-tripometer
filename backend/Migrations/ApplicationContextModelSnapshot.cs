@@ -85,7 +85,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 4, 13, 37, 39, 282, DateTimeKind.Local).AddTicks(1907),
+                            Date = new DateTime(2022, 4, 5, 11, 24, 40, 301, DateTimeKind.Local).AddTicks(7533),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -165,6 +165,9 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("FuelEfficiency")
                         .HasColumnType("int");
 
+                    b.Property<float>("FuelTank")
+                        .HasColumnType("real");
+
                     b.Property<string>("Make")
                         .HasColumnType("nvarchar(max)");
 
@@ -174,8 +177,8 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Year")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -188,10 +191,11 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             FuelEfficiency = 25,
+                            FuelTank = 50f,
                             Make = "Ford",
                             Model = "Mustang",
                             OwnerId = 1,
-                            Year = "2020"
+                            Year = 2020
                         });
                 });
 
