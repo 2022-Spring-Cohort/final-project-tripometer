@@ -18,7 +18,7 @@ const html = `
                 <button id="new-trip-button">New Trip</button>
                 <button id="my-profile-button">My Profile</button>
                 <button id="Add-Vehicle-button">Add New Vehicle</button>
-                <button id="Veiw-Vehicle-button">My Vehicle</button>
+                <button id="Veiw-Vehicle-button">My Vehicles</button>
             </li>
         </ul>
     </nav>
@@ -49,9 +49,9 @@ function setup(){
         
     })
     ViewVehicleButton.addEventListener('click', function(){
-
-         
-        vehicle.vehicleView(NewVehicle);
+         console.log("works");
+         let id = vehicle.GetId();
+         vehicle.GetVehicle(id);
     })
 
 }
