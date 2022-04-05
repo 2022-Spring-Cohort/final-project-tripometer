@@ -9,11 +9,13 @@ namespace TripometerAPI.Models
 
         public string Model { get; set; }
 
-        public string Year { get; set; }
+        public int Year { get; set; }
 
         public int FuelEfficiency { get; set; }
 
         public int OwnerId { get; set; }
+
+        public float FuelTank { get; set; }
 
         public virtual Owner Owner { get; set; }
 

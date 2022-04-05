@@ -22,16 +22,17 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Vehicle
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
-        {
-            return await _context.Vehicles.ToListAsync();
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        //{
+        //    return await _context.Vehicles.ToListAsync();
+        //}
 
         // GET: api/Vehicle/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
+           
             var vehicle = await _context.Vehicles.FindAsync(id);
 
             if (vehicle == null)
@@ -41,6 +42,24 @@ namespace TripometerAPI.Controllers
 
             return vehicle;
         }
+
+        [HttpGet]
+        public List<Vehicle> GetVehicles(int? ownerId)
+        {
+            List<Vehicle> vehicles = null;
+            if(ownerId != null)
+            {
+                vehicles = _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList();
+            }
+            else
+            {
+                vehicles = _context.Vehicles.ToList();
+            }
+            
+
+            return vehicles;
+        }
+
 
         // PUT: api/Vehicle/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,7 +100,7 @@ namespace TripometerAPI.Controllers
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
+            return vehicle;
         }
 
         // DELETE: api/Vehicle/5

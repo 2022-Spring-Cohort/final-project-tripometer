@@ -27,11 +27,12 @@ namespace TripometerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllers().AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
             services.AddDbContext<ApplicationContext>();
             services.AddSwaggerGen(c =>
             {
@@ -46,6 +47,7 @@ namespace TripometerAPI
                         .AllowAnyMethod();
                 });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +59,8 @@ namespace TripometerAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TripometerAPI v1"));
             }
+
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
 

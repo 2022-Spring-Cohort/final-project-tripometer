@@ -37,7 +37,8 @@ namespace TripometerAPI
                 Model = "Mustang",
                 FuelEfficiency = 25,
                 Make = "Ford",
-                Year = "2020",
+                Year = 2020,
+                FuelTank = 50,
                 OwnerId = 1,
 
             });
