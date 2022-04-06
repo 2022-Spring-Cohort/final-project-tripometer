@@ -28,20 +28,35 @@ namespace TripometerAPI
                 Id =1,
                 FullName = "Joe Smith",
                 FirstName =" Joe",
-                LastName = "Smith",
+                LastName = "Smith"
             });
 
             modelBuilder.Entity<Vehicle>().HasData(new Vehicle
             {
+
                 Id = 1,
                 Model = "Mustang",
-                FuelEfficiency = 25,
                 Make = "Ford",
+                FuelEfficiency = 25,
                 Year = 2020,
                 FuelTank = 50,
-                OwnerId = 1,
+                OwnerId = 1
 
             });
+
+            modelBuilder.Entity<Vehicle>().HasData(new Vehicle
+            {
+
+                Id = 2,
+                Model = "Tesla",
+                Make = "Model Y",
+                FuelEfficiency = 100,
+                Year = 2020,
+                FuelTank = 200,
+                OwnerId = 1
+
+            });
+
             modelBuilder.Entity<Trip>().HasData(new Trip
             {
                 Id = 1,
@@ -54,7 +69,8 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1,
+                OwnerId = 1
+
             }) ;
 
 
@@ -66,7 +82,7 @@ namespace TripometerAPI
                 TotalCost = 800,
                 AdditionalCosts = 1200,
                 GasStation = "Cleveland",
-                TripId = 1,
+                TripId = 1
 
             });
 

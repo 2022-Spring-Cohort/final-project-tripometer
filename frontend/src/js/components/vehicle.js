@@ -8,6 +8,7 @@ export default{
     GetVehicle,
     AddVehicle,
     SumbitVehicle,
+    GetVehicles,
     vehicleView,
     GetId
 }
@@ -15,24 +16,52 @@ export default{
 const appDiv = document.getElementById("app");
 
 
+function GetVehicles(){
+    console.log("h");
+   AllRequest.allRequest(VehicleController,vehiclesView)
+
+}
+
+
 function GetVehicle(id){
     AllRequest.allRequest(VehicleController+id,vehicleView);
 
+}
+
+
+function vehiclesView(NewVehicle){
+    console.log(NewVehicle.length);
+    
+
+    let vehicles = "";
+
+    for(let i = 0; i < NewVehicle.length; i++){
+        vehicles += "<p id='VehiclesList'>" + NewVehicle[i].model + "</p>";
+    }
+
+   
+    appDiv.innerHTML = vehicles;
+
+    // VehiclesList.addEventListener('click', function(){
+    //     console.log("vehicleView was click");
+    //     let Vehicleid = GetId();
+    //     GetVehicle(Vehicleid);
+    // })
 }
 
 function vehicleView(NewVehicle){
 console.log(NewVehicle);
 
     appDiv.innerHTML = `
-    <p>${NewVehicle.make}</p> 
+    
     <p>${NewVehicle.model}</p>
     <p>${NewVehicle.year}</p>
     <p>${NewVehicle.fuelEfficiency}</p>
     <p>${NewVehicle.fuelTank}</p>
     
 `;
-
 }
+
 
 
 function AddVehicle(){
@@ -88,5 +117,5 @@ function SumbitVehicle (){
 
 }
 function GetId(){
-    return 1;
+    return 2;
 }

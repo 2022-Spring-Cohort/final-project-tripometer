@@ -18,7 +18,7 @@ const html = `
                 <button id="new-trip-button">New Trip</button>
                 <button id="my-profile-button">My Profile</button>
                 <button id="Add-Vehicle-button">Add New Vehicle</button>
-                <button id="Veiw-Vehicle-button">My Vehicles</button>
+                <button id="View-Vehicle-button">My Vehicles</button>
             </li>
         </ul>
     </nav>
@@ -29,7 +29,7 @@ function setup(){
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
-    const ViewVehicleButton = document.getElementById('Veiw-Vehicle-button');
+    const ViewVehicleButton = document.getElementById('View-Vehicle-button');
 
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
@@ -51,7 +51,7 @@ function setup(){
     ViewVehicleButton.addEventListener('click', function(){
          console.log("works");
          let id = vehicle.GetId();
-         vehicle.GetVehicle(id);
+         vehicle.GetVehicles(id);
     })
 
 }
