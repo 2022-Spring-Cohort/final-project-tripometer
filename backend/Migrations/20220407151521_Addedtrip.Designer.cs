@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220407151521_Addedtrip")]
+    partial class Addedtrip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,32 +87,21 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 564, DateTimeKind.Local).AddTicks(824),
+                            Date = new DateTime(2022, 4, 7, 11, 15, 20, 107, DateTimeKind.Local).AddTicks(8402),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
-                            TripId = 2
+                            TripId = 1
                         },
                         new
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7487),
+                            Date = new DateTime(2022, 4, 7, 11, 15, 20, 113, DateTimeKind.Local).AddTicks(8862),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
-                            TripId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7696),
-                            GasStation = "Shaker",
-                            PricePerGallon = 6,
-                            TotalCost = 800,
-                            TripId = 1
+                            TripId = 2
                         });
                 });
 
@@ -229,16 +220,6 @@ namespace TripometerAPI.Migrations
                             FuelTank = 50f,
                             Make = "Ford",
                             Model = "Mustang",
-                            OwnerId = 1,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FuelEfficiency = 100,
-                            FuelTank = 200f,
-                            Make = "Model Y",
-                            Model = "Tesla",
                             OwnerId = 1,
                             Year = 2020
                         });
