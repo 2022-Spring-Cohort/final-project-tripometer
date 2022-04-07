@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220407152329_AddedReceipt")]
+    partial class AddedReceipt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,7 +87,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 564, DateTimeKind.Local).AddTicks(824),
+                            Date = new DateTime(2022, 4, 7, 11, 23, 27, 955, DateTimeKind.Local).AddTicks(986),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -95,19 +97,9 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7487),
+                            Date = new DateTime(2022, 4, 7, 11, 23, 27, 965, DateTimeKind.Local).AddTicks(7664),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
-                            TotalCost = 800,
-                            TripId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7696),
-                            GasStation = "Shaker",
-                            PricePerGallon = 6,
                             TotalCost = 800,
                             TripId = 1
                         });

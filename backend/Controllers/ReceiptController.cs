@@ -29,17 +29,32 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Receipt/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        //{
+        //    var receipt = await _context.Receipts.FindAsync(id);
+
+        //    if (receipt == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return receipt;
+        //}
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        public List<Receipt> GetReceipts(int id)
         {
-            var receipt = await _context.Receipts.FindAsync(id);
-
-            if (receipt == null)
+            List<Receipt> receipts;
+            if (id != null)
             {
-                return NotFound();
+                receipts = _context.Receipts.Where(r => r.TripId == id).ToList();
             }
-
-            return receipt;
+            else
+            {
+                receipts = _context.Receipts.ToList();
+            }
+            return receipts;
         }
 
         // PUT: api/Receipt/5
