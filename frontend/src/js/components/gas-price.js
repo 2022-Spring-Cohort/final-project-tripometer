@@ -1,7 +1,7 @@
 
 
 //stateCode EXAMPLE: OH,AZ
-function GetGasPrice(stateCode, callback){
+export function GetGasPrice(stateCode, callback){
     let url = 'https://api.collectapi.com/gasPrice/stateUsaPrice?state='+ stateCode;
     fetch(url, {
     headers: {
