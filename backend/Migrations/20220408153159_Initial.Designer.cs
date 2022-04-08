@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220408153159_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +113,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(9334),
+                            Date = new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(6549),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -121,7 +123,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(595),
+                            Date = new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(7715),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -131,7 +133,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(624),
+                            Date = new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(7742),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -146,7 +148,7 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DisembarkDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Distance")
@@ -154,9 +156,6 @@ namespace TripometerAPI.Migrations
 
                     b.Property<int>("ETA")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("EmbarkDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("EndAddress")
                         .HasColumnType("nvarchar(max)");
@@ -194,9 +193,9 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
+                            Date = new DateTime(2022, 4, 8, 11, 31, 58, 515, DateTimeKind.Local).AddTicks(9838),
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 25, 11, 45, 18, 736, DateTimeKind.Local).AddTicks(4467),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -209,91 +208,7 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 2,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 2, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(8558),
-                            EndAddress = "Miami",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Shaker",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "NYC",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Kent",
-                            VehicleId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
+                            Date = new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(5829),
                             Distance = 200,
                             ETA = 60,
                             EndAddress = "Miami",
@@ -303,7 +218,7 @@ namespace TripometerAPI.Migrations
                             MileageBefore = 20000,
                             OwnerId = 1,
                             StartAddress = "Shaker",
-                            VehicleId = 2
+                            VehicleId = 1
                         });
                 });
 
@@ -454,7 +369,7 @@ namespace TripometerAPI.Migrations
             modelBuilder.Entity("TripometerAPI.Models.Receipt", b =>
                 {
                     b.HasOne("TripometerAPI.Models.Trip", "Trip")
-                        .WithMany("Receipts")
+                        .WithMany("Receipt")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -501,7 +416,7 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-                    b.Navigation("Receipts");
+                    b.Navigation("Receipt");
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Vehicle", b =>

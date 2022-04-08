@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220408154519_AddedSeeddata")]
+    partial class AddedSeeddata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,90 +222,6 @@ namespace TripometerAPI.Migrations
                             OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "NYC",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Kent",
-                            VehicleId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Miami",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Shaker",
-                            VehicleId = 2
                         });
                 });
 
@@ -454,7 +372,7 @@ namespace TripometerAPI.Migrations
             modelBuilder.Entity("TripometerAPI.Models.Receipt", b =>
                 {
                     b.HasOne("TripometerAPI.Models.Trip", "Trip")
-                        .WithMany("Receipts")
+                        .WithMany("Receipt")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -501,7 +419,7 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-                    b.Navigation("Receipts");
+                    b.Navigation("Receipt");
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Vehicle", b =>
