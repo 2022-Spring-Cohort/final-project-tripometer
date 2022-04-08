@@ -2,6 +2,9 @@
 //import constants from "../constants";
 import trip from "./trip";
 import Owner from "./owner";
+import { allRequest, asyncRequest } from "../allRequest";
+import { OwnerController } from "../constants";
+import utility from "../utility";
 
 export default {
     setup
@@ -15,7 +18,14 @@ const html = `
         <ul>
             <li>
                 <button id="new-trip-button">New Trip</button>
+            </li>
+            <li>
                 <button id="my-profile-button">My Profile</button>
+            </li>
+            <li>
+                <select id="owner-select">
+                    <option selected disabled>---SELECT OWNER---</option>
+                </select>
             </li>
         </ul>
     </nav>
@@ -37,4 +47,24 @@ function setup(){
         let id = Owner.GetId();
         Owner.GetProfile(id);
     });
+
+    const ownerSelect = document.getElementById('owner-select');
+    populateOwnerSelect(ownerSelect);
+}
+
+//---TEMP---//
+//use this until we get proper log-in functions
+
+async function populateOwnerSelect(ownerSelect){
+    let owners = await asyncRequest(OwnerController);
+    let options = {
+        attributes: {"data-id": "id", "value": "id"},
+        properties: {"text":"fullName"},
+    };
+    utility.populateSelect(ownerSelect,owners,options);
+}
+
+export function getSelectedOwnerId(){
+    const ownerSelect = document.getElementById('owner-select');
+    return ownerSelect.value;
 }
