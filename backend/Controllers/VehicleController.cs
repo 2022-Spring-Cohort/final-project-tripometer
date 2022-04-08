@@ -64,24 +64,20 @@ namespace TripometerAPI.Controllers
         // PUT: api/Vehicle/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVehicle(int id, Vehicle vehicle)
+        public Vehicle Vehicle(Vehicle vehicle)
         {
-            if (id != vehicle.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(vehicle).State = EntityState.Modified;
-
+   
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Vehicles.Update(vehicle);
+                _context.SaveChanges();
+                return _context.Vehicles.Find(vehicle.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VehicleExists(id))
+                if (!VehicleExists(vehicle.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
@@ -89,7 +85,6 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return NoContent();
         }
 
         // POST: api/Vehicle
@@ -108,6 +103,7 @@ namespace TripometerAPI.Controllers
         public async Task<IActionResult> DeleteVehicle(int id)
         {
             var vehicle = await _context.Vehicles.FindAsync(id);
+
             if (vehicle == null)
             {
                 return NotFound();
