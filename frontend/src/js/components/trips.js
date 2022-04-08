@@ -29,6 +29,7 @@ function TripsView(trips){
                 return `
                 <ul id="${t.id}" class="trips">                   
                     <li class="trip">From ${t.startAddress} to ${t.endAddress}</li>
+                    <li class="trip">From ${t.embarkDate} to ${(t.disembarkDate == null)?"Future":t.disembarkDate}</li>
                     <li>${t.receipts.length} Receipts</li>   
                     <button class="deleteTripBtn">Delete this trip</button> 
                     <hr>  
@@ -85,7 +86,7 @@ function GetTrip(id){
 
 function TripView(trip){
     appDiv.innerHTML = `
-        
+        <button id="updateTripBtn">Update Profile</button>
 
         <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
         <p>MileageBefore ${trip.mileageBefore}</p>
@@ -96,8 +97,45 @@ function TripView(trip){
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;
+    SetupForUpdateTrip(trip);
 }
 
 function DeleteTrip(id){
     AllRequest.allRequest(TripController+id,TripsView,"DELETE");
+}
+
+function SetupForUpdateTrip(trip){
+    let updateTripBtn = document.getElementById('updateTripBtn');
+    updateTripBtn.addEventListener('click',function(){
+        UpdateTripView(trip);
+    });
+}
+
+function UpdateTripView(trip){
+    appDiv.innerHTML = `
+        <h2>Edit Your Trip</h2>
+
+        <label for="embarkDate">Embark Date</label>
+        <input type="text" id="embarkDate" value="${trip.embarkDate}" placeholder="${trip.embarkDate}">
+        <label for="disembarkDate">Disembark Date</label>
+        <input type="text" id="disembarkDate" value="${trip.disembarkDate}" placeholder="${trip.disembarkDate}">
+
+        <label for="StartAddress">StartAddress</label>
+        <input type="text" id="StartAddress" value="${trip.StartAddress}" placeholder="${trip.StartAddress}">
+        <label for="EndAddress">EndAddress</label>
+        <input type="text" id="EndAddress" value="${trip.EndAddress}" placeholder="${trip.EndAddress}">
+
+        <label for="MileageBefore">MileageBefore</label>
+        <input type="text" id="MileageBefore" value="${trip.MileageBefore}" placeholder="${trip.MileageBefore}">
+        <label for="MileageAfter">MileageAfter</label>
+        <input type="text" id="MileageAfter" value="${trip.MileageAfter}" placeholder="${trip.MileageAfter}">
+
+        <label for="MileageBefore">MileageBefore</label>
+        <input type="text" id="MileageBefore" value="${trip.MileageBefore}" placeholder="${trip.MileageBefore}">
+        <label for="MileageAfter">MileageAfter</label>
+        <input type="text" id="MileageAfter" value="${trip.MileageAfter}" placeholder="${trip.MileageAfter}">
+
+        <button type="submit" id="saveUpdateProfileBtn">Save</button>   
+    `;
+    SetupForUpdateProfile(owner);
 }
