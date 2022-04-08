@@ -1,5 +1,6 @@
 export default {
-    allRequest
+    allRequest,
+    
 }
 
 function allRequest(location, callback, method = "GET", body=null){
@@ -21,3 +22,4 @@ function allRequest(location, callback, method = "GET", body=null){
     })
     .catch(err => console.error(err));
 }
+
