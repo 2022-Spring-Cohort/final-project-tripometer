@@ -18,7 +18,7 @@ const appDiv = document.getElementById("app");
 
 function GetVehicles() {
     console.log("h");
-    AllRequest.allRequest("https://localhost:44376/api/vehicle?ownerId=" + 1, vehiclesView)
+    AllRequest.allRequest(`${VehicleController}?ownerId=1`, vehiclesView)
 
 }
 
