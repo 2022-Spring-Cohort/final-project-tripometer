@@ -85,8 +85,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 564, DateTimeKind.Local).AddTicks(824),
+                            Date = new DateTime(2022, 4, 7, 22, 23, 15, 289, DateTimeKind.Local).AddTicks(809),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -96,7 +95,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7487),
+                            Date = new DateTime(2022, 4, 7, 22, 23, 15, 291, DateTimeKind.Local).AddTicks(7381),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -106,7 +105,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 7, 11, 28, 2, 577, DateTimeKind.Local).AddTicks(7696),
+                            Date = new DateTime(2022, 4, 7, 22, 23, 15, 291, DateTimeKind.Local).AddTicks(7434),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -187,6 +186,90 @@ namespace TripometerAPI.Migrations
                             OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "Columbus",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Chicago",
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "NYC",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Kent",
+                            VehicleId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "Cincinnati",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Cleveland",
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "Cincinnati",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Cleveland",
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "Columbus",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Chicago",
+                            VehicleId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Distance = 200,
+                            ETA = 60,
+                            EndAddress = "Miami",
+                            EstimatedGasCost = 5,
+                            EstimatedTotalCost = 1000,
+                            MileageAfter = 20400,
+                            MileageBefore = 20000,
+                            OwnerId = 1,
+                            StartAddress = "Shaker",
+                            VehicleId = 2
                         });
                 });
 
@@ -247,7 +330,7 @@ namespace TripometerAPI.Migrations
             modelBuilder.Entity("TripometerAPI.Models.Receipt", b =>
                 {
                     b.HasOne("TripometerAPI.Models.Trip", "Trip")
-                        .WithMany("Receipt")
+                        .WithMany("Receipts")
                         .HasForeignKey("TripId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -294,7 +377,7 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-                    b.Navigation("Receipt");
+                    b.Navigation("Receipts");
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Vehicle", b =>

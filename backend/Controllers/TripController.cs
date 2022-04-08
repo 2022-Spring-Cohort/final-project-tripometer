@@ -22,10 +22,24 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Trip
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Trip>>> GetTrips()
+        //{
+        //    return await _context.Trips.ToListAsync();
+        //}
+
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trip>>> GetTrips()
+        public List<Trip> GetTrips(int? ownerId)
         {
-            return await _context.Trips.ToListAsync();
+            if (ownerId != null)
+            {
+                List<Trip> trips = _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
+                return trips;
+            }else
+            {
+                return null;
+            }
+
         }
 
         // GET: api/Trip/5
@@ -86,18 +100,23 @@ namespace TripometerAPI.Controllers
 
         // DELETE: api/Trip/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrip(int id)
+        public List<Trip> DeleteTrip(int id)
         {
-            var trip = await _context.Trips.FindAsync(id);
-            if (trip == null)
+            try
             {
-                return NotFound();
+                var trip = _context.Trips.Find(id);
+                var ownerId = trip.OwnerId;
+                _context.Trips.Remove(trip);
+                _context.SaveChanges();
+
+                return _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
+            }
+            catch
+            {
+                throw;
+                
             }
 
-            _context.Trips.Remove(trip);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private bool TripExists(int id)

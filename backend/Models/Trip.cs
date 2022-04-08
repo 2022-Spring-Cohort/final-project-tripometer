@@ -17,6 +17,6 @@ namespace TripometerAPI.Models
         public int OwnerId { get; set; }
         public virtual Owner Owner { get; set; }
         public virtual Vehicle Vehicle { get; set; }
-        public virtual List<Receipt> Receipt { get; set; }
+        public virtual List<Receipt> Receipts { get; set; }
     }
 }
