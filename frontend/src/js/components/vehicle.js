@@ -73,10 +73,8 @@ function vehiclesView(NewVehicle) {
 
     // DeleteVehicles.addEventListener('click', function () {
     //     console.log("Delete was click");
-    //      let Vehicleid = i+1;
-    //      console.log(Vehicleid);
-    //      DeleteVehicle(Vehicleid);
-         
+    //      console.log(NewVehicle[i].id);
+    //      DeleteVehicle(NewVehicle[i].id);
     // })
     }    
     
