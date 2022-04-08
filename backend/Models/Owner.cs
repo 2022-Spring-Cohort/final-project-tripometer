@@ -16,7 +16,7 @@ namespace TripometerAPI.Models
             }
         }
         public virtual List<Vehicle> Vehicles { get; set; }
-        public virtual List<Trip> Trips { get; set; }
+        //public virtual List<Trip> Trips { get; set; }
 
         }
     }

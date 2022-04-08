@@ -17,7 +17,7 @@ namespace TripometerAPI.Models
         public int EstimatedGasCost { get; set; }
         public int EstimatedTotalCost { get; set; }
 
-        public int? VehicleId { get; set; }
+        public int VehicleId { get; set; }
       //  public int? OwnerId { get; set; }
       //  public virtual Owner Owner { get; set; }
         public virtual Vehicle Vehicle { get; set; }

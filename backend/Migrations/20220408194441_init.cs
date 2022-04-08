@@ -61,24 +61,17 @@ namespace TripometerAPI.Migrations
                     Distance = table.Column<int>(type: "int", nullable: false),
                     EstimatedGasCost = table.Column<int>(type: "int", nullable: false),
                     EstimatedTotalCost = table.Column<int>(type: "int", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: true),
-                    OwnerId = table.Column<int>(type: "int", nullable: true)
+                    VehicleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trips", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trips_Owners_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Trips_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,43 +131,38 @@ namespace TripometerAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Trips",
-                columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "OwnerId", "StartAddress", "VehicleId" },
+                columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "StartAddress", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, null, 200, 60, new DateTime(2022, 3, 25, 15, 15, 48, 595, DateTimeKind.Local).AddTicks(6628), "Columbus", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
-                    { 2, null, 200, 60, new DateTime(2022, 4, 2, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(212), "Miami", 5, 1000, 20400, 20000, null, "Shaker", 1 },
-                    { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, null, "Chicago", 1 },
-                    { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
-                    { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
-                    { 7, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, null, "Chicago", 1 },
-                    { 4, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "NYC", 5, 1000, 20400, 20000, null, "Kent", 2 },
-                    { 8, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miami", 5, 1000, 20400, 20000, null, "Shaker", 2 }
+                    { 1, null, 200, 60, new DateTime(2022, 3, 25, 15, 44, 40, 383, DateTimeKind.Local).AddTicks(3783), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 2, null, 200, 60, new DateTime(2022, 4, 2, 15, 44, 40, 389, DateTimeKind.Local).AddTicks(8620), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
+                    { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
+                    { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 7, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
+                    { 4, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "NYC", 5, 1000, 20400, 20000, "Kent", 2 },
+                    { 8, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miami", 5, 1000, 20400, 20000, "Shaker", 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 2, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2278), "Shaker", 5, 800, 1 });
+                values: new object[] { 2, 1200, new DateTime(2022, 4, 8, 15, 44, 40, 390, DateTimeKind.Local).AddTicks(2878), "Shaker", 5, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 3, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2307), "Shaker", 6, 800, 1 });
+                values: new object[] { 3, 1200, new DateTime(2022, 4, 8, 15, 44, 40, 390, DateTimeKind.Local).AddTicks(2924), "Shaker", 6, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 1, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(871), "Cleveland", 4, 800, 2 });
+                values: new object[] { 1, 1200, new DateTime(2022, 4, 8, 15, 44, 40, 390, DateTimeKind.Local).AddTicks(38), "Cleveland", 4, 800, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Receipts_TripId",
                 table: "Receipts",
                 column: "TripId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trips_OwnerId",
-                table: "Trips",
-                column: "OwnerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trips_VehicleId",
