@@ -21,7 +21,7 @@ namespace TripometerAPI.Models
 
         public float FuelEfficiency { get; set; }
 
-        public int OwnerId { get; set; }
+        public int? OwnerId { get; set; }
 
         public float FuelTank { get; set; }
 
