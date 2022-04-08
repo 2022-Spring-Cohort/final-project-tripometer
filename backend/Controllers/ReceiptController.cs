@@ -85,18 +85,19 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return (IActionResult)receipt;
         }
 
         // POST: api/Receipt
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Receipt>> PostReceipt(Receipt receipt)
+        public Receipt PostReceipt(Receipt receipt)
         {
+            receipt.Date = DateTime.Now;
             _context.Receipts.Add(receipt);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return CreatedAtAction("GetReceipt", new { id = receipt.Id }, receipt);
+            return receipt;
         }
 
         // DELETE: api/Receipt/5

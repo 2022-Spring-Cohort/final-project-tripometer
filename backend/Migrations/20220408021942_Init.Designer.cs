@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220408021942_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +31,9 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,38 +45,9 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            FirstName = "Denzel",
-                            LastName = "Mclntyre"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Jessica",
-                            LastName = "Wang"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Darius",
-                            LastName = "Hammond"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Rimma",
-                            LastName = "Girsheva"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FirstName = "Qadriyyah",
-                            LastName = "Johnson"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FirstName = "Brad",
-                            LastName = "Weir"
+                            FirstName = " Joe",
+                            FullName = "Joe Smith",
+                            LastName = "Smith"
                         });
                 });
 
@@ -111,7 +87,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(9334),
+                            Date = new DateTime(2022, 4, 7, 22, 19, 42, 9, DateTimeKind.Local).AddTicks(8199),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -121,7 +97,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(595),
+                            Date = new DateTime(2022, 4, 7, 22, 19, 42, 11, DateTimeKind.Local).AddTicks(9768),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -131,7 +107,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(624),
+                            Date = new DateTime(2022, 4, 7, 22, 19, 42, 11, DateTimeKind.Local).AddTicks(9821),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -146,17 +122,11 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DisembarkDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Distance")
                         .HasColumnType("int");
 
                     b.Property<int>("ETA")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("EmbarkDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("EndAddress")
                         .HasColumnType("nvarchar(max)");
@@ -196,7 +166,6 @@ namespace TripometerAPI.Migrations
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 25, 11, 45, 18, 736, DateTimeKind.Local).AddTicks(4467),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -211,7 +180,6 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 2, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(8558),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -262,48 +230,6 @@ namespace TripometerAPI.Migrations
                             OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Distance = 200,
-                            ETA = 60,
-                            EndAddress = "Miami",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            OwnerId = 1,
-                            StartAddress = "Shaker",
-                            VehicleId = 2
                         });
                 });
 
@@ -314,8 +240,8 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("FuelEfficiency")
-                        .HasColumnType("real");
+                    b.Property<int>("FuelEfficiency")
+                        .HasColumnType("int");
 
                     b.Property<float>("FuelTank")
                         .HasColumnType("real");
@@ -342,112 +268,22 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            FuelEfficiency = 21f,
-                            FuelTank = 16f,
+                            FuelEfficiency = 25,
+                            FuelTank = 50f,
                             Make = "Ford",
                             Model = "Mustang",
                             OwnerId = 1,
-                            Year = 2021
+                            Year = 2020
                         },
                         new
                         {
                             Id = 2,
-                            FuelEfficiency = 36f,
-                            FuelTank = 59f,
-                            Make = "BMW",
-                            Model = "3 Series",
+                            FuelEfficiency = 100,
+                            FuelTank = 200f,
+                            Make = "Model Y",
+                            Model = "Tesla",
                             OwnerId = 1,
                             Year = 2020
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FuelEfficiency = 24f,
-                            FuelTank = 17.6f,
-                            Make = "Carrear 4S Cabriolet",
-                            Model = "Porsche",
-                            OwnerId = 2,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FuelEfficiency = 20f,
-                            FuelTank = 24f,
-                            Make = "GT",
-                            Model = "Bentley",
-                            OwnerId = 2,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 5,
-                            FuelEfficiency = 21f,
-                            FuelTank = 16f,
-                            Make = "BMW",
-                            Model = "xDrive28i",
-                            OwnerId = 3,
-                            Year = 2017
-                        },
-                        new
-                        {
-                            Id = 6,
-                            FuelEfficiency = 36f,
-                            FuelTank = 59f,
-                            Make = "BMW",
-                            Model = "3 Series",
-                            OwnerId = 3,
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 7,
-                            FuelEfficiency = 21f,
-                            FuelTank = 16f,
-                            Make = "Buick",
-                            Model = "Encore",
-                            OwnerId = 4,
-                            Year = 2019
-                        },
-                        new
-                        {
-                            Id = 8,
-                            FuelEfficiency = 36f,
-                            FuelTank = 59f,
-                            Make = "Toyota",
-                            Model = "Crown",
-                            OwnerId = 4,
-                            Year = 2019
-                        },
-                        new
-                        {
-                            Id = 9,
-                            FuelEfficiency = 47f,
-                            FuelTank = 19f,
-                            Make = "BMW",
-                            Model = "X5",
-                            OwnerId = 5,
-                            Year = 2019
-                        },
-                        new
-                        {
-                            Id = 10,
-                            FuelEfficiency = 30f,
-                            FuelTank = 14.5f,
-                            Make = "Volkswagen",
-                            Model = "EOS",
-                            OwnerId = 5,
-                            Year = 2016
-                        },
-                        new
-                        {
-                            Id = 11,
-                            FuelEfficiency = 28f,
-                            FuelTank = 12.4f,
-                            Make = "Honda",
-                            Model = "Civic Type-R",
-                            OwnerId = 6,
-                            Year = 2022
                         });
                 });
 

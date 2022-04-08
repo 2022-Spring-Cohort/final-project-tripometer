@@ -219,6 +219,101 @@ namespace TripometerAPI
                 OwnerId = 1
             });
 
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 3,
+                StartAddress = "Chicago",
+                EndAddress = "Columbus",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 1,
+                OwnerId = 1
+
+            });
+
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 4,
+                StartAddress = "Kent",
+                EndAddress = "NYC",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 2,
+                OwnerId = 1
+
+            });
+
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 5,
+                StartAddress = "Cleveland",
+                EndAddress = "Cincinnati",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 1,
+                OwnerId = 1
+
+            });
+
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 6,
+                StartAddress = "Cleveland",
+                EndAddress = "Cincinnati",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 1,
+                OwnerId = 1
+
+            });
+
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 7,
+                StartAddress = "Chicago",
+                EndAddress = "Columbus",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 1,
+                OwnerId = 1
+
+            });
+
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 8,
+                StartAddress = "Shaker",
+                EndAddress = "Miami",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 2,
+                OwnerId = 1
+
+            });
 
             modelBuilder.Entity<Receipt>().HasData(new Receipt
             {
@@ -253,7 +348,6 @@ namespace TripometerAPI
                 TotalCost = 800,
                 AdditionalCosts = 1200,
                 GasStation = "Shaker",
-
                 TripId = 1
 
             });

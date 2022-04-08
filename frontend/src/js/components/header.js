@@ -23,6 +23,8 @@ const html = `
 
                 <button id="Receipt-button">Receipt</button>
 
+               
+
             </li>
         </ul>
     </nav>
@@ -36,6 +38,7 @@ function setup(){
     const ViewVehicleButton = document.getElementById('View-Vehicle-button');
 
     const ReceiptButton = document.getElementById('Receipt-button');
+   
 
 
     //setup header navigation event listeners
@@ -68,6 +71,6 @@ function setup(){
         receipt.GetReceipt(1);
 
     })
-
 }
+
 

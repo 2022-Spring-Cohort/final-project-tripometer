@@ -12,5 +12,4 @@ function Capitalize(str){
     let firstChar = str.charAt(0).toUpperCase();
     let end = str.substr(1).toLowerCase();
     return firstChar + end;
-    
 }
