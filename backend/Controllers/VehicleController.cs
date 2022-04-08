@@ -100,19 +100,12 @@ namespace TripometerAPI.Controllers
 
         // DELETE: api/Vehicle/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVehicle(int id)
+        public List<Vehicle> DeleteVehicle(int? id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-
-            if (vehicle == null)
-            {
-                return NotFound();
-            }
-
-            _context.Vehicles.Remove(vehicle);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            Vehicle vehicleToDelete = _context.Vehicles.Find(id);
+            _context.Vehicles.Remove(vehicleToDelete);
+            _context.SaveChanges();
+            return _context.Vehicles.ToList();
         }
 
         private bool VehicleExists(int id)
