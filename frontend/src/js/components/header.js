@@ -45,13 +45,15 @@ function setup(){
     NewVehicleButton.addEventListener('click', function(){
         console.log("works");
         vehicle.AddVehicle();
-        vehicle.SumbitVehicle();
+        vehicle.SubmitVehicle();
         
     })
     ViewVehicleButton.addEventListener('click', function(){
          console.log("works");
-         let id = vehicle.GetId();
+         let id = Owner.GetId();
          vehicle.GetVehicles(id);
     })
 
 }
+
+

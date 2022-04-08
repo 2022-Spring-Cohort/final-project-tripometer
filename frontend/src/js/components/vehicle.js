@@ -1,70 +1,148 @@
-import {VehicleController} from "../constants";
+import { VehicleController } from "../constants";
 import Utility from "../utility";
 import AllRequest from "../allRequest";
 
 
 
-export default{
+export default {
     GetVehicle,
     AddVehicle,
-    SumbitVehicle,
     GetVehicles,
     vehicleView,
-    GetId
+    SubmitVehicle
+    
 }
 
 const appDiv = document.getElementById("app");
 
 
-function GetVehicles(){
+function GetVehicles() {
     console.log("h");
-   AllRequest.allRequest(VehicleController,vehiclesView)
+    AllRequest.allRequest(VehicleController, vehiclesView)
 
 }
 
 
-function GetVehicle(id){
-    AllRequest.allRequest(VehicleController+id,vehicleView);
-
+function GetVehicle(id) {
+    
+    AllRequest.allRequest(VehicleController + id, vehicleView);
+   
 }
 
+// function DeleteVehicle(id) {
+//     console.log(id)
+//     AllRequest.allRequest(VehicleController + id,vehiclesView,"DELETE");
+// }
 
-function vehiclesView(NewVehicle){
+//
+function vehiclesView(NewVehicle) {
+    console.log(NewVehicle);
     console.log(NewVehicle.length);
     
 
-    let vehicles = "";
+    let vehicleDiv = document.createElement("div");
 
-    for(let i = 0; i < NewVehicle.length; i++){
-        vehicles += "<p id='VehiclesList'>" + NewVehicle[i].model + "</p>";
+    for (let i = 0; i < NewVehicle.length; i++) {
+
+        let vehicle = document.createElement("p");
+        vehicle.setAttribute("id", i);
+        let Delete =  document.createElement("button");
+        Delete.innerText = "Delete";
+        Delete.setAttribute("id",'DeleteVehicleBtn'+i)
+
+        vehicle.innerHTML = NewVehicle[i].model;
+
+        vehicleDiv.appendChild(vehicle);
+        vehicleDiv.appendChild(Delete);
     }
 
+    appDiv.innerHTML = vehicleDiv.innerHTML;
    
-    appDiv.innerHTML = vehicles;
 
-    // VehiclesList.addEventListener('click', function(){
-    //     console.log("vehicleView was click");
-    //     let Vehicleid = GetId();
-    //     GetVehicle(Vehicleid);
+    for (let i = 0; i < NewVehicle.length; i++) {
+    let VehicleList = document.getElementById(i);
+    let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
+
+
+    
+    VehicleList.addEventListener('click', function () {
+        console.log("vehicleView was click");
+        let Vehicleid = i+1; //This method needs to use cookies 
+        GetVehicle(Vehicleid);
+    })
+
+    // DeleteVehicles.addEventListener('click', function () {
+    //     console.log("Delete was click");
+    //      let Vehicleid = i+1;
+    //      console.log(Vehicleid);
+    //      DeleteVehicle(Vehicleid);
+         
     // })
+    }    
+    
 }
 
-function vehicleView(NewVehicle){
-console.log(NewVehicle);
+
+function vehicleView(NewVehicle) {
+    console.log(NewVehicle);
 
     appDiv.innerHTML = `
     
-    <p>${NewVehicle.model}</p>
-    <p>${NewVehicle.year}</p>
-    <p>${NewVehicle.fuelEfficiency}</p>
-    <p>${NewVehicle.fuelTank}</p>
-    
-`;
+    <p>Model: ${NewVehicle.model}</p>
+    <p>Year: ${NewVehicle.year}</p>
+    <p>Fuel Efficiency: ${NewVehicle.fuelEfficiency}</p>
+    <p>Fuel Tank: ${NewVehicle.fuelTank}</p>
+
+    <button id='UpdateVehicleBtn'>Update Vehicle</button>
+    `;
+    UpdateVehicleButton(NewVehicle.id);
+}
+
+function UpdateVehicleButton(id){
+    const UpdateVehicleBtn = document.getElementById('UpdateVehicleBtn');
+    UpdateVehicleBtn.addEventListener('click', function(){
+    AllRequest.allRequest(VehicleController + id,UpdateVehicleView );
+    })
+}
+
+function UpdateVehicleView(EditVehicle){
+    appDiv.innerHTML = `
+    <h2>Edit Vehicle</h2>
+
+    <label for="Make">Make</label>
+    <input type="text" id="Make" value="${EditVehicle.make}" placeholder="${EditVehicle.make}">
+
+    <label for="Model">Model</label>
+    <input type="text" id="Model" value="${EditVehicle.model}" placeholder="${EditVehicle.model}">
+
+    <label for="Year">Year</label>
+    <input type="text" id="Year" value="${EditVehicle.year}" placeholder="${EditVehicle.year}">
+
+    <label for="FuelEfficiency">Fuel Efficiency</label>
+    <input type="text" id="FuelEfficiency" value="${EditVehicle.fuelEfficiency}" placeholder="${EditVehicle.fuelEfficiency}">
+
+    <label for="FuelTank">Fuel Tank</label>
+    <input type="text" id="FuelTank" value="${EditVehicle.fuelTank}" placeholder="${EditVehicle.fuelTank}">
+
+    <button type="submit" id="saveUpdateVehicleBtn">Update</button>   
+    `;
+    SumbitEditVehicle(EditVehicle);
+
+}
+
+function  SumbitEditVehicle(EditVehicle){
+    const saveUpdateVehicleBtn = document.getElementById('saveUpdateVehicleBtn');
+
+    console.log("ffffff");
+
+    saveUpdateVehicleBtn.addEventListener('click',function(){
+        VehicleUserInput(EditVehicle.id,"PUT");
+    });
 }
 
 
 
-function AddVehicle(){
+function AddVehicle() {
     appDiv.innerHTML = `
     <h2>Add Vehicle</h2>
 
@@ -89,33 +167,52 @@ function AddVehicle(){
 
 
 
-function SumbitVehicle (){
-    const SumbmitButton = document.getElementById("createNewVehicleBtn");
+function VehicleUserInput(id,method) {
+  
 
-    SumbmitButton.addEventListener('click', function(){
-    let Make = document.getElementById('Make').value;
-    let Model = document.getElementById('Model').value;
-    let Year = document.getElementById('Year').value;
-    let FuelEfficiency = document.getElementById('FuelEfficiency').value; 
-    let FuelTank = document.getElementById('FuelTank').value;
+        let Make = document.getElementById('Make').value;
+        let Model = document.getElementById('Model').value;
+        let Year = document.getElementById('Year').value;
+        let FuelEfficiency = document.getElementById('FuelEfficiency').value;
+        let FuelTank = document.getElementById('FuelTank').value;
 
-    let NewVehicle = {
-        Make: Make,
-        Model: Model,
-        Year: Year,
-        FuelEfficiency: FuelEfficiency,
-        FuelTank: FuelTank,
-        ownerId: 1,
-        Id: 1,
+        let NewVehicle = {
+            Make: Make,
+            Model: Model,
+            Year: Year,
+            FuelEfficiency: FuelEfficiency,
+            FuelTank: FuelTank,
+            ownerId: 1
+        }
 
-    }
+        if (method == "PUT") {
+            NewVehicle["Id"] = id;
+        }
 
-    console.log(NewVehicle);
-    AllRequest.allRequest(VehicleController,vehicleView,"POST",NewVehicle);
-    })
-
-
+        console.log(NewVehicle);
+        AllRequest.allRequest(VehicleController+id, vehicleView, method, NewVehicle);
 }
-function GetId(){
-    return 2;
+
+function SubmitVehicle(){
+const SumbmitButton = document.getElementById("createNewVehicleBtn");
+SumbmitButton.addEventListener('click',function(){
+    VehicleUserInput("","POST");
+});
 }
+
+
+
+
+(async () => {
+    const response = await fetch(
+        'https://parseapi.back4app.com/classes/Carmodels_Car_Model_List?limit=10',
+        {
+            headers: {
+                'X-Parse-Application-Id': 'iqVulf4rcnwk8v3YC71FGKNkUrY7mzNJosyQzpUA', // This is your app's application id
+                'X-Parse-REST-API-Key': 'ugWIeOKk3FQoATqdZaR7Gv4jTsc2tsFzLjDNST5a', // This is your app's REST API key
+            }
+        }
+    );
+    const data = await response.json(); // Here you have the data that you need
+    console.log(JSON.stringify(data, null, 2));
+})();
