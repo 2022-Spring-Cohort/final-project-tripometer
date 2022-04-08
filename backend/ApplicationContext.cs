@@ -55,6 +55,7 @@ namespace TripometerAPI
                 FuelTank = 200,
                 OwnerId = 1
 
+
             });
 
             modelBuilder.Entity<Trip>().HasData(new Trip
@@ -73,6 +74,21 @@ namespace TripometerAPI
 
             }) ;
 
+            modelBuilder.Entity<Trip>().HasData(new Trip
+            {
+                Id = 2,
+                StartAddress = "Shaker",
+                EndAddress = "Miami",
+                MileageBefore = 20000,
+                MileageAfter = 20400,
+                ETA = 60,
+                Distance = 200,
+                EstimatedGasCost = 5,
+                EstimatedTotalCost = 1000,
+                VehicleId = 1,
+                OwnerId = 1
+            });
+
 
             modelBuilder.Entity<Receipt>().HasData(new Receipt
             {
@@ -82,6 +98,32 @@ namespace TripometerAPI
                 TotalCost = 800,
                 AdditionalCosts = 1200,
                 GasStation = "Cleveland",
+
+                TripId = 2
+
+            });
+
+            modelBuilder.Entity<Receipt>().HasData(new Receipt
+            {
+                Id = 2,
+                Date = DateTime.Now,
+                PricePerGallon = 5,
+                TotalCost = 800,
+                AdditionalCosts = 1200,
+                GasStation = "Shaker",
+                TripId = 1
+
+            });
+
+            modelBuilder.Entity<Receipt>().HasData(new Receipt
+            {
+                Id = 3,
+                Date = DateTime.Now,
+                PricePerGallon = 6,
+                TotalCost = 800,
+                AdditionalCosts = 1200,
+                GasStation = "Shaker",
+
                 TripId = 1
 
             });

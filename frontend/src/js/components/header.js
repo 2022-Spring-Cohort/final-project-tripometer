@@ -3,6 +3,7 @@
 import trip from "./trip";
 import Owner from "./owner";
 import vehicle from "./vehicle";
+import receipt from "./receipt";
 
 export default {
     setup
@@ -19,6 +20,9 @@ const html = `
                 <button id="my-profile-button">My Profile</button>
                 <button id="Add-Vehicle-button">Add New Vehicle</button>
                 <button id="View-Vehicle-button">My Vehicles</button>
+
+                <button id="Receipt-button">Receipt</button>
+
             </li>
         </ul>
     </nav>
@@ -30,6 +34,9 @@ function setup(){
     const myprofileButton = document.getElementById('my-profile-button');
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
     const ViewVehicleButton = document.getElementById('View-Vehicle-button');
+
+    const ReceiptButton = document.getElementById('Receipt-button');
+
 
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
@@ -54,6 +61,13 @@ function setup(){
          vehicle.GetVehicles(id);
     })
 
-}
 
+    ReceiptButton.addEventListener('click', function(){
+        console.log("works");
+
+        receipt.GetReceipt(1);
+
+    })
+
+}
 
