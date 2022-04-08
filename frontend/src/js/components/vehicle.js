@@ -18,7 +18,7 @@ const appDiv = document.getElementById("app");
 
 function GetVehicles() {
     console.log("h");
-    AllRequest.allRequest(VehicleController, vehiclesView)
+    AllRequest.allRequest("https://localhost:44376/api/vehicle?ownerId=" + 1, vehiclesView)
 
 }
 
@@ -29,10 +29,10 @@ function GetVehicle(id) {
    
 }
 
-// function DeleteVehicle(id) {
-//     console.log(id)
-//     AllRequest.allRequest(VehicleController + id,vehiclesView,"DELETE");
-// }
+function DeleteVehicle(id) {
+    console.log(id);
+    AllRequest.allRequest(VehicleController + id,vehiclesView,"DELETE");
+}
 
 //
 function vehiclesView(NewVehicle) {
@@ -71,11 +71,11 @@ function vehiclesView(NewVehicle) {
         GetVehicle(Vehicleid);
     })
 
-    // DeleteVehicles.addEventListener('click', function () {
-    //     console.log("Delete was click");
-    //      console.log(NewVehicle[i].id);
-    //      DeleteVehicle(NewVehicle[i].id);
-    // })
+    DeleteVehicles.addEventListener('click', function () {
+        console.log("Delete was click");
+         console.log(NewVehicle[i].id);
+         DeleteVehicle(NewVehicle[i].id);
+    })
     }    
     
 }

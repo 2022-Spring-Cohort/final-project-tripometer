@@ -44,20 +44,10 @@ namespace TripometerAPI.Controllers
         }
 
         [HttpGet]
-        public List<Vehicle> GetVehicles(int? ownerId)
+        public List<Vehicle> GetVehicles(int ownerId)
         {
-            List<Vehicle> vehicles = null;
-            if(ownerId != null)
-            {
-                vehicles = _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList();
-            }
-            else
-            {
-                vehicles = _context.Vehicles.ToList();
-            }
-            
 
-            return vehicles;
+            return _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList();
         }
 
 
@@ -100,7 +90,7 @@ namespace TripometerAPI.Controllers
 
         // DELETE: api/Vehicle/5
         [HttpDelete("{id}")]
-        public List<Vehicle> DeleteVehicle(int? id)
+        public List<Vehicle> DeleteVehicle(int id)
         {
             Vehicle vehicleToDelete = _context.Vehicles.Find(id);
             _context.Vehicles.Remove(vehicleToDelete);

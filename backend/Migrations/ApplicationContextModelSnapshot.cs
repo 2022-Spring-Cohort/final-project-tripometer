@@ -97,7 +97,7 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("TotalCost")
                         .HasColumnType("int");
 
-                    b.Property<int>("TripId")
+                    b.Property<int?>("TripId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -111,7 +111,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(9334),
+                            Date = new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(871),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -121,7 +121,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(595),
+                            Date = new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2278),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -131,7 +131,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 8, 11, 45, 18, 739, DateTimeKind.Local).AddTicks(624),
+                            Date = new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2307),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -173,13 +173,13 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -196,13 +196,12 @@ namespace TripometerAPI.Migrations
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 25, 11, 45, 18, 736, DateTimeKind.Local).AddTicks(4467),
+                            EmbarkDate = new DateTime(2022, 3, 25, 15, 15, 48, 595, DateTimeKind.Local).AddTicks(6628),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -211,13 +210,12 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 2, 11, 45, 18, 738, DateTimeKind.Local).AddTicks(8558),
+                            EmbarkDate = new DateTime(2022, 4, 2, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(212),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 1
                         },
@@ -226,12 +224,12 @@ namespace TripometerAPI.Migrations
                             Id = 3,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Chicago",
                             VehicleId = 1
                         },
@@ -240,12 +238,12 @@ namespace TripometerAPI.Migrations
                             Id = 4,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "NYC",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Kent",
                             VehicleId = 2
                         },
@@ -254,12 +252,12 @@ namespace TripometerAPI.Migrations
                             Id = 5,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "Cincinnati",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -268,12 +266,12 @@ namespace TripometerAPI.Migrations
                             Id = 6,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "Cincinnati",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -282,12 +280,12 @@ namespace TripometerAPI.Migrations
                             Id = 7,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Chicago",
                             VehicleId = 1
                         },
@@ -296,12 +294,12 @@ namespace TripometerAPI.Migrations
                             Id = 8,
                             Distance = 200,
                             ETA = 60,
+                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 2
                         });
@@ -326,7 +324,7 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
                     b.Property<int>("Year")
@@ -455,28 +453,20 @@ namespace TripometerAPI.Migrations
                 {
                     b.HasOne("TripometerAPI.Models.Trip", "Trip")
                         .WithMany("Receipts")
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TripId");
 
                     b.Navigation("Trip");
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-                    b.HasOne("TripometerAPI.Models.Owner", "Owner")
+                    b.HasOne("TripometerAPI.Models.Owner", null)
                         .WithMany("Trips")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
 
                     b.HasOne("TripometerAPI.Models.Vehicle", "Vehicle")
                         .WithMany("Trips")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
+                        .HasForeignKey("VehicleId");
 
                     b.Navigation("Vehicle");
                 });
@@ -485,9 +475,7 @@ namespace TripometerAPI.Migrations
                 {
                     b.HasOne("TripometerAPI.Models.Owner", "Owner")
                         .WithMany("Vehicles")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
                 });

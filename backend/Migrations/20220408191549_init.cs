@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TripometerAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +31,7 @@ namespace TripometerAPI.Migrations
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<int>(type: "int", nullable: false),
                     FuelEfficiency = table.Column<float>(type: "real", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: true),
                     FuelTank = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -42,7 +42,7 @@ namespace TripometerAPI.Migrations
                         column: x => x.OwnerId,
                         principalTable: "Owners",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,7 +51,8 @@ namespace TripometerAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EmbarkDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DisembarkDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StartAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MileageBefore = table.Column<int>(type: "int", nullable: false),
@@ -60,8 +61,8 @@ namespace TripometerAPI.Migrations
                     Distance = table.Column<int>(type: "int", nullable: false),
                     EstimatedGasCost = table.Column<int>(type: "int", nullable: false),
                     EstimatedTotalCost = table.Column<int>(type: "int", nullable: false),
-                    VehicleId = table.Column<int>(type: "int", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false)
+                    VehicleId = table.Column<int>(type: "int", nullable: true),
+                    OwnerId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,13 +72,13 @@ namespace TripometerAPI.Migrations
                         column: x => x.OwnerId,
                         principalTable: "Owners",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Trips_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -91,7 +92,7 @@ namespace TripometerAPI.Migrations
                     TotalCost = table.Column<int>(type: "int", nullable: false),
                     AdditionalCosts = table.Column<int>(type: "int", nullable: false),
                     GasStation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TripId = table.Column<int>(type: "int", nullable: false)
+                    TripId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,7 +102,7 @@ namespace TripometerAPI.Migrations
                         column: x => x.TripId,
                         principalTable: "Trips",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -137,28 +138,33 @@ namespace TripometerAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Trips",
-                columns: new[] { "Id", "Date", "Distance", "ETA", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "OwnerId", "StartAddress", "VehicleId" },
-                values: new object[] { 1, new DateTime(2022, 4, 8, 11, 31, 58, 515, DateTimeKind.Local).AddTicks(9838), 200, 60, "Columbus", 5, 1000, 20400, 20000, 1, "Cleveland", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Trips",
-                columns: new[] { "Id", "Date", "Distance", "ETA", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "OwnerId", "StartAddress", "VehicleId" },
-                values: new object[] { 2, new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(5829), 200, 60, "Miami", 5, 1000, 20400, 20000, 1, "Shaker", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Receipts",
-                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 2, 1200, new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(7715), "Shaker", 5, 800, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Receipts",
-                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 3, 1200, new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(7742), "Shaker", 6, 800, 1 });
+                columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "OwnerId", "StartAddress", "VehicleId" },
+                values: new object[,]
+                {
+                    { 1, null, 200, 60, new DateTime(2022, 3, 25, 15, 15, 48, 595, DateTimeKind.Local).AddTicks(6628), "Columbus", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
+                    { 2, null, 200, 60, new DateTime(2022, 4, 2, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(212), "Miami", 5, 1000, 20400, 20000, null, "Shaker", 1 },
+                    { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, null, "Chicago", 1 },
+                    { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
+                    { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, null, "Cleveland", 1 },
+                    { 7, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, null, "Chicago", 1 },
+                    { 4, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "NYC", 5, 1000, 20400, 20000, null, "Kent", 2 },
+                    { 8, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miami", 5, 1000, 20400, 20000, null, "Shaker", 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 1, 1200, new DateTime(2022, 4, 8, 11, 31, 58, 518, DateTimeKind.Local).AddTicks(6549), "Cleveland", 4, 800, 2 });
+                values: new object[] { 2, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2278), "Shaker", 5, 800, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Receipts",
+                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
+                values: new object[] { 3, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(2307), "Shaker", 6, 800, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Receipts",
+                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
+                values: new object[] { 1, 1200, new DateTime(2022, 4, 8, 15, 15, 48, 598, DateTimeKind.Local).AddTicks(871), "Cleveland", 4, 800, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Receipts_TripId",
