@@ -73,8 +73,8 @@ function ProcessUserInput(id,method){
         
         let newOwner = {
             FirstName: firstName,
-            LastName: lastName,
-            FullName: firstName + " " + lastName
+            LastName: lastName
+            // FullName: firstName + " " + lastName
         }
         if (method == "PUT") {
             newOwner["Id"] = id;
@@ -97,7 +97,6 @@ function SetupForSubmitProfile(){
 function UpdateProfile(id){
     const updateProfileBtn = document.getElementById('updateProfileBtn');
     updateProfileBtn.addEventListener('click',function(){
-        console.log("update clicked");
         AllRequest.allRequest(OwnerController+id,UpdateProfileView);
         
     });
