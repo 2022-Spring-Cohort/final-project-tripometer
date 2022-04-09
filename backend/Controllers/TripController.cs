@@ -29,17 +29,12 @@ namespace TripometerAPI.Controllers
         //}
 
         [HttpGet]
-        public List<Trip> GetTrips(int? ownerId)
+        public List<Trip> GetTrips(int ownerId)
         {
-            if (ownerId != null)
-            {
-                List<Trip> trips = _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
-                return trips;
-            }else
-            {
-                return null;
-            }
-
+           
+            List<Trip> trips = _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
+            return trips;
+ 
         }
 
         // GET: api/Trip/5
@@ -59,32 +54,25 @@ namespace TripometerAPI.Controllers
         // PUT: api/Trip/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrip(int id, Trip trip)
+        public Trip PutTrip(Trip trip)
         {
-            if (id != trip.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(trip).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Trips.Update(trip);
+                _context.SaveChanges();
+                return _context.Trips.Find(trip.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TripExists(id))
+                if (!TripExists(trip.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
                     throw;
                 }
             }
-
-            return NoContent();
         }
 
         // POST: api/Trip
