@@ -16,21 +16,18 @@ export default {
 const appDiv = document.getElementById("app");
 
 
-function GetVehicles() {
-    console.log("h");
-    AllRequest.allRequest(`${VehicleController}?ownerId=1`, vehiclesView)
-
+function GetVehicles(ownerId) {
+    console.log("Getvehicle() called");
+    AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesView)
 }
 
 
-function GetVehicle(id) {
-    
+function GetVehicle(id) { 
     AllRequest.allRequest(VehicleController + id, vehicleView);
-   
 }
 
 function DeleteVehicle(id) {
-    console.log(id);
+    console.log();
     AllRequest.allRequest(VehicleController + id,vehiclesView,"DELETE");
 }
 
