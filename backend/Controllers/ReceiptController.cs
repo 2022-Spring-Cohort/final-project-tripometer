@@ -60,24 +60,21 @@ namespace TripometerAPI.Controllers
         // PUT: api/Receipt/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReceipt(int id, Receipt receipt)
+        public Receipt  PutReceipt( Receipt receipt)
         {
-            if (id != receipt.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(receipt).State = EntityState.Modified;
+          
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Receipts.Update(receipt);
+                _context.SaveChanges();
+                return _context.Receipts.Find(receipt.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReceiptExists(id))
+                if (!ReceiptExists( receipt.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
@@ -85,7 +82,7 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return (IActionResult)receipt;
+           
         }
 
         // POST: api/Receipt
@@ -102,18 +99,15 @@ namespace TripometerAPI.Controllers
 
         // DELETE: api/Receipt/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReceipt(int id)
+        public Trip DeleteReceipt(int id)
         {
-            var receipt = await _context.Receipts.FindAsync(id);
-            if (receipt == null)
-            {
-                return NotFound();
-            }
+            var receiptToDelete = _context.Receipts.Find(id);
+            var tripId = receiptToDelete.TripId;
+            Trip trip = _context.Trips.Find(tripId);
+            _context.Receipts.Remove(receiptToDelete);
+            _context.SaveChanges();
 
-            _context.Receipts.Remove(receipt);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return trip;
         }
 
         private bool ReceiptExists(int id)

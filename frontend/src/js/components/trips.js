@@ -8,7 +8,8 @@ import Owner from "./owner";
 //Gonna have to combine trip.js and trips.js for better format
 
 export default{
-    GetTrips
+    GetTrips,
+    TripView
 }
 
 const appDiv = document.getElementById("app");
@@ -96,6 +97,7 @@ function TripView(trip){
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;
+    Receipt.SetupForButtons();
 }
 
 function DeleteTrip(id){
