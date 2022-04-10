@@ -7,8 +7,8 @@ import AllRequest from "../allRequest";
 export default {
     GetVehicle,
     AddVehicle,
-    GetVehicles,
-    vehicleView,
+    GetVehicleList,
+    vehiclesDetails,
     SubmitVehicle
     
 }
@@ -16,23 +16,23 @@ export default {
 const appDiv = document.getElementById("app");
 
 
-function GetVehicles(ownerId) {
+function GetVehicleList(ownerId) {
     console.log("Getvehicle() called");
-    AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesView)
+    AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesList)
 }
 
 
 function GetVehicle(id) { 
-    AllRequest.allRequest(VehicleController + id, vehicleView);
+    AllRequest.allRequest(VehicleController + id, vehiclesDetails);
 }
 
 function DeleteVehicle(id) {
-    console.log();
-    AllRequest.allRequest(VehicleController + id,vehiclesView,"DELETE");
+    console.log(VehicleController);
+    AllRequest.allRequest(VehicleController + id,vehiclesList,"DELETE");
 }
 
 //
-function vehiclesView(NewVehicle) {
+function vehiclesList(NewVehicle) {
     console.log(NewVehicle);
     console.log(NewVehicle.length);
     
@@ -60,8 +60,6 @@ function vehiclesView(NewVehicle) {
     let VehicleList = document.getElementById(i);
     let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
 
-
-    
     VehicleList.addEventListener('click', function () {
         console.log("vehicleView was click");
         let Vehicleid = i+1; //This method needs to use cookies 
@@ -78,7 +76,7 @@ function vehiclesView(NewVehicle) {
 }
 
 
-function vehicleView(NewVehicle) {
+function vehiclesDetails(NewVehicle) {
     console.log(NewVehicle);
 
     appDiv.innerHTML = `
@@ -185,7 +183,7 @@ function VehicleUserInput(id,method) {
         }
 
         console.log(NewVehicle);
-        AllRequest.allRequest(VehicleController+id, vehicleView, method, NewVehicle);
+        AllRequest.allRequest(VehicleController+id, vehiclesDetails, method, NewVehicle);
 }
 
 function SubmitVehicle(){
@@ -210,4 +208,5 @@ SumbmitButton.addEventListener('click',function(){
     );
     const data = await response.json(); // Here you have the data that you need
     console.log(JSON.stringify(data, null, 2));
+   // console.log(data.)
 })();

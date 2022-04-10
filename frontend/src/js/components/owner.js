@@ -42,7 +42,7 @@ function addEventListenerForVirtualLists(){
     let ownerId = GetId();
     myVehicles.addEventListener('click',function(){
         //fetch vehicle list
-        Vehicle.GetVehicles(ownerId);
+        Vehicle.GetVehicleList(ownerId);
     });
     myTrips.addEventListener('click',function(){
          //fetch trips list

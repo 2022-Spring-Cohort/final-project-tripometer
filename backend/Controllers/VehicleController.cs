@@ -93,9 +93,10 @@ namespace TripometerAPI.Controllers
         public List<Vehicle> DeleteVehicle(int id)
         {
             Vehicle vehicleToDelete = _context.Vehicles.Find(id);
+            var ownerId = vehicleToDelete.OwnerId;
             _context.Vehicles.Remove(vehicleToDelete);
             _context.SaveChanges();
-            return _context.Vehicles.ToList();
+            return _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList(); 
         }
 
         private bool VehicleExists(int id)

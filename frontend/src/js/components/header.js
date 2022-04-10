@@ -61,7 +61,7 @@ function setup(){
     ViewVehicleButton.addEventListener('click', function(){
          console.log("works");
          let id = Owner.GetId();
-         vehicle.GetVehicles(id);
+         vehicle.GetVehicleList(id);
     })
 
 
