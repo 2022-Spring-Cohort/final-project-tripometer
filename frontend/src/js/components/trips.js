@@ -9,7 +9,8 @@ import Owner from "./owner";
 //Gonna have to combine trip.js and trips.js for better format
 
 export default{
-    GetTrips
+    GetTrips,
+    TripView
 }
 
 const appDiv = document.getElementById("app");
@@ -87,7 +88,9 @@ function GetTrip(id){
 
 function TripView(trip){
     appDiv.innerHTML = `
+
         <button id="updateTripBtn">Update Profile</button>
+
 
         <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
         <p>MileageBefore ${trip.mileageBefore}</p>
@@ -98,7 +101,10 @@ function TripView(trip){
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;
-    SetupForUpdateTrip(trip);
+
+    
+    Receipt.SetupForButtons(trip.receipts);
+
 }
 
 function DeleteTrip(id){
