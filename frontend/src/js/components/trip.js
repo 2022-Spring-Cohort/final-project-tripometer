@@ -3,8 +3,12 @@ import { VehicleController } from "../constants";
 import utility from "../utility";
 import { getSelectedOwnerId } from "./header";
 import { FlatArrayFactory } from "./flat-array-proxy";
+import { decodePolyline } from "./decode-polyline";
 import { decodePolylines } from "./decode-polyline";
 import { getCoordinatesAtDistances } from "./geometry";
+import { Vehicle } from "./vehicle-model"
+import { getStepsAtDistances } from "./distance";
+import { getCountyGeometry } from "./overpass";
 
 export default{
     view,
@@ -17,26 +21,51 @@ class Trip{
         this.ownerId = ownerId;
         this.request = request;
         this.initFuelGaugeReading = initFuelGaugeReading;
-        let vehiclePromise = asyncRequest(`${VehicleController}${this.vehicleId}`);
+        //let vehiclePromise = asyncRequest(`${VehicleController}${this.vehicleId}`);
         let directionsPromise = this.map.directionsService.route(request);
-        Promise.all([vehiclePromise, directionsPromise])
-            .then(([vehicle, directions]) => {
-                this.vehicle = vehicle;
-                this.directions = directions;
-                let refuelDistances = this.refuelDistances;
+        Promise.all([/*vehiclePromise, */ directionsPromise])
+            .then(([/*vehicle,*/ directions]) =>{
+                this.map.directionsRenderer.setDirections(directions);
+                let overviewPolyline = directions.routes[0].overview_polyline;
+                console.log(directions.routes[0]);
+                let isInComponents = decodePolyline(overviewPolyline,5);
+                getCountyGeometry(isInComponents)
+                    .then(results => {
+                        
+                        const geojson = osmtogeojson(results);
+                        console.log(geojson);
+                        const objectURL = URL.createObjectURL(new Blob([new TextEncoder().encode(JSON.stringify(geojson))], {type: "application/json; charset='application/json;charset=utf8'"}));
+                        this.map.map.data.loadGeoJson(objectURL);
+                    });
+                this.vehicle = new Vehicle();//vehicle;
+                let legs = directions.routes[0].legs;
+                let tripDistance = legs.map(leg => leg.distance.value).reduce((prev,next)=> prev+next);
+                let refuelDistances = this.vehicle.getRefuelDistances(tripDistance);
                 let distances = refuelDistances.map(refuelDistance => refuelDistance.distance);
                 let fuelUsages = refuelDistances.map(refuelDistance => refuelDistance.fuel);
-                let stepsAtDistances = this.getStepsAtDistances(distances);
-                let steps = stepsAtDistances.map(stepAtDistance => this.steps[stepAtDistance.stepIndex]);
-                let remainingDistances = stepsAtDistances.map(stepAtDistance => stepAtDistance.remainingDistance);
+                let legSteps = legs.flatMap(leg => leg.steps);
+                let stepsAtDistances = getStepsAtDistances(legSteps,distances);
+                let steps = stepsAtDistances.map(stepAtDistance => legSteps[stepAtDistance.stepIndex]);
+                let remainingDistances = stepsAtDistances.map(stepAtDistance => stepAtDistance.distanceRemaining);
                 let polylines = steps.map(step => step.polyline.points);
                 let decodedPolylines = decodePolylines(polylines);
+                console.log(decodedPolylines);
                 let coordinates = getCoordinatesAtDistances(remainingDistances,decodedPolylines);
-                this.map.reverseGeocodeAll(coordinates)
+                console.log(coordinates);
+                //remove null coordinates (happens if final fuel stop is at the destination)
+                let coordinatesToGeocode = coordinates.filter(coordinate => coordinate != null);
+                console.log(coordinatesToGeocode);
+                this.map.addMarkers(coordinatesToGeocode);
+                this.map.reverseGeocodeAll(coordinatesToGeocode)
                     .then(allResults => {
-                        //address_components[5].short_name should be state abrev
-                        states = allResults.map(results => results[0].address_components[5].short_name);
+                        let states = [];
+                        states.push(directions.routes[0].legs[0].start_address.match(/([A-Z]{2}),\sUSA/)[1]);
+                        for (let results of allResults){
+                            states.push(results[results.length-2].address_components[0].short_name);
+                        }
                         console.log(fuelUsages, states);
+                        //calculate fuel cost by state
+                        
                     });
 
             });
@@ -53,14 +82,19 @@ class Trip{
     }
 
     get tripDistance() {
-        return this.legs.reduce(prevLeg, currLeg => prevLeg.distance.value + currLeg.distance.value);
+        let distance = 0;
+        if (this.legs.length < 2)
+            distance = this.legs[0].distance.value
+        else
+            this.legs.reduce((prevLeg, currLeg) => { prevLeg.distance.value + currLeg.distance.value}, distance);
+        return distance;
     }
 
     //generator that returns all steps of all legs
     get steps() {
         let legSteps = [];
         for (let i = 0; i < this.legs.length; ++i){
-            legSteps.push(legs[i].steps);
+            legSteps.push(this.legs[i].steps);
         }
         return FlatArrayFactory(legSteps);
     }
@@ -150,6 +184,7 @@ function init(){
         let ownerId = getSelectedOwnerId();
         let vehicleId = vehicleSelect.value;
         let trip = new Trip(ownerId,vehicleId,request,map);
+        console.log(trip);
     });
 }
 
@@ -158,7 +193,7 @@ function init(){
 async function vehicleSelectInit(vehicleSelect){
     let ownerId = getSelectedOwnerId();
     console.log('ownerId',ownerId);
-    let vehicles = await asyncRequest(`https://localhost:44376/api/vehicle?ownerId=${ownerId}`);
+    let vehicles = await asyncRequest(`${VehicleController}?ownerId=${ownerId}`);
     console.log('vehicles',vehicles);
     let options = {
         attributes: {"data-id": "id", "value": "id"},

@@ -2,8 +2,8 @@ const FUEL_LEFT_ON_EMPTY = 2; //below average in gallons
 const LITERS_PER_GALLON = 3.78541;
 const METERS_PER_MILE = 1609.34;
 
-class Car{
-    constructor(ownerId, fuelEfficiency, fuelTankSize = 12, initialGaugeReading = 1){
+export class Vehicle{
+    constructor(ownerId=1, fuelEfficiency=30, fuelTankSize = 12, initialGaugeReading = 1){
         this.ownerId = ownerId;
         this.fuelEfficiency = fuelEfficiency;
         this.fuelTankSize = fuelTankSize;
@@ -27,7 +27,7 @@ class Car{
     }
 
     get maxDistanceInMeters(){
-        return maxDistance * METERS_PER_MILE;
+        return this.maxDistance * METERS_PER_MILE;
     }
     get maxDistanceOnFull(){
         return this.FuelTankSize * this.fuelEfficiency;
@@ -46,9 +46,10 @@ class Car{
     }
 
     getRefuelDistances(totalDistanceInMeters){
+        console.log(totalDistanceInMeters);
         let refuelDistances = [];
         let remainingDistance = totalDistanceInMeters;
-        distance = this.maxDistanceInMeters; //initial distance we can travel
+        let distance = this.maxDistanceInMeters; //initial distance we can travel
         while(distance < remainingDistance) {
             remainingDistance -= distance; //our remaining distance
             refuelDistances.push({distance: distance, fuel: this.fuel});
@@ -62,6 +63,7 @@ class Car{
             refuelDistances.push({distance:remainingDistance, fuel: this.fuel});
         }
         this.gaugeReading = 0; //for return trip calculations
+        console.log(refuelDistances);
         return refuelDistances;
     }
 }

@@ -28,6 +28,7 @@ function distanceFrom(prevCoordinate, nextCoordinate){
 }
 
 function getBearing(prevCoordinate,nextCoordinate){
+    console.log(prevCoordinate,nextCoordinate);
     let phi_1 = degreesToRadians(prevCoordinate.lat);
     let phi_2 = degreesToRadians(nextCoordinate.lat);
     let delta_lambda = degreesToRadians(nextCoordinate.lng)
@@ -54,20 +55,21 @@ function getCoordinateFromBearingDistance(coordinate, bearing, meters){
 }
 
 //distance is a Distance object, path is a Polyline object
-export function getCoordinateAtDistance(distance, path){
-    let meters = distance.value;
-    let distance = 0;
+export function getCoordinateAtDistance(totalDistance, path){
+    console.log('START GETCOORDINATEATDISTANCE',totalDistance,path);
+    let meters = totalDistance;
+    let currDistance = 0;
     let prevDistance = 0;
     let i = 1;
     if (meters == 0) return path[0];
     if (meters < 0 || path.length < 2) return null;
-    while (i < path.length && distance < meters){
-        prevDistance = distance;
-        distance += distanceFrom(path[i-1],path[i]);//from prevCoordinate to nextCoordinate
+    while (i < path.length && currDistance < meters){
+        prevDistance = currDistance;
+        currDistance += distanceFrom(path[i-1],path[i]);//from prevCoordinate to nextCoordinate
         i++;
     }
-    if (distance < meters) return null; //the point extends beyond the path
-
+    if (currDistance < meters) return null; //the point extends beyond the path
+    console.log('getting Bearing', path[i-2],path[i-1]);
     let prevCoordinate = path[i-2];
     let nextCoordinate = path[i-1];
     let metersFromPrevCoordinate = meters - prevDistance; 
@@ -77,11 +79,11 @@ export function getCoordinateAtDistance(distance, path){
 }
 
 export function getCoordinatesAtDistances(distances, paths){
-    coordinates = [];
+    let coordinates = [];
     if (distances.length != paths.length)
         throw Error("there must be the same number of distances and paths");
 
-    for (i = 0; i < paths.length; i++){
+    for (let i = 0; i < paths.length; i++){
         coordinates.push(getCoordinateAtDistance(distances[i], paths[i]));
     }
     return coordinates;

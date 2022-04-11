@@ -23,9 +23,9 @@ namespace TripometerAPI.Controllers
 
         // GET: api/Vehicle
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles(int ownerId)
         {
-            return await _context.Vehicles.ToListAsync();
+            return await _context.Vehicles.Where(vehicle => vehicle.OwnerId == ownerId).ToListAsync();
         }
 
         // GET: api/Vehicle/5

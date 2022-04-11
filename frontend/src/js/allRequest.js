@@ -22,14 +22,14 @@ function allRequest(location, callback, method = "GET", body = null){
     .catch(err => console.error(err));
 }
 
-export async function asyncRequest(location, method = "GET", body = null){
+export async function asyncRequest(location, method = "GET", body = null, headers = null){
     let fetchOptions = {
         method : method,
     }
 
     if (method == "PUT" || method == "POST" || body != null){
-        fetchOptions["body"] = JSON.stringify(body);
-        fetchOptions["headers"] = {
+        fetchOptions["body"] = (headers) ? body : JSON.stringify(body);
+        fetchOptions["headers"] = headers || {
             "Content-Type": "application/json"
         }
     }

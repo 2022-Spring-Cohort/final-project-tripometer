@@ -85,7 +85,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 4, 13, 37, 39, 282, DateTimeKind.Local).AddTicks(1907),
+                            Date = new DateTime(2022, 4, 8, 16, 35, 34, 24, DateTimeKind.Local).AddTicks(4560),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -121,9 +121,6 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -131,8 +128,6 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
 
                     b.HasIndex("VehicleId");
 
@@ -149,7 +144,6 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
-                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         });
@@ -208,19 +202,11 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-                    b.HasOne("TripometerAPI.Models.Owner", "Owner")
-                        .WithMany("Trips")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TripometerAPI.Models.Vehicle", "Vehicle")
                         .WithMany("Trips")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Owner");
 
                     b.Navigation("Vehicle");
                 });
@@ -238,8 +224,6 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Owner", b =>
                 {
-                    b.Navigation("Trips");
-
                     b.Navigation("Vehicles");
                 });
 

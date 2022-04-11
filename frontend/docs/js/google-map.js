@@ -65,27 +65,56 @@ class GoogleMap extends HTMLElement{
     }
 
     //https://developers.google.com/maps/documentation/javascript/reference/marker#MarkerOptions
-    addMarker(coordinates, options){
-        options.position = coordinates;
+    addMarker(coordinate, options = {}){
+        options.position = coordinate;
         let marker = new google.maps.Marker(options)
         this.markers.push(marker);
-        this.map.fitBounds(this.bounds.extends(coordinates));
-        marker.setPosition(coordinates);
+        this.map.fitBounds(this.bounds.extend(coordinate));
+        marker.setMap(this.map);
+    }
+
+    addMarkers(coordinates, options){
+        for (let i = 0; i < coordinates.length; i++){
+            this.addMarker(coordinates[i], options);
+        }
     }
 
     //https://developers.google.com/maps/documentation/javascript/reference/polygon#PolygonOptions
     addPolyline(path, options){
         options.path = path;
         let polyline = new google.maps.Polyline(options);
+        polyline.setMap(this.map);
     }
 
+    addPolygon(paths){
+        console.log(paths);
+        //options.paths = paths;
+        let polygon = new google.maps.Polygon();
+        polygon.setPaths(paths);
+        //this.polygons.push(polygon);
+        polygon.setMap(this.map);
+    }
+
+    addPolygons(paths){
+        for (let i = 0; i < paths.length; i++){
+            this.addPolygon(paths[i]);
+        }
+    }
+    //Note about reverse geocoding using google maps
+    //political entities vary from region to region even within the US
+    //the geocoder will return all results for a particular coordinate
+    //note the last result should always be the country
+    //for the US the next to last should always be state level
+    //therefore if you want the state level you would use results[results.length - 2];
+
+
     async reverseGeocode(coordinate){
-        let [results, status] = await this.geocoder.geocode({location: coordinate});
+        let {results, status} = await this.geocoder.geocode({location: coordinate});
         return results;
     }
 
     async reverseGeocodeAll(coordinates){
-        return coordinates.map(coordinate => await this.reverseGeocode(coordinate));
+        return Promise.all(coordinates.map(coordinate => this.reverseGeocode(coordinate)));
     }
 }
 

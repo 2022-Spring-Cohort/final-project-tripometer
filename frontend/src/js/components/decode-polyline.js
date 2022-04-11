@@ -1,6 +1,9 @@
 //this function decodes a polyline and returns coordinates (array of LatLng object)
+//this function decodes a polyline and returns coordinates (array of LatLng object)
+const RETURN_TYPE = {LAT_LNG_ARR:0,VECTOR_ARR:1,VECTOR:2,POINT_ARR:3,PT_LSTR:4,IS_IN: 5};
 const ACCURACY_EXPONENT = 5;
-export function decodePolyline(polyline){
+export function decodePolyline(polyline, returnType = RETURN_TYPE.LAT_LNG_ARR){
+    console.log(polyline);
     const accuracyMultiplier = Math.pow(10, ACCURACY_EXPONENT);
     let coordinates = [];
 
@@ -34,13 +37,33 @@ export function decodePolyline(polyline){
 
         lat += getCoordinate();
         lng += getCoordinate();
-
-        coordinates.push({lat: lat / accuracyMultiplier, lng: lng / accuracyMultiplier });
+        let _lat = lat / accuracyMultiplier;
+        let _lng = lng / accuracyMultiplier;
+        // if (returnType == RETURN_TYPE.VECTOR){
+        //     coordinates.push([_lat,_lng]);
+        // }
+        // else if (returnType == RETURN_TYPE.POINT_ARR)
+        // {
+        //     coordinates.push({x: _lat, y: _lng});
+        // }
+        // else if (returnType == RETURN_TYPE.PT_LSTR){
+        //     coordinates.push(`pt(${_lat},${_lng}),`);
+        // }
+        /* else*/ if (returnType == RETURN_TYPE.IS_IN){
+            coordinates.push(`is_in(${_lat},${_lng});`);
+        }
+        else {
+            coordinates.push({lat: _lat, lng: _lng });
+        }
     }
-
+    if (returnType == /*RETURN_TYPE.PT_LSTR||*/RETURN_TYPE.IS_IN){
+        return coordinates.join('').replace(/,$/,')');
+    }
+    console.log('in decode: should output latlngarr',coordinates);
     return coordinates;
 }
 
 export function decodePolylines(polylines){
+    
     return polylines.map(polyline => decodePolyline(polyline));
 }
