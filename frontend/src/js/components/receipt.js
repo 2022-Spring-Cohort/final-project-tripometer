@@ -2,17 +2,22 @@ import { ReceiptController } from "../constants";
 import { TripController } from "../constants";
 import Utility from "../utility";
 import AllRequest from "../allRequest";
+import Trip from "./trips";
 
 
 export default{
     DisplayAll,
     GetReceipts,
-    AddReceiptView
-
-
+    AddReceiptView,
+    DeleteAReceipt,
+    SetupForButtons,
+    UpdateReceiptView,
+    GetReceipt
+    
 }
 
 const appDiv = document.getElementById("app");
+
 
 function GetReceipts(tripId){
 AllRequest.allRequest(ReceiptController + tripId, DisplayAll);
@@ -21,6 +26,9 @@ AllRequest.allRequest(ReceiptController + tripId, DisplayAll);
 
 
 function DisplayAll(receipts){
+
+   
+
     return`
     <ul>
         ${receipts.map(receipt=>{
@@ -28,26 +36,42 @@ function DisplayAll(receipts){
                     <li>City the gas station is located in: ${receipt.gasStation}</li>
                     <li>Gas price by the gallon: $${receipt.pricePerGallon} per gallon</li>
                     <li>Total Cost of the trip: $${receipt.totalCost} dollars</li>
-                ------------------------------------------------------------------------  
+                    <section id="${receipt.id}" class="receipts">
+                        <button class="DeleteReceipt"> Delete Receipt</button>
+                        <button class="EditReceipt">Edit Receipt</button>
+                    </section>
+                ------------------------------------------------------------------------ 
+                ------------------------------------------------------------------------ 
             `;      
         }).join('')}
     </ul>
     `
+   
+
  }
 
-// function DisplayAll(receipts){
-//     appDiv.innerHTML = `
-//     ${receipts.map(receipt=>{
-//         return `<p>Date and Time: ${receipt.date}</p>
-//                 <p>City the gas station is located in: ${receipt.gasStation}</p>
-//                 <p>Gas price by the gallon: $${receipt.pricePerGallon} per gallon</p>
-//                 <p>Total Cost of the trip: $${receipt.totalCost} dollars</p>
-//             ------------------------------------------------------------------------  
-//         `;      
-//     }).join('')}
+function SetupForButtons(receiptid){
+    let receipts = document.getElementsByClassName("receipts");
+    
+    Array.prototype.forEach.call(receipts,function(r){
+        console.log(r);
+        let id = r.id;
+        let DeleteReceipt = r.getElementsByClassName("DeleteReceipt")[0];
+        let EditReceipt = r.getElementsByClassName("EditReceipt")[0];
+    
+        DeleteReceipt.addEventListener('click', function(){
+            console.log(r);
+            DeleteAReceipt(id);
 
-//     `
-//  }
+        });
+        EditReceipt.addEventListener('click', function(){
+            console.log("edit click");
+            console.log(receiptid[receiptid.length-1]);
+            UpdateReceiptView(receiptid[receiptid.length-1])
+        });
+
+});
+ }
 
 
  function AddReceiptView(trips){
@@ -86,12 +110,14 @@ function SetupForSubmitReceipt(){
         let tripId = document.getElementById('tripId').value;
         if (!Utility.isEmpty(pricePerGallon)&&!Utility.isEmpty(totalCost)&&!Utility.isEmpty(gasStation)&&!Utility.isEmpty(tripId)) {
             let newReceipt = {
+                
                 PricePerGallon: pricePerGallon,
                 TotalCost: totalCost,
                 AdditionalCosts: 0,
                 GasStation: Utility.Capitalize(gasStation),
                 TripId: tripId
             }
+            console.log()
             AllRequest.allRequest(ReceiptController,ReceiptView,"POST",newReceipt);
         }else{
             //error View
@@ -101,15 +127,93 @@ function SetupForSubmitReceipt(){
 }
 
 function GetReceipt(id){
-    AllRequest.allRequest(ReceiptController_id,ReceiptView);
+    
+    AllRequest.allRequest(ReceiptController+id,SetupForButtons )
 }
 
 function ReceiptView(receipt){
+    console.log(receipt);
     appDiv.innerHTML = `
         <p>Date and Time: ${receipt.date}</p>
         <p>City the gas station is located in: ${receipt.gasStation}</p>
         <p>Gas price by the gallon: $${receipt.pricePerGallon} per gallon</p>
         <p>Total Cost of the trip: $${receipt.totalCost} dollars</p>
     
+        
     `;
+
 }
+
+function DeleteAReceipt(id){
+    console.log(id);
+    AllRequest.allRequest(ReceiptController+id,Trip.TripView,"DELETE");
+
+}
+
+
+
+function UpdateReceiptView(id){
+
+    console.log("h")
+    console.log(id.Trip);
+    appDiv.innerHTML = `
+    <h2>Edit Receipt</h2>
+
+
+    <input type="hidden" id="TripId" name="TripId" value="${id.tripId}">
+    
+
+    <label for="PricePerGallon">Price of gas per gallon</label>
+    <input type="text" id="PricePerGallon" value="${id.pricePerGallon}">
+
+    <label for="TotalCost">Total cost of trip</label>
+    <input type="text" id="TotalCost" value="${id.totalCost}">
+
+    <label for="GasStation">Gas Station</label>
+    <input type="text" id="GasStation" value="${id.gasStation}">
+
+    <button type="submit" id="saveUpdateReceiptbtn">Update</button>
+    
+    `;
+    EditAReceipt(id);
+}
+
+
+ function EditAReceipt (newReceipt){
+const saveUpdateBtn = document.getElementById('saveUpdateReceiptbtn');
+
+  console.log("ffffff");
+
+  saveUpdateBtn.addEventListener('click',function(){
+         ReceiptUserInput(newReceipt.id,"PUT");
+   });
+ }
+
+
+function ReceiptUserInput(id, method) {
+  
+
+        let PricePerGallon = document.getElementById('PricePerGallon').value;
+        let TotalCost = document.getElementById('TotalCost').value;
+        let GasStation = document.getElementById('GasStation').value;
+        let TripId = document.getElementById('TripId').value;
+
+        let GetReceipts = {
+            PricePerGallon: PricePerGallon,
+            TotalCost :TotalCost,
+            GasStation: GasStation,
+            TripId: TripId,
+        
+            ownerId: 1
+        }
+
+        if (method == "PUT") {
+            GetReceipts["Id"] = id;
+        }
+
+        console.log(GetReceipts);
+        AllRequest.allRequest(ReceiptController+id, ReceiptView, method, GetReceipts);
+}
+
+
+
