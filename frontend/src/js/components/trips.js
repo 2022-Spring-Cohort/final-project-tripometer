@@ -97,7 +97,8 @@ function TripView(trip){
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;
-    Receipt.SetupForButtons();
+    
+    Receipt.SetupForButtons(trip.receipts);
 }
 
 function DeleteTrip(id){

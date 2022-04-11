@@ -12,7 +12,6 @@ export default{
     DeleteAReceipt,
     SetupForButtons,
     UpdateReceiptView,
-    EditAReceipt,
     GetReceipt
     
 }
@@ -27,6 +26,7 @@ AllRequest.allRequest(ReceiptController + tripId, DisplayAll);
 
 
 function DisplayAll(receipts){
+   
     return`
     <ul>
         ${receipts.map(receipt=>{
@@ -50,7 +50,7 @@ function DisplayAll(receipts){
 
 function SetupForButtons(receiptid){
     let receipts = document.getElementsByClassName("receipts");
-    console.log(receipts);
+    
     Array.prototype.forEach.call(receipts,function(r){
         console.log(r);
         let id = r.id;
@@ -59,27 +59,36 @@ function SetupForButtons(receiptid){
     
         DeleteReceipt.addEventListener('click', function(){
             console.log(r);
-            DeleteAReceipt(id);
+          //  DeleteAReceipt(id);
 
         });
         EditReceipt.addEventListener('click', function(){
-        // AllRequest.allRequest(ReceiptController+id, UpdateReceiptView)
-            console.log(receiptid);
-            // console.log("r");
-            // console.log(id.id);
-            // console.log(receipts.id);
-            // UpdateReceiptView(id);
+            console.log("edit click");
+            console.log(receiptid[receiptid.length-1]);
+            UpdateReceiptView(receiptid[receiptid.length-1])
         });
 
 });
-
-
-
-
  }
 
+//  function EditAReceipt(id){
 
+//     const Edit = document.getElementsByClassName("EditReceipt")[0];
+    
+//     Edit.addEventListener('click', function(){
+//     console.log(id.length);
+//     for (let i = 0; i < id.length; i++) {
+//         console.log("press");
+//         AllRequest.allRequest(ReceiptController+(id),aaa);
+//         console.log("press");
+//     }
+//     })
+//  }
+// function aaa(id){
+// console.log("asfsdf");
+// console.log(id);
 
+// }
 
  function AddReceiptView(trips){
     appDiv.innerHTML = `
@@ -159,17 +168,10 @@ function DeleteAReceipt(id){
 
 
 
-// function EditAReceipt(){
-//     console.log(id)
-//     AllRequest.allRequest(ReceiptController+id,Trip.TripView,"PUT");
-
-// }
-
 function UpdateReceiptView(id){
     console.log("h")
-
-    console.log(id.id)
-    console.log(id)
+    console.log(id);
+    console.log(id.pricePerGallon);
     appDiv.innerHTML = `
     <h2>Edit Receipt</h2>
 
@@ -184,8 +186,7 @@ function UpdateReceiptView(id){
 
     <button type="submit" id="saveUpdateReceiptbtn">Update</button>   
     `;
- EditAReceipt(id);
-
+    EditAReceipt(id);
 }
 
  function EditAReceipt (newReceipt){
