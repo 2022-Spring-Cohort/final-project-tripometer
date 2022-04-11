@@ -22,11 +22,7 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Vehicle
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
-        //{
-        //    return await _context.Vehicles.ToListAsync();
-        //}
+
 
         // GET: api/Vehicle/5
         [HttpGet("{id}")]

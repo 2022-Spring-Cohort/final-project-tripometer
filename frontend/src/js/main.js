@@ -14,3 +14,4 @@ function setup(){
     //landingPage.setup(); //default appDiv
     //footer.setup();
 }
+

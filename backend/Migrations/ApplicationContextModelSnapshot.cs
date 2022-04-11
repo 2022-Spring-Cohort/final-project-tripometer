@@ -173,9 +173,10 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
 
+
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
-                        
+
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -458,6 +459,7 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
+
 
                     b.HasOne("TripometerAPI.Models.Owner", "Owner")
                         .WithMany("Trips")

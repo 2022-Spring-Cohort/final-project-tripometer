@@ -199,7 +199,6 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-              //  OwnerId = 1
 
             }) ;
 
