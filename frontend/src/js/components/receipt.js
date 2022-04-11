@@ -26,7 +26,9 @@ AllRequest.allRequest(ReceiptController + tripId, DisplayAll);
 
 
 function DisplayAll(receipts){
+
    
+
     return`
     <ul>
         ${receipts.map(receipt=>{
