@@ -5,6 +5,9 @@ import Owner from "./owner";
 import { allRequest, asyncRequest } from "../allRequest";
 import { OwnerController } from "../constants";
 import utility from "../utility";
+import vehicle from "./vehicle";
+import receipt from "./receipt";
+
 
 export default {
     setup
@@ -21,6 +24,10 @@ const html = `
             </li>
             <li>
                 <button id="my-profile-button">My Profile</button>
+                <button id="Add-Vehicle-button">Add New Vehicle</button>
+
+               
+
             </li>
             <li>
                 <select id="owner-select">
@@ -35,6 +42,7 @@ function setup(){
     element.innerHTML = html;
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
+    const NewVehicleButton = document.getElementById('Add-Vehicle-button');
 
 
     //setup header navigation event listeners
@@ -48,9 +56,23 @@ function setup(){
         Owner.GetProfile(id);
     });
 
+
     const ownerSelect = document.getElementById('owner-select');
     populateOwnerSelect(ownerSelect);
+
+
+
+    NewVehicleButton.addEventListener('click', function(){
+        console.log("works");
+        vehicle.AddVehicle();
+        vehicle.SubmitVehicle();
+        
+    })
 }
+
+
+
+
 
 //---TEMP---//
 //use this until we get proper log-in functions

@@ -22,16 +22,13 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Vehicle
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles(int ownerId)
-        {
-            return await _context.Vehicles.Where(vehicle => vehicle.OwnerId == ownerId).ToListAsync();
-        }
+
 
         // GET: api/Vehicle/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
+           
             var vehicle = await _context.Vehicles.FindAsync(id);
 
             if (vehicle == null)
@@ -42,27 +39,31 @@ namespace TripometerAPI.Controllers
             return vehicle;
         }
 
+        [HttpGet]
+        public List<Vehicle> GetVehicles(int ownerId)
+        {
+
+            return _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList();
+        }
+
+
         // PUT: api/Vehicle/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVehicle(int id, Vehicle vehicle)
+        public Vehicle Vehicle(Vehicle vehicle)
         {
-            if (id != vehicle.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(vehicle).State = EntityState.Modified;
-
+   
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Vehicles.Update(vehicle);
+                _context.SaveChanges();
+                return _context.Vehicles.Find(vehicle.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VehicleExists(id))
+                if (!VehicleExists(vehicle.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
@@ -70,7 +71,6 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return NoContent();
         }
 
         // POST: api/Vehicle
@@ -81,23 +81,18 @@ namespace TripometerAPI.Controllers
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVehicle", new { id = vehicle.Id }, vehicle);
+            return vehicle;
         }
 
         // DELETE: api/Vehicle/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVehicle(int id)
+        public List<Vehicle> DeleteVehicle(int id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-            if (vehicle == null)
-            {
-                return NotFound();
-            }
-
-            _context.Vehicles.Remove(vehicle);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            Vehicle vehicleToDelete = _context.Vehicles.Find(id);
+            var ownerId = vehicleToDelete.OwnerId;
+            _context.Vehicles.Remove(vehicleToDelete);
+            _context.SaveChanges();
+            return _context.Vehicles.Where(v => v.OwnerId == ownerId).ToList(); 
         }
 
         private bool VehicleExists(int id)

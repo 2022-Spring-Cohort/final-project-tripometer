@@ -1,5 +1,6 @@
 export default {
     allRequest,
+
 }
 
 function allRequest(location, callback, method = "GET", body = null){
@@ -21,6 +22,7 @@ function allRequest(location, callback, method = "GET", body = null){
     })
     .catch(err => console.error(err));
 }
+
 
 export async function asyncRequest(location, method = "GET", body = null, headers = null){
     let fetchOptions = {
@@ -44,3 +46,4 @@ export async function asyncRequest(location, method = "GET", body = null, header
         throw error;
     }
 }
+

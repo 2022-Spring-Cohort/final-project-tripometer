@@ -29,40 +29,52 @@ namespace TripometerAPI.Controllers
         }
 
         // GET: api/Receipt/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        //{
+        //    var receipt = await _context.Receipts.FindAsync(id);
+
+        //    if (receipt == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return receipt;
+        //}
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Receipt>> GetReceipt(int id)
+        public List<Receipt> GetReceipts(int id)
         {
-            var receipt = await _context.Receipts.FindAsync(id);
-
-            if (receipt == null)
+            List<Receipt> receipts;
+            if (id != null)
             {
-                return NotFound();
+                receipts = _context.Receipts.Where(r => r.TripId == id).ToList();
             }
-
-            return receipt;
+            else
+            {
+                receipts = _context.Receipts.ToList();
+            }
+            return receipts;
         }
 
         // PUT: api/Receipt/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReceipt(int id, Receipt receipt)
+        public Receipt  PutReceipt( Receipt receipt)
         {
-            if (id != receipt.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(receipt).State = EntityState.Modified;
+          
 
             try
             {
-                await _context.SaveChangesAsync();
+                _context.Receipts.Update(receipt);
+                _context.SaveChanges();
+                return _context.Receipts.Find(receipt.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReceiptExists(id))
+                if (!ReceiptExists( receipt.Id))
                 {
-                    return NotFound();
+                    throw;
                 }
                 else
                 {
@@ -70,34 +82,32 @@ namespace TripometerAPI.Controllers
                 }
             }
 
-            return NoContent();
+           
         }
 
         // POST: api/Receipt
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Receipt>> PostReceipt(Receipt receipt)
+        public Receipt PostReceipt(Receipt receipt)
         {
+            receipt.Date = DateTime.Now;
             _context.Receipts.Add(receipt);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return CreatedAtAction("GetReceipt", new { id = receipt.Id }, receipt);
+            return receipt;
         }
 
         // DELETE: api/Receipt/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReceipt(int id)
+        public Trip DeleteReceipt(int id)
         {
-            var receipt = await _context.Receipts.FindAsync(id);
-            if (receipt == null)
-            {
-                return NotFound();
-            }
+            var receiptToDelete = _context.Receipts.Find(id);
+            var tripId = receiptToDelete.TripId;
+            Trip trip = _context.Trips.Find(tripId);
+            _context.Receipts.Remove(receiptToDelete);
+            _context.SaveChanges();
 
-            _context.Receipts.Remove(receipt);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return trip;
         }
 
         private bool ReceiptExists(int id)

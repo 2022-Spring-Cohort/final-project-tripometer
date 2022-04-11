@@ -1,6 +1,8 @@
 import {OwnerController} from "../constants";
 import Utility from "../utility";
 import AllRequest from "../allRequest";
+import Trip from "./trips";
+import Vehicle from "./vehicle";
 
 
 export default{
@@ -37,12 +39,15 @@ function ProfileView(owner){
 function addEventListenerForVirtualLists(){
     const myVehicles = document.getElementById('myVehicles');
     const myTrips = document.getElementById('myTrips');
+    let ownerId = GetId();
     myVehicles.addEventListener('click',function(){
-        console.log("addEventListenerForVirtualLists() called");
         //fetch vehicle list
+        Vehicle.GetVehicleList(ownerId);
     });
     myTrips.addEventListener('click',function(){
          //fetch trips list
+         Trip.GetTrips(ownerId);
+         
     });
 }
 
@@ -63,24 +68,24 @@ function AddOwnerView(){
 
 function ProcessUserInput(id,method){
     let firstName = document.getElementById('firstName').value;
-        let lastName = document.getElementById('lastName').value;
-        if (!Utility.isEmpty(firstName) && !Utility.isEmpty(lastName)) {
-            firstName = Utility.Capitalize(firstName.trim());
-            lastName = Utility.Capitalize(lastName.trim());   
-            
-            let newOwner = {
-                FirstName: firstName,
-                LastName: lastName,
-                FullName: firstName + " " + lastName
-            }
-            if (method == "PUT") {
-                newOwner["Id"] = id;
-            }
-            console.log(newOwner);
-            AllRequest.allRequest(OwnerController+id,ProfileView,method,newOwner);
-        }else{
-            //redirect to a view with error messages
+    let lastName = document.getElementById('lastName').value;
+    if (!Utility.isEmpty(firstName) && !Utility.isEmpty(lastName)) {
+        firstName = Utility.Capitalize(firstName.trim());
+        lastName = Utility.Capitalize(lastName.trim());   
+        
+        let newOwner = {
+            FirstName: firstName,
+            LastName: lastName
+            // FullName: firstName + " " + lastName
         }
+        if (method == "PUT") {
+            newOwner["Id"] = id;
+        }
+        console.log(newOwner);
+        AllRequest.allRequest(OwnerController+id,ProfileView,method,newOwner);
+    }else{
+        //redirect to a view with error messages
+    }
 }
 
 function SetupForSubmitProfile(){
@@ -94,7 +99,6 @@ function SetupForSubmitProfile(){
 function UpdateProfile(id){
     const updateProfileBtn = document.getElementById('updateProfileBtn');
     updateProfileBtn.addEventListener('click',function(){
-        console.log("update clicked");
         AllRequest.allRequest(OwnerController+id,UpdateProfileView);
         
     });

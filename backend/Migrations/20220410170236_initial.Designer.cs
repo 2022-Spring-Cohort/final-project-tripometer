@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220410170236_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,7 +175,6 @@ namespace TripometerAPI.Migrations
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
 
-
                     b.Property<int?>("OwnerId")
                         .HasColumnType("int");
 
@@ -184,6 +185,8 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("VehicleId");
 
@@ -201,6 +204,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -215,6 +219,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 1
                         },
@@ -229,6 +234,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Chicago",
                             VehicleId = 1
                         },
@@ -243,6 +249,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Kent",
                             VehicleId = 2
                         },
@@ -257,6 +264,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -271,6 +279,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Cleveland",
                             VehicleId = 1
                         },
@@ -285,6 +294,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Chicago",
                             VehicleId = 1
                         },
@@ -299,6 +309,7 @@ namespace TripometerAPI.Migrations
                             EstimatedTotalCost = 1000,
                             MileageAfter = 20400,
                             MileageBefore = 20000,
+                            OwnerId = 1,
                             StartAddress = "Shaker",
                             VehicleId = 2
                         });
@@ -459,8 +470,6 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
                 {
-
-
                     b.HasOne("TripometerAPI.Models.Owner", "Owner")
                         .WithMany("Trips")
                         .HasForeignKey("OwnerId");
@@ -470,6 +479,8 @@ namespace TripometerAPI.Migrations
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Vehicle");
                 });
@@ -485,6 +496,8 @@ namespace TripometerAPI.Migrations
 
             modelBuilder.Entity("TripometerAPI.Models.Owner", b =>
                 {
+                    b.Navigation("Trips");
+
                     b.Navigation("Vehicles");
                 });
 
