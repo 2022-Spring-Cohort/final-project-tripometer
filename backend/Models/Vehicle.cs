@@ -29,6 +29,6 @@ namespace TripometerAPI.Models
 
         public virtual List<Trip> Trips { get; set; }
 
-        public virtual string YearMakeModel { get { return $"{Year} {Make} {Model}"; } }
+     
     }
 }
