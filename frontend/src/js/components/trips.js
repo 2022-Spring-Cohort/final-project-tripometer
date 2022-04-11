@@ -86,8 +86,6 @@ function GetTrip(id){
 
 function TripView(trip){
     appDiv.innerHTML = `
-        
-
         <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
         <p>MileageBefore ${trip.mileageBefore}</p>
         <p>MileageAfter ${trip.mileageAfter} </p>

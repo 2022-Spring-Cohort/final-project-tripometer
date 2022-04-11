@@ -151,11 +151,15 @@ function DeleteAReceipt(id){
 
 
 function UpdateReceiptView(id){
+
     console.log("h")
-    console.log(id);
-    console.log(id.pricePerGallon);
+    console.log(id.Trip);
     appDiv.innerHTML = `
     <h2>Edit Receipt</h2>
+
+
+    <input type="hidden" id="TripId" name="TripId" value="${id.tripId}">
+    
 
     <label for="PricePerGallon">Price of gas per gallon</label>
     <input type="text" id="PricePerGallon" value="${id.pricePerGallon}">
@@ -166,10 +170,12 @@ function UpdateReceiptView(id){
     <label for="GasStation">Gas Station</label>
     <input type="text" id="GasStation" value="${id.gasStation}">
 
-    <button type="submit" id="saveUpdateReceiptbtn">Update</button>   
+    <button type="submit" id="saveUpdateReceiptbtn">Update</button>
+    
     `;
     EditAReceipt(id);
 }
+
 
  function EditAReceipt (newReceipt){
 const saveUpdateBtn = document.getElementById('saveUpdateReceiptbtn');
@@ -188,12 +194,13 @@ function ReceiptUserInput(id, method) {
         let PricePerGallon = document.getElementById('PricePerGallon').value;
         let TotalCost = document.getElementById('TotalCost').value;
         let GasStation = document.getElementById('GasStation').value;
-       
+        let TripId = document.getElementById('TripId').value;
 
         let GetReceipts = {
             PricePerGallon: PricePerGallon,
             TotalCost :TotalCost,
             GasStation: GasStation,
+            TripId: TripId,
         
             ownerId: 1
         }
@@ -203,7 +210,7 @@ function ReceiptUserInput(id, method) {
         }
 
         console.log(GetReceipts);
-        AllRequest.allRequest(ReceiptController+id, ReceiptView,method, GetReceipts);
+        AllRequest.allRequest(ReceiptController+id, ReceiptView, method, GetReceipts);
 }
 
 
