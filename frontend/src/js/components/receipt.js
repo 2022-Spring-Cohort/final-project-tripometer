@@ -59,7 +59,7 @@ function SetupForButtons(receiptid){
     
         DeleteReceipt.addEventListener('click', function(){
             console.log(r);
-          //  DeleteAReceipt(id);
+            DeleteAReceipt(id);
 
         });
         EditReceipt.addEventListener('click', function(){
@@ -71,24 +71,6 @@ function SetupForButtons(receiptid){
 });
  }
 
-//  function EditAReceipt(id){
-
-//     const Edit = document.getElementsByClassName("EditReceipt")[0];
-    
-//     Edit.addEventListener('click', function(){
-//     console.log(id.length);
-//     for (let i = 0; i < id.length; i++) {
-//         console.log("press");
-//         AllRequest.allRequest(ReceiptController+(id),aaa);
-//         console.log("press");
-//     }
-//     })
-//  }
-// function aaa(id){
-// console.log("asfsdf");
-// console.log(id);
-
-// }
 
  function AddReceiptView(trips){
     appDiv.innerHTML = `
