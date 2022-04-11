@@ -199,7 +199,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1
+              //  OwnerId = 1
 
             }) ;
 
@@ -215,8 +215,8 @@ namespace TripometerAPI
                 Distance = 200,
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
-                VehicleId = 1,
-                OwnerId = 1
+                 VehicleId = 1,
+                //   OwnerId = 1
             });
 
             modelBuilder.Entity<Trip>().HasData(new Trip
@@ -231,7 +231,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1
+                //    OwnerId = 1
 
             });
 
@@ -247,7 +247,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 2,
-                OwnerId = 1
+                //      OwnerId = 1
 
             });
 
@@ -263,7 +263,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1
+                //     OwnerId = 1
 
             });
 
@@ -279,7 +279,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1
+                //    OwnerId = 1
 
             });
 
@@ -295,7 +295,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 1,
-                OwnerId = 1
+                //    OwnerId = 1
 
             });
 
@@ -311,7 +311,7 @@ namespace TripometerAPI
                 EstimatedGasCost = 5,
                 EstimatedTotalCost = 1000,
                 VehicleId = 2,
-                OwnerId = 1
+                //    OwnerId = 1
 
             });
 

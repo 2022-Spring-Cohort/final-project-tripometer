@@ -2,6 +2,7 @@ import {OwnerController} from "../constants";
 import Utility from "../utility";
 import AllRequest from "../allRequest";
 import Trip from "./trips";
+import Vehicle from "./vehicle";
 
 
 export default{
@@ -38,12 +39,13 @@ function ProfileView(owner){
 function addEventListenerForVirtualLists(){
     const myVehicles = document.getElementById('myVehicles');
     const myTrips = document.getElementById('myTrips');
+    let ownerId = GetId();
     myVehicles.addEventListener('click',function(){
         //fetch vehicle list
+        Vehicle.GetVehicleList(ownerId);
     });
     myTrips.addEventListener('click',function(){
          //fetch trips list
-         let ownerId = GetId();
          Trip.GetTrips(ownerId);
          
     });

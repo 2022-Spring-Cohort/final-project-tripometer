@@ -31,10 +31,16 @@ namespace TripometerAPI.Controllers
         [HttpGet]
         public List<Trip> GetTrips(int ownerId)
         {
-           
-            List<Trip> trips = _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
-            return trips;
- 
+
+            if (ownerId != null)
+            {
+                List<Trip> trips = _context.Trips.Where(t => t.Vehicle.OwnerId == ownerId).ToList();
+                return trips;
+            }else
+            {
+                return null;
+            }
+
         }
 
         // GET: api/Trip/5
@@ -93,11 +99,11 @@ namespace TripometerAPI.Controllers
             try
             {
                 var trip = _context.Trips.Find(id);
-                var ownerId = trip.OwnerId;
+                var ownerId = trip.Vehicle.OwnerId;
                 _context.Trips.Remove(trip);
                 _context.SaveChanges();
 
-                return _context.Trips.Where(t => t.OwnerId == ownerId).ToList();
+                return _context.Trips.Where(t => t.Vehicle.OwnerId == ownerId).ToList();
             }
             catch
             {

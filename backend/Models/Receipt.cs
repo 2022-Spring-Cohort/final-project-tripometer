@@ -16,7 +16,7 @@ namespace TripometerAPI.Models
 
         public string GasStation { get; set; }
 
-        public int? TripId { get; set; }
+        public int TripId { get; set; }
 
         public virtual Trip Trip { get; set; }
 
