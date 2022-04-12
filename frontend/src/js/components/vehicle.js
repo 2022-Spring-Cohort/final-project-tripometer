@@ -39,6 +39,10 @@ function vehiclesList(NewVehicle) {
 
 
     let vehicleDiv = document.createElement("div");
+    let vehicleBTn = document.createElement("button");
+    vehicleBTn.setAttribute("id", "Add-Vehicle-button");
+    vehicleBTn.innerText = "addBTN"
+    vehicleDiv.appendChild(vehicleBTn);
 
         let addvehicle=document.createElement('button');
         addvehicle.innerHTML="Add Vehicle";
@@ -119,6 +123,7 @@ function vehiclesList(NewVehicle) {
 
 function vehiclesDetails(NewVehicle) {
     console.log(NewVehicle);
+    console.log(VehicleController);
 
     appDiv.innerHTML = `
     
@@ -287,24 +292,11 @@ function EventListener(data) {
 
 
     const SumbmitButton = document.getElementById("createNewVehicleBtn");
-    const MakeSelect = document.getElementById("Make");
-    const ModelSelect = document.getElementById("Model");
-    const YearSelect = document.getElementById("Year");
 
     SumbmitButton.addEventListener('click', function () {
         VehicleUserInput("", "POST");
     })
 
-
-    MakeSelect.addEventListener("change", function () {
-        console.log("change");
-        console.log(MakeSelect);
-        console.log(MakeSelect.value);
-        console.log(MakeSelect[1]);
-        console.log(data.results);
-
-       
-    })
 }
 
 

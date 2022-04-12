@@ -13,6 +13,7 @@ import main from "../main";
 
 
 import login from "./login";
+import cookie from "./cookie";
 
 
 
@@ -62,10 +63,6 @@ const html = `
             
         </ul>
     </nav>
-
-    <footer class="footer"> 
-           <p>&copy;</p>
-    </footer>
 `;
 
 function setup(){
@@ -122,7 +119,8 @@ function setup(){
 
     LoginButton.addEventListener('click', function(){
         console.log("works");
-        login.LoginVeiw();
+        //login.GetUser();  
+        login.LoginVeiw(); 
     })
 
 }
