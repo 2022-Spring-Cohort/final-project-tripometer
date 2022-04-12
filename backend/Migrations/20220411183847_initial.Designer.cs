@@ -10,8 +10,8 @@ using TripometerAPI;
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220410161635_Initial")]
-    partial class Initial
+    [Migration("20220411183847_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -113,7 +113,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 10, 12, 16, 34, 859, DateTimeKind.Local).AddTicks(8126),
+                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 76, DateTimeKind.Local).AddTicks(9641),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -123,7 +123,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 10, 12, 16, 34, 859, DateTimeKind.Local).AddTicks(9808),
+                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 77, DateTimeKind.Local).AddTicks(7125),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -133,7 +133,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 10, 12, 16, 34, 859, DateTimeKind.Local).AddTicks(9845),
+                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 77, DateTimeKind.Local).AddTicks(7403),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -193,7 +193,7 @@ namespace TripometerAPI.Migrations
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 27, 12, 16, 34, 856, DateTimeKind.Local).AddTicks(4170),
+                            EmbarkDate = new DateTime(2022, 3, 28, 14, 38, 46, 48, DateTimeKind.Local).AddTicks(5058),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -207,7 +207,7 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 4, 12, 16, 34, 859, DateTimeKind.Local).AddTicks(7020),
+                            EmbarkDate = new DateTime(2022, 4, 5, 14, 38, 46, 75, DateTimeKind.Local).AddTicks(7448),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,

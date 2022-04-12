@@ -16,6 +16,7 @@ export default {
 const appDiv = document.getElementById("app");
 
 
+
 function GetVehicleList(ownerId) {
     console.log("Getvehicle() called");
     AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesList)
@@ -31,34 +32,59 @@ function DeleteVehicle(id) {
     AllRequest.allRequest(VehicleController + id,vehiclesList,"DELETE");
 }
 
-//
+
+
+
 function vehiclesList(NewVehicle) {
     console.log(NewVehicle);
     console.log(NewVehicle.length);
     
+    
+   
 
     let vehicleDiv = document.createElement("div");
 
+        let addvehicle=document.createElement('button');
+        addvehicle.innerHTML="Add Vehicle";
+        addvehicle.id= "Add-Vehicle-button";
+        vehicleDiv.appendChild(addvehicle);
+
+        
+
+      
     for (let i = 0; i < NewVehicle.length; i++) {
 
         let vehicle = document.createElement("p");
         vehicle.setAttribute("id", i);
         let Delete =  document.createElement("button");
         Delete.innerText = "Delete";
-        Delete.setAttribute("id",'DeleteVehicleBtn'+i)
+        Delete.setAttribute("id",'DeleteVehicleBtn'+i);
+      //  NewCar.innerText = "Add car";
+      //  Newcar.setAttribute('Add-Vehicle-button')
 
-        vehicle.innerHTML = NewVehicle[i].model;
+        vehicle.innerHTML = NewVehicle[i].year + " " + NewVehicle[i].make + "  " + NewVehicle[i].model; 
 
         vehicleDiv.appendChild(vehicle);
         vehicleDiv.appendChild(Delete);
     }
 
     appDiv.innerHTML = vehicleDiv.innerHTML;
-   
+
+    const NewVehicleButton = document.getElementById('Add-Vehicle-button');
+
+    NewVehicleButton.addEventListener('click', function(){
+        console.log("works");
+       AddVehicle();
+        SubmitVehicle();
+            
+    });
+
+    
 
     for (let i = 0; i < NewVehicle.length; i++) {
     let VehicleList = document.getElementById(i);
     let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
+   // let NewVehicleButton = document.getElementById('Add-Vehicle-button');
 
     VehicleList.addEventListener('click', function () {
         console.log("vehicleView was click");
@@ -72,6 +98,8 @@ function vehiclesList(NewVehicle) {
          DeleteVehicle(NewVehicle[i].id);
     })
     }    
+
+  
     
 }
 
@@ -81,6 +109,7 @@ function vehiclesDetails(NewVehicle) {
 
     appDiv.innerHTML = `
     
+    <p>Make: ${NewVehicle.make}</p>
     <p>Model: ${NewVehicle.model}</p>
     <p>Year: ${NewVehicle.year}</p>
     <p>Fuel Efficiency: ${NewVehicle.fuelEfficiency}</p>
