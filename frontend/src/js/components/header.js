@@ -6,7 +6,7 @@ import { allRequest, asyncRequest } from "../allRequest";
 import { OwnerController } from "../constants";
 import utility from "../utility";
 import vehicle from "./vehicle";
-import receipt from "./receipt";
+import login from "./login";
 
 
 export default {
@@ -20,13 +20,12 @@ const html = `
     <nav>
         <ul>
             <li>
+                <button id="login-button">Login</button>
                 <button id="new-trip-button">New Trip</button>
             </li>
             <li>
                 <button id="my-profile-button">My Profile</button>
                 <button id="Add-Vehicle-button">Add New Vehicle</button>
-
-               
 
             </li>
             <li>
@@ -43,8 +42,7 @@ function setup(){
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
-
-
+    const LoginButton = document.getElementById('login-button');
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
         trip.view();
@@ -65,13 +63,15 @@ function setup(){
     NewVehicleButton.addEventListener('click', function(){
         console.log("works");
         vehicle.AddVehicle();
-        vehicle.SubmitVehicle();
-        
     })
+
+
+    LoginButton.addEventListener('click', function(){
+        console.log("works");
+        login.LoginVeiw();
+    })
+
 }
-
-
-
 
 
 //---TEMP---//
