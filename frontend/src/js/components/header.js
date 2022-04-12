@@ -26,41 +26,15 @@ const appDiv = document.getElementById('app');
 const element = document.getElementById('header');
 const html = `
 
-
-<nav>
-        <ul>
-            <li>
-            <button id="Home">Home</button>
-                <button id="new-trip-button">New Trip</button>
-            </li>
-            <li>
-                <button id="my-profile-button">Profile</button>
-               
-                <button id="Aboutus">About Our Team</button>
-
-               
-
-            </li>
-            <li>
-
-    <nav>
     <h1 class="logo">Tripometer</h1>
+    <button id="Aboutus">About Our Team</button>
+    <button id="Home">Home</button>
         <ul class="nav">
-    
-            
+         
                 <button class="div1" id="login-button">Login</button>
                 <button class="div2" id="new-trip-button">New Trip</button>
-            
-            
                 <button class="div3" id="my-profile-button">My Profile</button>
-                <button class="div4" id="Add-Vehicle-button">Add New Vehicle</button>
-            
-            
-
-                <select id="owner-select">
-                    <option selected disabled>---SELECT OWNER---</option>
-                </select>
-            
+    
         </ul>
     </nav>
 `;
@@ -90,15 +64,6 @@ function setup(){
     });
 
 
-    const ownerSelect = document.getElementById('owner-select');
-    populateOwnerSelect(ownerSelect);
-
-
-
-
-
-
-
     AboutusButton.addEventListener('click', function(){
         console.log("works");
         Aboutus.SetupFooter();
@@ -108,18 +73,13 @@ function setup(){
 
     HomeButton.addEventListener('click', function(){
         console.log("works");
-
         main.Home();
    
         
     });
-}
-
-
 
     LoginButton.addEventListener('click', function(){
         console.log("works");
-        //login.GetUser();  
         login.LoginVeiw(); 
     })
 

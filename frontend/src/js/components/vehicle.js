@@ -39,10 +39,6 @@ function vehiclesList(NewVehicle) {
 
 
     let vehicleDiv = document.createElement("div");
-    let vehicleBTn = document.createElement("button");
-    vehicleBTn.setAttribute("id", "Add-Vehicle-button");
-    vehicleBTn.innerText = "addBTN"
-    vehicleDiv.appendChild(vehicleBTn);
 
         let addvehicle=document.createElement('button');
         addvehicle.innerHTML="Add Vehicle";
@@ -60,8 +56,7 @@ function vehiclesList(NewVehicle) {
         Delete.innerText = "Delete";
 
         Delete.setAttribute("id",'DeleteVehicleBtn'+i);
-        NewCar.innerText = "Add car";
-      Newcar.setAttribute('Add-Vehicle-button')
+
 
 
         vehicle.innerHTML = NewVehicle[i].year + " " + NewVehicle[i].make + "  " + NewVehicle[i].model; 
@@ -77,9 +72,7 @@ function vehiclesList(NewVehicle) {
 
     NewVehicleButton.addEventListener('click', function(){
         console.log("works");
-       AddVehicle();
-        SubmitVehicle();
-            
+         AddVehicle();       
     });
 
     
