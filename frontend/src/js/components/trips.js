@@ -261,4 +261,3 @@ function UpdateTrip(tripId){
 }
 
 
-{/* <input type="text" id="embarkDate" value="${trip.embarkDate}" placeholder="${new Date(trip.embarkDate).getMonth()}"> */}

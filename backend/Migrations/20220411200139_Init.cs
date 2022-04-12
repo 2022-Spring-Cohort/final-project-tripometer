@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TripometerAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -134,8 +134,8 @@ namespace TripometerAPI.Migrations
                 columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "StartAddress", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, null, 200, 60, new DateTime(2022, 3, 28, 14, 35, 51, 792, DateTimeKind.Local).AddTicks(5520), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
-                    { 2, null, 200, 60, new DateTime(2022, 4, 5, 14, 35, 51, 794, DateTimeKind.Local).AddTicks(7948), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
+                    { 1, null, 200, 60, new DateTime(2022, 3, 28, 16, 1, 38, 343, DateTimeKind.Local).AddTicks(8028), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 2, null, 200, 60, new DateTime(2022, 4, 5, 16, 1, 38, 347, DateTimeKind.Local).AddTicks(2994), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
                     { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
                     { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
                     { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
@@ -147,17 +147,17 @@ namespace TripometerAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 2, 1200, new DateTime(2022, 4, 11, 14, 35, 51, 794, DateTimeKind.Local).AddTicks(9814), "Shaker", 5, 800, 1 });
+                values: new object[] { 2, 1200, new DateTime(2022, 4, 11, 16, 1, 38, 347, DateTimeKind.Local).AddTicks(5924), "Shaker", 5, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 3, 1200, new DateTime(2022, 4, 11, 14, 35, 51, 794, DateTimeKind.Local).AddTicks(9840), "Shaker", 6, 800, 1 });
+                values: new object[] { 3, 1200, new DateTime(2022, 4, 11, 16, 1, 38, 347, DateTimeKind.Local).AddTicks(5951), "Shaker", 6, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 1, 1200, new DateTime(2022, 4, 11, 14, 35, 51, 794, DateTimeKind.Local).AddTicks(8559), "Cleveland", 4, 800, 2 });
+                values: new object[] { 1, 1200, new DateTime(2022, 4, 11, 16, 1, 38, 347, DateTimeKind.Local).AddTicks(4662), "Cleveland", 4, 800, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Receipts_TripId",
