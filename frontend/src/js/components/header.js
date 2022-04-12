@@ -18,23 +18,28 @@ const appDiv = document.getElementById('app');
 const element = document.getElementById('header');
 const html = `
     <nav>
-        <ul>
-            <li>
-                <button id="login-button">Login</button>
-                <button id="new-trip-button">New Trip</button>
-            </li>
-            <li>
-                <button id="my-profile-button">My Profile</button>
-                <button id="Add-Vehicle-button">Add New Vehicle</button>
-
-            </li>
-            <li>
+    <h1 class="logo">Tripometer</h1>
+        <ul class="nav">
+    
+            
+                <button class="div1" id="login-button">Login</button>
+                <button class="div2" id="new-trip-button">New Trip</button>
+            
+            
+                <button class="div3" id="my-profile-button">My Profile</button>
+                <button class="div4" id="Add-Vehicle-button">Add New Vehicle</button>
+            
+            
                 <select id="owner-select">
                     <option selected disabled>---SELECT OWNER---</option>
                 </select>
-            </li>
+            
         </ul>
     </nav>
+
+    <footer class="footer"> 
+           <p>&copy;</p>
+    </footer>
 `;
 
 function setup(){
