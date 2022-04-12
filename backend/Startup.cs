@@ -1,17 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using TripometerAPI.Authorization;
+using TripometerAPI.Helpers;
+using TripometerAPI.Services;
 
 namespace TripometerAPI
 {
@@ -27,7 +24,15 @@ namespace TripometerAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", services =>
+                {
+                    services.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             services.AddControllers().AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -38,15 +43,13 @@ namespace TripometerAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TripometerAPI", Version = "v1" });
             });
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAll", services =>
-                {
-                    services.AllowAnyOrigin()
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IUserService, UserService>();
 
         }
 
@@ -68,7 +71,10 @@ namespace TripometerAPI
 
             app.UseCors("AllowAll");
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
