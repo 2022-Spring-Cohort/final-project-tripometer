@@ -7,6 +7,7 @@ import { OwnerController } from "../constants";
 import utility from "../utility";
 import vehicle from "./vehicle";
 import login from "./login";
+import cookie from "./cookie";
 
 
 export default {
@@ -36,10 +37,6 @@ const html = `
             
         </ul>
     </nav>
-
-    <footer class="footer"> 
-           <p>&copy;</p>
-    </footer>
 `;
 
 function setup(){
@@ -73,7 +70,8 @@ function setup(){
 
     LoginButton.addEventListener('click', function(){
         console.log("works");
-        login.LoginVeiw();
+        //login.GetUser();  
+        login.LoginVeiw(); 
     })
 
 }

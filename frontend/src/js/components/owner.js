@@ -3,6 +3,7 @@ import Utility from "../utility";
 import AllRequest from "../allRequest";
 import Trip from "./trips";
 import Vehicle from "./vehicle";
+import cookie from "./cookie";
 
 
 export default{
@@ -129,7 +130,7 @@ function SetupForUpdateProfile(owner){
 
 //Todo: Get Id from coockies later
 function GetId(){
-    return 1;
+    return cookie.getCookie("UserId");
 }
 
 
