@@ -8,9 +8,7 @@ export default {
     GetVehicle,
     AddVehicle,
     GetVehicleList,
-    vehiclesDetails,
-    SubmitVehicle
-    
+    vehiclesDetails
 }
 
 const appDiv = document.getElementById("app");
@@ -22,20 +20,20 @@ function GetVehicleList(ownerId) {
 }
 
 
-function GetVehicle(id) { 
+function GetVehicle(id) {
     AllRequest.allRequest(VehicleController + id, vehiclesDetails);
 }
 
 function DeleteVehicle(id) {
     console.log(VehicleController);
-    AllRequest.allRequest(VehicleController + id,vehiclesList,"DELETE");
+    AllRequest.allRequest(VehicleController + id, vehiclesList, "DELETE");
 }
 
 //
 function vehiclesList(NewVehicle) {
     console.log(NewVehicle);
     console.log(NewVehicle.length);
-    
+
 
     let vehicleDiv = document.createElement("div");
 
@@ -43,9 +41,9 @@ function vehiclesList(NewVehicle) {
 
         let vehicle = document.createElement("p");
         vehicle.setAttribute("id", i);
-        let Delete =  document.createElement("button");
+        let Delete = document.createElement("button");
         Delete.innerText = "Delete";
-        Delete.setAttribute("id",'DeleteVehicleBtn'+i)
+        Delete.setAttribute("id", 'DeleteVehicleBtn' + i)
 
         vehicle.innerHTML = NewVehicle[i].model;
 
@@ -54,25 +52,25 @@ function vehiclesList(NewVehicle) {
     }
 
     appDiv.innerHTML = vehicleDiv.innerHTML;
-   
+
 
     for (let i = 0; i < NewVehicle.length; i++) {
-    let VehicleList = document.getElementById(i);
-    let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
+        let VehicleList = document.getElementById(i);
+        let DeleteVehicles = document.getElementById('DeleteVehicleBtn' + i);
 
-    VehicleList.addEventListener('click', function () {
-        console.log("vehicleView was click");
-        let Vehicleid = i+1; //This method needs to use cookies 
-        GetVehicle(Vehicleid);
-    })
+        VehicleList.addEventListener('click', function () {
+            console.log("vehicleView was click");
+            let Vehicleid = i + 1; //This method needs to use cookies 
+            GetVehicle(Vehicleid);
+        })
 
-    DeleteVehicles.addEventListener('click', function () {
-        console.log("Delete was click");
-         console.log(NewVehicle[i].id);
-         DeleteVehicle(NewVehicle[i].id);
-    })
-    }    
-    
+        DeleteVehicles.addEventListener('click', function () {
+            console.log("Delete was click");
+            console.log(NewVehicle[i].id);
+            DeleteVehicle(NewVehicle[i].id);
+        })
+    }
+
 }
 
 
@@ -91,14 +89,14 @@ function vehiclesDetails(NewVehicle) {
     UpdateVehicleButton(NewVehicle.id);
 }
 
-function UpdateVehicleButton(id){
+function UpdateVehicleButton(id) {
     const UpdateVehicleBtn = document.getElementById('UpdateVehicleBtn');
-    UpdateVehicleBtn.addEventListener('click', function(){
-    AllRequest.allRequest(VehicleController + id,UpdateVehicleView );
+    UpdateVehicleBtn.addEventListener('click', function () {
+        AllRequest.allRequest(VehicleController + id, UpdateVehicleView);
     })
 }
 
-function UpdateVehicleView(EditVehicle){
+function UpdateVehicleView(EditVehicle) {
     appDiv.innerHTML = `
     <h2>Edit Vehicle</h2>
 
@@ -123,52 +121,64 @@ function UpdateVehicleView(EditVehicle){
 
 }
 
-function  SumbitEditVehicle(EditVehicle){
+function SumbitEditVehicle(EditVehicle) {
     const saveUpdateVehicleBtn = document.getElementById('saveUpdateVehicleBtn');
 
-    console.log("ffffff");
+    console.log("EditVehicle");
 
-    saveUpdateVehicleBtn.addEventListener('click',function(){
-        VehicleUserInput(EditVehicle.id,"PUT");
+    saveUpdateVehicleBtn.addEventListener('click', function () {
+        VehicleUserInput(EditVehicle.id, "PUT");
     });
 }
 
 
 
 function AddVehicle() {
-    (async () => {
-        const response = await fetch(
-            'https://parseapi.back4app.com/classes/Carmodels_Car_Model_List?limit=10',
-            {
-                headers: {
-                    'X-Parse-Application-Id': 'iqVulf4rcnwk8v3YC71FGKNkUrY7mzNJosyQzpUA', // This is your app's application id
-                    'X-Parse-REST-API-Key': 'ugWIeOKk3FQoATqdZaR7Gv4jTsc2tsFzLjDNST5a', // This is your app's REST API key
-                }
-            }
-        );
-        const data = await response.json(); // Here you have the data that you need
-        console.log(data);
-        console.log(data.results);
-        console.log(data.results.length);
-        for (let i = 0; i < data.results.length; i++) {
-           console.log(data.results[i].Make);
-        // console.log(data.results[i].Model);
-        // console.log(data.results[i].Year);
-       
-    
+    let MakeOptions = null;
+    let ModelOptions = "";
 
-    appDiv.innerHTML = `
+
+    fetch('https://parseapi.back4app.com/classes/Carmodels_Car_Model_List', {
+        headers: {
+            'X-Parse-Application-Id': 'iqVulf4rcnwk8v3YC71FGKNkUrY7mzNJosyQzpUA', // This is your app's application id
+            'X-Parse-REST-API-Key': 'ugWIeOKk3FQoATqdZaR7Gv4jTsc2tsFzLjDNST5a', // This is your app's REST API key
+        }
+    })
+        .then(response => response.json())
+        .then(data => {               // Here you have the data that you need
+            console.log(data);
+            console.log(data.results);
+            console.log(data.results.length);
+           
+           
+
+            for (let i = 0; i < data.results.length; i++) {
+                console.log("makeList");
+                console.log(data.results[i].Make);
+                ModelOptions += `<option value='${data.results[i].Model}'>${data.results[i].Model}</option>`;
+                MakeOptions += `<option value='${data.results[i].Make}'>${data.results[i].Make}</option>`;
+
+            }
+
+            
+
+            appDiv.innerHTML = `
     <h2>Add Vehicle</h2>
 
-    <label for="Make ">Make of vehicle</label>
-    <select id="MakeVehicle">
-    <option id="Make" value="${data.results[i].Make}">${data.results[i].Make}</option>
+  
+    <label for="Make">Make of vehicle</label>
+    <select class="MakeOptions" id="Make">
+    <option></option>
+    ${MakeOptions}
     </select>
 
     <label for="Model">Model of vehicle</label>
-    <input type="text" id="Model">
+    <select class="ModelOptions" id="Model">
+    <option></option>
+    ${ModelOptions}
+    </select> 
 
-    <label for="Year">Enter the Year of vehicle</label>
+    <label for="Model">Year of vehicle</label>
     <input type="number" id="Year">
 
     <label for="FuelEfficiency">Enter the mpg of vehicle </label>
@@ -179,85 +189,79 @@ function AddVehicle() {
 
     <button type="submit" id="createNewVehicleBtn">Submit</button>
 `;
-}
-})();
-}
+            var MakeList = document.getElementById("Make");
 
-/**
- * <label for="Trip">Trip</label>
-        <select id="tripId">
-            ${trips.map(t=>{
-                return `
-                    <option value="${t.id}">From ${t.startAddress} To ${t.endAddress}</option>
-                `
-            }).join('')}
-            <option selected disabled>Please select a trip</option>
-        </select>
+            [].slice.call(MakeList.options)
+                .map(function (a) {
+                    if (this[a.value]) {
+                        MakeList.removeChild(a);
+                    } else {
+                        this[a.value] = 1;
+                    }
+                }, {});
 
+            EventListener(data);
 
-<option value="1988">1988</option>
-
-    <select id="Make">
-    <option value="${t.id}">From ${t.startAddress} To ${t.endAddress}</option>
-    </select>
- */
+        }).catch(err => console.log(err));
+    //}); // end of the async
 
 
 
-
-function VehicleUserInput(id,method) {
-  
-
-        let Make = document.getElementById('Make').value;
-        let Model = document.getElementById('Model').value;
-        let Year = document.getElementById('Year').value;
-        let FuelEfficiency = document.getElementById('FuelEfficiency').value;
-        let FuelTank = document.getElementById('FuelTank').value;
-
-        let NewVehicle = {
-            Make: Make,
-            Model: Model,
-            Year: Year,
-            FuelEfficiency: FuelEfficiency,
-            FuelTank: FuelTank,
-            ownerId: 1
-        }
-
-        if (method == "PUT") {
-            NewVehicle["Id"] = id;
-        }
-
-        console.log(NewVehicle);
-        AllRequest.allRequest(VehicleController+id, vehiclesDetails, method, NewVehicle);
-}
-
-function SubmitVehicle(){
-const SumbmitButton = document.getElementById("createNewVehicleBtn");
-SumbmitButton.addEventListener('click',function(){
-    VehicleUserInput("","POST");
-});
-}
+} //end of function
 
 
 
+function VehicleUserInput(id, method) {
 
-(async () => {
-    const response = await fetch(
-        'https://parseapi.back4app.com/classes/Carmodels_Car_Model_List?limit=10',
-        {
-            headers: {
-                'X-Parse-Application-Id': 'iqVulf4rcnwk8v3YC71FGKNkUrY7mzNJosyQzpUA', // This is your app's application id
-                'X-Parse-REST-API-Key': 'ugWIeOKk3FQoATqdZaR7Gv4jTsc2tsFzLjDNST5a', // This is your app's REST API key
-            }
-        }
-    );
-    const data = await response.json(); // Here you have the data that you need
-    console.log(data);
-    console.log(data.results);
-    console.log(data.results.length);
-    for (let i = 0; i < data.results.length; i++) {
-    // console.log(data.results[i].Make);
-    // console.log(data.results[i].Model);
-    // console.log(data.results[i].Year);
+
+    let Make = document.getElementById('Make').value;
+    let Model = document.getElementById('Model').value;
+    let Year = document.getElementById('Year').value;
+    let FuelEfficiency = document.getElementById('FuelEfficiency').value;
+    let FuelTank = document.getElementById('FuelTank').value;
+
+    let NewVehicle = {
+        Make: Make,
+        Model: Model,
+        Year: Year,
+        FuelEfficiency: FuelEfficiency,
+        FuelTank: FuelTank,
+        ownerId: 1
     }
-})();
+
+    if (method == "PUT") {
+        NewVehicle["Id"] = id;
+    }
+
+    console.log(NewVehicle);
+    AllRequest.allRequest(VehicleController + id, vehiclesDetails, method, NewVehicle);
+}
+
+function EventListener(data) {
+
+    console.log("eventListener");
+
+
+    const SumbmitButton = document.getElementById("createNewVehicleBtn");
+    const MakeSelect = document.getElementById("Make");
+    const ModelSelect = document.getElementById("Model");
+    const YearSelect = document.getElementById("Year");
+
+    SumbmitButton.addEventListener('click', function () {
+        VehicleUserInput("", "POST");
+    })
+
+
+    MakeSelect.addEventListener("change", function () {
+        console.log("change");
+        console.log(MakeSelect);
+        console.log(MakeSelect.value);
+        console.log(MakeSelect[1]);
+        console.log(data.results);
+
+       
+    })
+}
+
+
+

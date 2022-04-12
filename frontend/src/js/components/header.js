@@ -3,7 +3,7 @@
 import trip from "./trip";
 import Owner from "./owner";
 import vehicle from "./vehicle";
-import receipt from "./receipt";
+import login from "./login";
 
 export default {
     setup
@@ -16,15 +16,10 @@ const html = `
     <nav>
         <ul>
             <li>
+                <button id="login-button">Login</button>
                 <button id="new-trip-button">New Trip</button>
                 <button id="my-profile-button">My Profile</button>
                 <button id="Add-Vehicle-button">Add New Vehicle</button>
-                <button id="View-Vehicle-button">My Vehicles</button>
-
-                <button id="Receipt-button">Receipt</button>
-
-               
-
             </li>
         </ul>
     </nav>
@@ -35,12 +30,9 @@ function setup(){
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
-    const ViewVehicleButton = document.getElementById('View-Vehicle-button');
+    const LoginButton = document.getElementById('login-button');
 
-    const ReceiptButton = document.getElementById('Receipt-button');
    
-
-
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
         trip.view();
@@ -55,22 +47,13 @@ function setup(){
     NewVehicleButton.addEventListener('click', function(){
         console.log("works");
         vehicle.AddVehicle();
-        vehicle.SubmitVehicle();
-        
-    })
-    ViewVehicleButton.addEventListener('click', function(){
-         console.log("works");
-         let id = Owner.GetId();
-         vehicle.GetVehicleList(id);
     })
 
-
-    ReceiptButton.addEventListener('click', function(){
+    LoginButton.addEventListener('click', function(){
         console.log("works");
-
-        receipt.GetReceipt(1);
-
+        login.LoginVeiw();
     })
+
 }
 
 
