@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tripometer</title><script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script><link href="./css/style.css" rel="stylesheet"/><script defer="defer" src="main.js"></script></head><body><header id="header"></header><main><div id="app"></div></main><footer></footer><script>function initAPI(){
+            console.log("Google Maps API loaded...");
+            //load scripts that interact with API
+            load('./js/google-map.js');
+        }
+
+        function load(src){
+            const script = document.createElement('script');
+            script.src = src;
+            document.head.appendChild(script);
+        }</script><script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCMsOIEiqnQ16TDY85wGfVEjZ7fPu9buI&libraries=places,geometry&callback=initAPI"></script></body></html>

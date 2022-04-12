@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tripometer</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
 </head>
 <body>
     <header id="header">
@@ -20,10 +20,21 @@
     <footer>
 
     </footer id="footer">
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCELA5n7fUaN4sOoyKgKwOnbIlWjpXyQTc"></script>
-    <script src="main.js"></script>
-    
+    <script>
+        function initAPI(){
+            console.log("Google Maps API loaded...");
+            //load scripts that interact with API
+            load('./js/google-map.js');
+            load('./js/osmtogeojson.js');
+        }
+
+        function load(src){
+            const script = document.createElement('script');
+            script.src = src;
+            document.head.appendChild(script);
+        }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCMsOIEiqnQ16TDY85wGfVEjZ7fPu9buI&libraries=places,geometry&callback=initAPI"></script>
 </body>
 </html>
 

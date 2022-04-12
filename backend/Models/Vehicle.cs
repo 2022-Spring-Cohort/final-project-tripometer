@@ -28,5 +28,7 @@ namespace TripometerAPI.Models
         public virtual Owner Owner { get; set; }
 
         public virtual List<Trip> Trips { get; set; }
+
+     
     }
 }
