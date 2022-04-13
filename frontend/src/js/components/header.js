@@ -8,6 +8,11 @@ import utility from "../utility";
 import vehicle from "./vehicle";
 import receipt from "./receipt";
 import Time from "./dataTime";
+import Aboutus from "./Aboutus";
+import main from "../main";
+import login from "./login";
+import cookie from "./cookie";
+
 
 
 export default {
@@ -18,24 +23,18 @@ const appDiv = document.getElementById('app');
 
 const element = document.getElementById('header');
 const html = `
-    <nav>
-        <ul>
-            <li>
-                <button id="new-trip-button">New Trip</button>
-            </li>
-            <li>
-                <button id="my-profile-button">My Profile</button>
-                <button id="Add-Vehicle-button">Add New Vehicle</button>
 
 
-               
+    <h1 class="logo">Tripometer</h1>
+    <button id="Aboutus">About Our Team</button>
+    <button id="Home">Home</button>
+        <ul class="nav">
+         
+                <button class="div1" id="login-button">Login</button>
+                <button class="div2" id="new-trip-button">New Trip</button>
+                <button class="div3" id="my-profile-button">My Profile</button>
+    
 
-            </li>
-            <li>
-                <select id="owner-select">
-                    <option selected disabled>---SELECT OWNER---</option>
-                </select>
-            </li>
         </ul>
     </nav>
 `;
@@ -44,8 +43,14 @@ function setup(){
     element.innerHTML = html;
     const newTripButton = document.getElementById('new-trip-button');
     const myprofileButton = document.getElementById('my-profile-button');
-    const NewVehicleButton = document.getElementById('Add-Vehicle-button');
 
+   
+    const HomeButton = document.getElementById('Home');
+    const AboutusButton = document.getElementById('Aboutus');
+
+
+
+    const LoginButton = document.getElementById('login-button');
 
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
@@ -60,21 +65,26 @@ function setup(){
     });
 
 
-    const ownerSelect = document.getElementById('owner-select');
-    populateOwnerSelect(ownerSelect);
-
-
-
-    NewVehicleButton.addEventListener('click', function(){
+    AboutusButton.addEventListener('click', function(){
         console.log("works");
-        vehicle.AddVehicle();
-        vehicle.SubmitVehicle();
+        Aboutus.SetupFooter();
+   
         
+    });
+
+    HomeButton.addEventListener('click', function(){
+        console.log("works");
+        main.Home();
+   
+        
+    });
+
+    LoginButton.addEventListener('click', function(){
+        console.log("works");
+        login.LoginVeiw(); 
     })
+
 }
-
-
-
 
 
 //---TEMP---//
