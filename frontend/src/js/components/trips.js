@@ -86,11 +86,11 @@ function TripView(trip){
 
         <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
         <p>From ${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
-        <p>MileageBefore ${trip.mileageBefore}</p>
-        <p>MileageAfter ${trip.mileageAfter} </p>
+        <p>Mileage on vehilce before trip ${trip.mileageBefore} miles</p>
+        <p>Mileage on vehilce after trip ${trip.mileageAfter} miles</p>
         <p>ETA ${trip.eTA} </p>
-        <p>Distance ${trip.distance} </p>
-        <p>EstimatedGasCost ${trip.estimatedGasCost} </p>
+        <p>Total miles traveled for the trip ${trip.distance} miles</p>
+        <p>Amount of gas money needed to finish trip: $${trip.estimatedGasCost} </p>
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;

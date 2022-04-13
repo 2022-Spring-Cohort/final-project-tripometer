@@ -124,7 +124,7 @@ function vehiclesDetails(NewVehicle) {
     <p>Model: ${NewVehicle.model}</p>
     <p>Year: ${NewVehicle.year}</p>
     <p>Fuel Efficiency: ${NewVehicle.fuelEfficiency}</p>
-    <p>Fuel Tank: ${NewVehicle.fuelTank}</p>
+    <p>Size of fuel tank: ${NewVehicle.fuelTank}gallons</p>
 
     <button id='UpdateVehicleBtn'>Update Vehicle</button>
     `;
@@ -154,7 +154,7 @@ function UpdateVehicleView(EditVehicle) {
     <label for="FuelEfficiency">Fuel Efficiency</label>
     <input type="text" id="FuelEfficiency" value="${EditVehicle.fuelEfficiency}" placeholder="${EditVehicle.fuelEfficiency}">
 
-    <label for="FuelTank">Fuel Tank</label>
+    <label for="FuelTank">Fuel tank size</label>
     <input type="text" id="FuelTank" value="${EditVehicle.fuelTank}" placeholder="${EditVehicle.fuelTank}">
 
     <button type="submit" id="saveUpdateVehicleBtn">Update</button>   
@@ -205,7 +205,7 @@ function AddVehicle() {
             
 
             appDiv.innerHTML = `
-    <h2>Add Vehicle</h2>
+    <h2>Add a new Vehicle</h2>
 
   
     <label for="Make">Make of vehicle</label>
@@ -226,7 +226,7 @@ function AddVehicle() {
     <label for="FuelEfficiency">Enter the mpg of vehicle </label>
     <input type="number" id="FuelEfficiency">
 
-    <label for="FuelTank">Enter the mpg of vehicle </label>
+    <label for="FuelTank">enter the tank size of the vehicle </label>
     <input type="number" id="FuelTank">
 
     <button type="submit" id="createNewVehicleBtn">Submit</button>
