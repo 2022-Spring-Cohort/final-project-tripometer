@@ -12,6 +12,9 @@ import Aboutus from "./Aboutus";
 import main from "../main";
 import login from "./login";
 import cookie from "./cookie";
+import owner from "./owner";
+import Register from "./Register";
+import SignOut from "./SignOut";
 
 
 
@@ -28,12 +31,15 @@ const html = `
     <h1 class="logo">Tripometer</h1>
     
     <section class="nav">
-        
+    
+            <p id="Sign-Out-button">Sign Out</p>
+            <p id="Register-button">Register</p>
             <p id="login-button">Login</p>
             <p id="new-trip-button">New Trip</p>
             <p id="my-profile-button">My Profile</p>
             <p id="Aboutus">About Us</p>
             <p id="Home">Home</p>
+
     </section>
 
 
@@ -49,9 +55,10 @@ function setup(){
     const HomeButton = document.getElementById('Home');
     const AboutusButton = document.getElementById('Aboutus');
 
-
-
+    const RegisterButton = document.getElementById('Register-button');
     const LoginButton = document.getElementById('login-button');
+
+    const SignOutButton = document.getElementById('Sign-Out-button');
 
     //setup header navigation event listeners
     newTripButton.addEventListener('click', function(){
@@ -69,20 +76,25 @@ function setup(){
     AboutusButton.addEventListener('click', function(){
         console.log("works");
         Aboutus.SetupFooter();
-   
-        
     });
 
     HomeButton.addEventListener('click', function(){
         console.log("works");
         main.Home();
-   
-        
     });
 
     LoginButton.addEventListener('click', function(){
         console.log("works");
         login.LoginVeiw(); 
+    })
+    RegisterButton.addEventListener('click', function(){
+        console.log("works");
+        Register.RegisterView();
+    })
+    SignOutButton.addEventListener('click', function(){
+        console.log("works");
+        let id = Owner.GetId();
+        SignOut.SignOut();
     })
      
     //will talk about it later not working
