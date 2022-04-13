@@ -17,6 +17,7 @@ function Capitalize(str){
     
 }
 
+
 /**
  * Represents the property accessor of another object.
  * @typedef ReferenceObjectProperty

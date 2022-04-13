@@ -6,12 +6,10 @@ import { allRequest, asyncRequest } from "../allRequest";
 import { OwnerController } from "../constants";
 import utility from "../utility";
 import vehicle from "./vehicle";
-
 import receipt from "./receipt";
+import Time from "./dataTime";
 import Aboutus from "./Aboutus";
 import main from "../main";
-
-
 import login from "./login";
 import cookie from "./cookie";
 
@@ -26,6 +24,7 @@ const appDiv = document.getElementById('app');
 const element = document.getElementById('header');
 const html = `
 
+
     <h1 class="logo">Tripometer</h1>
     <button id="Aboutus">About Our Team</button>
     <button id="Home">Home</button>
@@ -35,6 +34,7 @@ const html = `
                 <button class="div2" id="new-trip-button">New Trip</button>
                 <button class="div3" id="my-profile-button">My Profile</button>
     
+
         </ul>
     </nav>
 `;
@@ -61,6 +61,7 @@ function setup(){
         //ToDo: Link an user id to get the specific profile
         let id = Owner.GetId();
         Owner.GetProfile(id);
+
     });
 
 
