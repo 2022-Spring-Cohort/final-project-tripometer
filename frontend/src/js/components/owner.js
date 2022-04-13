@@ -25,13 +25,18 @@ function GetProfile(id){
 
 function ProfileView(owner){
     console.log(owner);
-    appDiv.innerHTML = `       
-        <h2>${owner.fullName}</h2>    
+    appDiv.innerHTML = `
+      
+        <section class="profile">
+         <div class="OwnerName">
+             <h2>Hello, ${owner.fullName}</h2>
+         </div>    
         
-        <p id="myVehicles">My Vehicles</p>
-        <p id="myTrips">My trips</p>
+         <p id="myVehicles">My Vehicles</p>
+         <p id="myTrips">My Trips</p>
         
-        <button id="updateProfileBtn">Update Profile</button>
+         <p id="updateProfileBtn">Update Profile</p>
+        </section>
     `;
     addEventListenerForVirtualLists();
     UpdateProfile(owner.id);
