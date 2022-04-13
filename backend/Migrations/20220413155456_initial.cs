@@ -124,12 +124,12 @@ namespace TripometerAPI.Migrations
                 columns: new[] { "Id", "PasswordHash", "Username" },
                 values: new object[,]
                 {
-                    { 1, "$2a$11$JBd75qfEzGLanKU/MCfwV.WMPQW63IJ5hOTw8lEIbIg8LEHdbCyhK", "TestUser1" },
-                    { 2, "$2a$11$kqEhhctOLwvhosoyXuQIvOJ/dPe1r71HyOwpxE8hCTS4HxCJ29HBa", "TestUser2" },
-                    { 3, "$2a$11$kWfSdbIovl5weqct5VwMfux9c1zLFo8CGABsCiqpMSCwYnUJoRRCy", "TestUser3" },
-                    { 4, "$2a$11$xiJ7fFShMe8eFkeJXOFRsuVktg.DBpwOAKLOEr.uBYq2DtxYxnj1u", "TestUser4" },
-                    { 5, "$2a$11$ySUBEW80EZ8l4SjkJhGoWexE6WbpY/A/rLTF71GrvOOC5tzi9oWN.", "TestUser5" },
-                    { 6, "$2a$11$anp3XbpUkz6MM0prXwHZK.eyMPivM4wHvMDo4MTKdA980uedZgMDq", "TestUser6" }
+                    { 1, "$2a$11$eWlhPJdUDQeH6QqsrzBIjuLe6l4JmhFvZ/XY0E3p7PiUWJBybZFvm", "TestUser1" },
+                    { 2, "$2a$11$7uLLgmT8Hpl0S3R.o6N7pOq7K8cR901xB6nr0KLjSJUE169HZ.1c2", "TestUser2" },
+                    { 3, "$2a$11$DCuTnZ6C6u1/XYEhNqoWSORtkkD6Qu0Fb/zaTjjQGtSI6x4plmpKe", "TestUser3" },
+                    { 4, "$2a$11$06dbJ0LjJppL0hMC/BKsNe1B8AZ.RsDiPSQlgwrdDGxKnhmf5Ovvm", "TestUser4" },
+                    { 5, "$2a$11$D.H8rIawUw.5OHY1QMyBNuu/FEzD5zyNbJTw0lwzo31NR1vtAI7se", "TestUser5" },
+                    { 6, "$2a$11$g43YHPcqVC08VumTFQdYyedwLEguqgjycw1mSYoIcGeYqiZXIM3um", "TestUser6" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,8 +168,8 @@ namespace TripometerAPI.Migrations
                 columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "StartAddress", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, null, 200, 60, new DateTime(2022, 3, 30, 10, 20, 44, 914, DateTimeKind.Local).AddTicks(5982), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
-                    { 2, null, 200, 60, new DateTime(2022, 4, 7, 10, 20, 44, 919, DateTimeKind.Local).AddTicks(725), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
+                    { 1, null, 200, 60, new DateTime(2022, 3, 30, 11, 54, 55, 789, DateTimeKind.Local).AddTicks(9636), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 2, null, 200, 60, new DateTime(2022, 4, 7, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(4565), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
                     { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
                     { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
                     { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
@@ -181,17 +181,17 @@ namespace TripometerAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 2, 1200, new DateTime(2022, 4, 13, 10, 20, 44, 919, DateTimeKind.Local).AddTicks(6237), "Shaker", 5, 800, 1 });
+                values: new object[] { 2, 1200, new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8870), "Shaker", 5, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 3, 1200, new DateTime(2022, 4, 13, 10, 20, 44, 919, DateTimeKind.Local).AddTicks(6298), "Shaker", 6, 800, 1 });
+                values: new object[] { 3, 1200, new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8922), "Shaker", 6, 800, 1 });
 
             migrationBuilder.InsertData(
                 table: "Receipts",
                 columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
-                values: new object[] { 1, 1200, new DateTime(2022, 4, 13, 10, 20, 44, 919, DateTimeKind.Local).AddTicks(2754), "Cleveland", 4, 800, 2 });
+                values: new object[] { 1, 1200, new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(5808), "Cleveland", 4, 800, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Owners_UserId",
