@@ -3,20 +3,20 @@ import AllRequest from "../allRequest";
 import {UsersController} from "../constants";
 import cookie from "./cookie"
 import header from "./header";
-import Owner from "./owner"
+import owner from "./owner";
 
 
-export default { 
-    LoginVeiw
+export default {
+    RegisterView
+
 }
 
 
 const appDiv = document.getElementById("app");
 
-function LoginVeiw(id){
-
+function RegisterView(){
     appDiv.innerHTML = `       
-        <h2>Log in to Tripometer</h2>    
+        <h2>Register</h2>    
              
         <div>
        
@@ -26,17 +26,18 @@ function LoginVeiw(id){
         <ul><label for="Password">Password</label></ul>
         <ul><input type="text" id="Password"></ul>
         
-        <ul><button id="LoginBtn">Log in</button></ul>
+        <ul><button id="SubmitBtn">Submit</button></ul>
         
         </div>
     `;
-    LoginSubmit();
+    RegisterSubmit();
 }
 
-function LoginSubmit(){
+function RegisterSubmit(){
 
- const LoginBtn = document.getElementById("LoginBtn");
- LoginBtn.addEventListener('click',function(){
+ const SubmitBtn = document.getElementById("SubmitBtn");
+ SubmitBtn.addEventListener('click',function(){
+
     console.log("log click");
     let Username = document.getElementById("Username").value;
     let Password = document.getElementById("Password").value;
@@ -48,26 +49,12 @@ function LoginSubmit(){
 
     
    
-   AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
+   AllRequest.allRequest(UsersController + "register", postRegister ,"POST",User );
  })
 
 }
 
-function postLogin(user){
-console.log(user);
-     
-//login was sucess
-if(!user.hasOwnProperty('message')){
-    cookie.setCookie("UserId",user.id,100);
-    cookie.setCookie("UserName",user.Username,100);
-    let id = Owner.GetId();
-    Owner.GetProfile(id);
-}
-//login failed
-else{
-
-alert(user.message);
-
-}
-
+function postRegister(User){
+    console.log(User);
+    owner.AddOwnerView(User);
 }

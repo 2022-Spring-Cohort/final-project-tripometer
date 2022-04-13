@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using TripometerAPI.Authorization;
 using TripometerAPI.Helpers;
+using TripometerAPI.Models;
 using TripometerAPI.Models.Users;
 using TripometerAPI.Services;
 
@@ -37,10 +38,10 @@ namespace WebApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register(RegisterRequest model)
+        public User Register(RegisterRequest model)
         {
-            _userService.Register(model);
-            return Ok(new { message = "Registration successful" });
+           return _userService.Register(model);
+            
         }
 
         [HttpGet]
