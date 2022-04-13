@@ -27,17 +27,20 @@ const element = document.getElementById('header');
 const html = `
 
     <h1 class="logo">Tripometer</h1>
-    <button id="Aboutus">About Our Team</button>
-    <button id="Home">Home</button>
-        <ul class="nav">
-         
-                <button class="div1" id="login-button">Login</button>
-                <button class="div2" id="new-trip-button">New Trip</button>
-                <button class="div3" id="my-profile-button">My Profile</button>
     
-        </ul>
-    </nav>
+    
+    <section class="nav">
+        
+            <p id="login-button">Login</p>
+            <p id="new-trip-button">New Trip</p>
+            <p id="my-profile-button">My Profile</p>
+            <p id="Aboutus">About Us</p>
+            <p id="Home">Home</p>
+    </section>
+    
+    
 `;
+
 
 function setup(){
     element.innerHTML = html;
@@ -82,6 +85,17 @@ function setup(){
         console.log("works");
         login.LoginVeiw(); 
     })
+     
+    //will talk about it later not working
+    // const NavItems = document.getElementsByClassName('nav')[0];
+    // const Items = NavItems.getElementsByTagName('p');
+    // console.log(NavItems);
+    // for( var i=0; i<Items.length; i++){
+    //         Items[i].addEventListener('mouseover', function(){
+    //         Items[i].style.borderBottom = '2px solid black';
+    //     }); 
+    // }
+
 
 }
 
