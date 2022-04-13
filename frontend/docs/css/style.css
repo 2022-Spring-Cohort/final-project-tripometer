@@ -2,42 +2,7 @@
 
 li {
     list-style: none;
- 
 }
-
-
-/* 
-.nav{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 30px;
-    grid-row-gap: 0px;  
-}
-
-
-.div1{ 
-    grid-area: 1 / 1 / 2 / 2;
-   
- }
-.div2{
-
-     grid-area: 1 / 2 / 2 / 2;
-
- }
-.div3{ 
-
-    grid-area: 1 / 2 / 2 / 3;
-}
-.div4{ 
-    grid-area: 1 / 4 / 2 / 5;
-
-}
-.div5{ 
-    grid-area: 1 / 5 / 2 / 6;
-
-}  */
-
 /*My Profile Style*/
 
 .profile{
@@ -52,6 +17,7 @@ li {
     border-bottom: 2px solid rgb(100, 135, 138);
     cursor: pointer;
 }
+
 
 header{
     display: flex;
@@ -113,4 +79,6 @@ header{
     width: 100%;
     font-weight:bold;
     font-family:Arial;
+
 }
+

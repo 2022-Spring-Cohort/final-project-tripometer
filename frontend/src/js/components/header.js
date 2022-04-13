@@ -6,12 +6,10 @@ import { allRequest, asyncRequest } from "../allRequest";
 import { OwnerController } from "../constants";
 import utility from "../utility";
 import vehicle from "./vehicle";
-
 import receipt from "./receipt";
+import Time from "./dataTime";
 import Aboutus from "./Aboutus";
 import main from "../main";
-
-
 import login from "./login";
 import cookie from "./cookie";
 
@@ -26,8 +24,8 @@ const appDiv = document.getElementById('app');
 const element = document.getElementById('header');
 const html = `
 
+
     <h1 class="logo">Tripometer</h1>
-    
     
     <section class="nav">
         
@@ -37,8 +35,8 @@ const html = `
             <p id="Aboutus">About Us</p>
             <p id="Home">Home</p>
     </section>
-    
-    
+
+
 `;
 
 
@@ -64,6 +62,7 @@ function setup(){
         //ToDo: Link an user id to get the specific profile
         let id = Owner.GetId();
         Owner.GetProfile(id);
+
     });
 
 
@@ -103,14 +102,14 @@ function setup(){
 //---TEMP---//
 //use this until we get proper log-in functions
 
-async function populateOwnerSelect(ownerSelect){
-    let owners = await asyncRequest(OwnerController);
-    let options = {
-        attributes: {"data-id": "id", "value": "id"},
-        properties: {"text":"fullName"},
-    };
-    utility.populateSelect(ownerSelect,owners,options);
-}
+// async function populateOwnerSelect(ownerSelect){
+//     let owners = await asyncRequest(OwnerController);
+//     let options = {
+//         attributes: {"data-id": "id", "value": "id"},
+//         properties: {"text":"fullName"},
+//     };
+//     utility.populateSelect(ownerSelect,owners,options);
+// }
 
 export function getSelectedOwnerId(){
     const ownerSelect = document.getElementById('owner-select');
