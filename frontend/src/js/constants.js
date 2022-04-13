@@ -6,3 +6,4 @@ export const TripController = `${APIPATH}/trip/`;
 export const ReceiptController = `${APIPATH}/receipt/`;
 export const VehicleController = `${APIPATH}/vehicle/`;
 
+export const METERS_PER_MILE = 1609.34;

@@ -17,7 +17,7 @@ const appDiv = document.getElementById("app");
 
 
 function GetVehicleList(ownerId) {
-    console.log("Getvehicle() called");
+    //console.log("Getvehicle() called");
     AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesList)
 }
 
@@ -27,14 +27,14 @@ function GetVehicle(id) {
 }
 
 function DeleteVehicle(id) {
-    console.log(VehicleController);
+    //console.log(VehicleController);
     AllRequest.allRequest(VehicleController + id,vehiclesList,"DELETE");
 }
 
 //
 function vehiclesList(NewVehicle) {
-    console.log(NewVehicle);
-    console.log(NewVehicle.length);
+    //console.log(NewVehicle);
+    //console.log(NewVehicle.length);
     
 
     let vehicleDiv = document.createElement("div");
@@ -61,14 +61,14 @@ function vehiclesList(NewVehicle) {
     let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
 
     VehicleList.addEventListener('click', function () {
-        console.log("vehicleView was click");
+        //console.log("vehicleView was click");
         let Vehicleid = i+1; //This method needs to use cookies 
         GetVehicle(Vehicleid);
     })
 
     DeleteVehicles.addEventListener('click', function () {
-        console.log("Delete was click");
-         console.log(NewVehicle[i].id);
+        //console.log("Delete was click");
+         //console.log(NewVehicle[i].id);
          DeleteVehicle(NewVehicle[i].id);
     })
     }    
@@ -77,7 +77,7 @@ function vehiclesList(NewVehicle) {
 
 
 function vehiclesDetails(NewVehicle) {
-    console.log(NewVehicle);
+    //(NewVehicle);
 
     appDiv.innerHTML = `
     
@@ -126,7 +126,7 @@ function UpdateVehicleView(EditVehicle){
 function  SumbitEditVehicle(EditVehicle){
     const saveUpdateVehicleBtn = document.getElementById('saveUpdateVehicleBtn');
 
-    console.log("ffffff");
+    //console.log("ffffff");
 
     saveUpdateVehicleBtn.addEventListener('click',function(){
         VehicleUserInput(EditVehicle.id,"PUT");
@@ -182,7 +182,7 @@ function VehicleUserInput(id,method) {
             NewVehicle["Id"] = id;
         }
 
-        console.log(NewVehicle);
+        //console.log(NewVehicle);
         AllRequest.allRequest(VehicleController+id, vehiclesDetails, method, NewVehicle);
 }
 
@@ -207,6 +207,6 @@ SumbmitButton.addEventListener('click',function(){
         }
     );
     const data = await response.json(); // Here you have the data that you need
-    console.log(JSON.stringify(data, null, 2));
+    //console.log(JSON.stringify(data, null, 2));
    // console.log(data.)
 })();

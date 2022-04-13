@@ -3,7 +3,7 @@
 const RETURN_TYPE = {LAT_LNG_ARR:0,VECTOR_ARR:1,VECTOR:2,POINT_ARR:3,PT_LSTR:4,IS_IN: 5};
 const ACCURACY_EXPONENT = 5;
 export function decodePolyline(polyline, returnType = RETURN_TYPE.LAT_LNG_ARR){
-    console.log(polyline);
+    //console.log(polyline);
     const accuracyMultiplier = Math.pow(10, ACCURACY_EXPONENT);
     let coordinates = [];
 
@@ -59,7 +59,7 @@ export function decodePolyline(polyline, returnType = RETURN_TYPE.LAT_LNG_ARR){
     if (returnType == /*RETURN_TYPE.PT_LSTR||*/RETURN_TYPE.IS_IN){
         return coordinates.join('').replace(/,$/,')');
     }
-    console.log('in decode: should output latlngarr',coordinates);
+    //console.log('in decode: should output latlngarr',coordinates);
     return coordinates;
 }
 

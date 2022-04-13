@@ -114,6 +114,7 @@ class GoogleMap extends HTMLElement{
     }
 
     async reverseGeocodeAll(coordinates){
+        console.log(coordinates);
         return Promise.all(coordinates.map(coordinate => this.reverseGeocode(coordinate)));
     }
 }

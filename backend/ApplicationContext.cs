@@ -186,7 +186,7 @@ namespace TripometerAPI
             });
             
 
-            modelBuilder.Entity<Trip>().HasData(new Trip
+            /*modelBuilder.Entity<Trip>().HasData(new Trip
             {
                 Id = 1,
                 EmbarkDate= DateTime.Now.AddDays(-14),
@@ -312,9 +312,9 @@ namespace TripometerAPI
                 VehicleId = 2,
                 //    OwnerId = 1
 
-            });
+            });*/
 
-            modelBuilder.Entity<Receipt>().HasData(new Receipt
+            /*modelBuilder.Entity<Receipt>().HasData(new Receipt
             {
                 Id = 1,
                 Date = DateTime.Now,
@@ -349,7 +349,7 @@ namespace TripometerAPI
                 GasStation = "Shaker",
                 TripId = 1
 
-            });
+            });*/
 
 
         }
