@@ -90,14 +90,14 @@ function setup(){
 //---TEMP---//
 //use this until we get proper log-in functions
 
-async function populateOwnerSelect(ownerSelect){
-    let owners = await asyncRequest(OwnerController);
-    let options = {
-        attributes: {"data-id": "id", "value": "id"},
-        properties: {"text":"fullName"},
-    };
-    utility.populateSelect(ownerSelect,owners,options);
-}
+// async function populateOwnerSelect(ownerSelect){
+//     let owners = await asyncRequest(OwnerController);
+//     let options = {
+//         attributes: {"data-id": "id", "value": "id"},
+//         properties: {"text":"fullName"},
+//     };
+//     utility.populateSelect(ownerSelect,owners,options);
+// }
 
 export function getSelectedOwnerId(){
     const ownerSelect = document.getElementById('owner-select');
