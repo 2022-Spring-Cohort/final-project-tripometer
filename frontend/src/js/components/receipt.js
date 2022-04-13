@@ -50,6 +50,7 @@ function DisplayAll(receipts){
 
  }
 
+
 function SetupForButtons(receiptid){
     let receipts = document.getElementsByClassName("receipts");
     
@@ -127,7 +128,7 @@ function SetupForSubmitReceipt(){
 }
 
 function GetReceipt(id){
-    
+    console.log("getReceipt");
     AllRequest.allRequest(ReceiptController+id,SetupForButtons )
 }
 

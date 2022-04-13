@@ -96,7 +96,7 @@ function TripView(trip){
     `;
 
     SetupForUpdateTrip(trip);
-    // Receipt.SetupForButtons(trip.receipts);
+    Receipt.SetupForButtons(trip.receipts); // need this for receipt.js Crud dont get rid of this
 }
 
 function DeleteTrip(id){

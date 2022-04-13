@@ -76,13 +76,6 @@ function vehiclesList(NewVehicle) {
     });
 
     
-
-    for (let i = 0; i < NewVehicle.length; i++) {
-    let VehicleList = document.getElementById(i);
-    let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
-   let NewVehicleButton = document.getElementById('Add-Vehicle-button');
-
-
     for (let i = 0; i < NewVehicle.length; i++) {
         let VehicleList = document.getElementById(i);
         let DeleteVehicles = document.getElementById('DeleteVehicleBtn' + i);
@@ -101,16 +94,7 @@ function vehiclesList(NewVehicle) {
     }
 
 
-    DeleteVehicles.addEventListener('click', function () {
-        console.log("Delete was click");
-         console.log(NewVehicle[i].id);
-         DeleteVehicle(NewVehicle[i].id);
-    })
-    }    
-
-  
-    
-
+     
 }
 
 

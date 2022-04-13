@@ -70,13 +70,15 @@ function AddOwnerView(){
 function ProcessUserInput(id,method){
     let firstName = document.getElementById('firstName').value;
     let lastName = document.getElementById('lastName').value;
+    let UserId = document.getElementById('userId').value;
     if (!Utility.isEmpty(firstName) && !Utility.isEmpty(lastName)) {
         firstName = Utility.Capitalize(firstName.trim());
         lastName = Utility.Capitalize(lastName.trim());   
         
         let newOwner = {
             FirstName: firstName,
-            LastName: lastName
+            LastName: lastName,
+            UserId: UserId
             // FullName: firstName + " " + lastName
         }
         if (method == "PUT") {
@@ -109,6 +111,8 @@ function UpdateProfile(id){
 function UpdateProfileView(owner){
     appDiv.innerHTML = `
         <h2>Edit Your Profile</h2>
+
+        <input type="hidden" id="userId" value="${GetId()}">
 
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" value="${owner.firstName}" placeholder="${owner.firstName}">
