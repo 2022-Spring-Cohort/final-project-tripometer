@@ -1,5 +1,4 @@
 
-
 li {
     list-style: none;
 }
@@ -37,7 +36,7 @@ header{
 }
 .OwnerName{
     width: 100vw;
-    height: 300px;
+    height: 220px;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -81,3 +80,157 @@ margin-left: 2%;
         font-family:Arial;
 }
 
+
+/* TripsView */
+.tripsView{
+    width:70vw;
+    margin:2rem auto;
+    font-size: 15px;
+}
+
+.trips-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows:300px;
+    gap:1rem 1.5rem;
+}
+
+.trips{
+    padding:0;
+    background-color: rgb(228, 236, 240);
+    border-radius:7px;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap:20px;
+    position:relative;
+    
+}
+
+.trips::before{
+    position:absolute;
+    content: " ";
+    background-color: transparent;
+    top:5px;
+    bottom:5px;
+    left:5px;
+    right:5px;
+    border:5px solid white;
+    border-radius:6px;
+    
+}
+
+.trips li { 
+    z-index: 10;
+}
+
+.trips li:first-child{
+    font-size: 1.3rem;
+    color:rgb(43, 76, 100);
+    font-weight: bold;
+}
+
+.trips li:first-child:hover{
+    border-bottom:2px solid rgb(64, 90, 108);
+    cursor:default;
+}
+
+.deleteTripBtn, #createNewReceiptBtn, #updateTripBtn,.receipts button {
+    border:none;
+    background-color: rgb(64, 90, 108);
+    border-radius: 4px;
+    color:white;
+    padding:.4rem;
+    cursor:pointer;
+    z-index: 11;
+}
+
+/* singletripView */
+.singletripView {
+    padding:0;
+    margin:2rem auto;
+    width:100vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:.7rem;
+}
+
+.location{
+    height:150px;
+    width:100vw;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(228, 236, 240);
+}
+
+.location p{
+    font-size: 2rem;
+}
+
+.location button {
+    margin-top:-1rem;
+}
+
+.tripInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.receiptsView{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.receiptsView h3{
+    text-align: center;
+
+.Input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Login{
+    width: 100vw;
+    height: 300px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(228, 236, 240);
+    font-size: 25px;
+    box-shadow: 0px 0px 9px 0px rgba(118, 123, 124, 0.75);
+}
+
+#Username:hover, #Password:hover{
+    color:rgb(100, 135, 138);
+    
+    cursor: pointer;
+}
+#loginpage{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 200px;
+    gap: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    
+}
+.logininfo{
+    font-size: 25px;
+    margin-right: 2px;
+}
+#footer{
+    position:absolute;
+    bottom: 0;
+
+}
