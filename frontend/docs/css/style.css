@@ -81,8 +81,6 @@ header{
 
 }
 
-<<<<<<< HEAD
-
 
 /* TripsView */
 .tripsView{
@@ -195,7 +193,7 @@ header{
 
 .receiptsView h3{
     text-align: center;
-=======
+
 .Input {
     display: flex;
     flex-direction: column;
@@ -235,5 +233,5 @@ header{
 #footer{
     position:absolute;
     bottom: 0;
->>>>>>> f446e7bea88018c45f42a847fc2750c613d368ba
+
 }
