@@ -25,21 +25,23 @@ function GetTrips(ownerId){
 function TripsView(trips){
     console.log(trips);
     appDiv.innerHTML = `
+    <div class="tripsView">    
         <button id="createNewReceiptBtn">Add a receipt to a trip</button>
 
-        <section>
+        <section class="trips-container">
             ${trips.map(t=>{
                 return `
                 <ul id="${t.id}" class="trips">                   
-                    <li class="trip">From ${t.startAddress} to ${t.endAddress}</li>
+                    <li class="trip">${t.startAddress} to ${t.endAddress}</li>
                     <li class="trip">${DateTime.FormatDate(t.embarkDate)} ${(t.disembarkDate == null)?" ":" to "+DateTime.FormatDate(t.disembarkDate)}</li>
                     <li>${t.receipts.length} Receipts</li>   
                     <button class="deleteTripBtn">Delete this trip</button> 
-                    <hr>  
+                    
                 </ul>        
                 `;
             }).join('')}  
         </section> 
+    </div>
     `;
 
     SetupForCreatingNewReceipt();
@@ -80,19 +82,26 @@ function GetTrip(id){
 
 function TripView(trip){
     appDiv.innerHTML = `
-
-        <button id="updateTripBtn">Update Profile</button>
-
-
-        <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
-        <p>From ${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
-        <p>MileageBefore ${trip.mileageBefore}</p>
-        <p>MileageAfter ${trip.mileageAfter} </p>
-        <p>ETA ${trip.eTA} </p>
-        <p>Distance ${trip.distance} </p>
-        <p>EstimatedGasCost ${trip.estimatedGasCost} </p>
-        ${Receipt.DisplayAll(trip.receipts)}        
-        <hr>  
+        <div class="singletripView">
+            <div class="location">
+                <p>From ${trip.startAddress} to ${trip.endAddress}</p>
+                <button id="updateTripBtn">Update Trip</button>
+            </div>
+            <div class="tripInfo">
+                
+                  
+                    <p>${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
+                    <p>MileageBefore: ${trip.mileageBefore}</p>
+                    <p>MileageAfter: ${trip.mileageAfter} </p>
+                    <p>Distance ${trip.distance} </p>
+                    <p>EstimatedGasCost ${trip.estimatedGasCost} </p>
+             
+            </div>
+            <div class="receiptsView"> 
+                <h3>Receipts</h3>
+            ${Receipt.DisplayAll(trip.receipts)}  
+            </div>      
+        </div>  
     `;
 
     SetupForUpdateTrip(trip);
