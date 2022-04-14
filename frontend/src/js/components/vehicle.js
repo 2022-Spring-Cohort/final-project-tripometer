@@ -37,21 +37,31 @@ function vehiclesList(NewVehicle) {
     console.log(NewVehicle);
     console.log(NewVehicle.length);
 
+    let vehicleView = document.createElement("div"); 
+    
+    let vehicleButtonDiv = document.createElement("div");
+    vehicleButtonDiv.classList.add("addVehicleButtonDiv");
 
-    let vehicleDiv = document.createElement("div");
-
-        let addvehicle=document.createElement('button');
+    let addvehicle= document.createElement('button');
+        addvehicle.classList.add("addVehicleButton");
         addvehicle.innerHTML="Add Vehicle";
         addvehicle.id= "Add-Vehicle-button";
-        vehicleDiv.appendChild(addvehicle);
+
+    vehicleButtonDiv.appendChild(addvehicle);
+
+        vehicleView.appendChild(vehicleButtonDiv);
 
         
 
       
     for (let i = 0; i < NewVehicle.length; i++) {
 
+        let vehicleDiv = document.createElement("div");
+        vehicleDiv.classList.add("vehicleView");
+
         let vehicle = document.createElement("p");
         vehicle.setAttribute("id", i);
+
         let Delete = document.createElement("button");
         Delete.innerText = "Delete";
 
@@ -63,9 +73,10 @@ function vehiclesList(NewVehicle) {
 
         vehicleDiv.appendChild(vehicle);
         vehicleDiv.appendChild(Delete);
+        vehicleView.appendChild(vehicleDiv);
     }
 
-    appDiv.innerHTML = vehicleDiv.innerHTML;
+    appDiv.innerHTML = vehicleView.innerHTML;
 
 
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
