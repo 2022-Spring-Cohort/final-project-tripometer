@@ -30,9 +30,9 @@ appDiv.innerHTML = `
 <div>
 
 <div class="hero-text">
-<h2>We hope this would help plan driving trips from family vacation to busniess trips</h2>
- <h4>by predicting how many miles would be driven</h4>
- <p> how long it would take and the cost of gas for the trip.</p>
+<h2>We hope this would help plan driving trips from family vacation to busniess trips.</h2>
+ <h4>By predicting how many miles would be driven.</h4>
+ <p> How long it would take and the cost of gas for the trip.</p>
 <div>
 
 </section>
