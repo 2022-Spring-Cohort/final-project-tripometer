@@ -101,16 +101,17 @@ function vehiclesList(NewVehicle) {
 function vehiclesDetails(NewVehicle) {
     console.log(NewVehicle);
     console.log(VehicleController);
-
+  
     appDiv.innerHTML = `
-    
+    <div class="vehiclelist">
     <p>Make: ${NewVehicle.make}</p>
     <p>Model: ${NewVehicle.model}</p>
     <p>Year: ${NewVehicle.year}</p>
     <p>Fuel Efficiency: ${NewVehicle.fuelEfficiency}</p>
-    <p>Size of fuel tank: ${NewVehicle.fuelTank}gallons</p>
-
+    <p>Size of fuel tank: ${NewVehicle.fuelTank} gallons</p>
+    
     <button id='UpdateVehicleBtn'>Update Vehicle</button>
+    </div>
     `;
     UpdateVehicleButton(NewVehicle.id);
 }

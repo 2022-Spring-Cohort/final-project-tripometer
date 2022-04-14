@@ -82,3 +82,24 @@ header{
 
 }
 
+.vehiclelist{
+  
+  
+  font-display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding-left: 10fr;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+
+  background-color: aliceblue;
+};
+
+    
+
+
+
+
+
