@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+#create-trip-container{
+    overflow:hidden;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+#sidebar{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+google-map{
+    overflow:hidden;
+}
+
+#create-trip-container input {
+    height: 1.25em;
+    font-size: 1em;
+    border-radius: 25px;
+    border-width: 3px;
+}
+
+#create-trip-container select {
+    height: 1.5em;
+    font-size: 1em;
+    text-align: center;
+}
+
+#create-trip-container input[type=text]{
+    width: 100%;
+}
+
+#create-trip-container input[type=range]{
+    width: 100%;
+}
+
+#create-trip-container select{
+    width: 100%;
+}
+
+.trip-input{
+    text-align:center;
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+
+#sidebar button{
+    border-radius: 25px;
+    color: white;
+    background-color: black;
+    font-size: 1em;
+    height: 1.5em;
+}
+
+.result-item{
+    border-top: 2px solid black;
+}

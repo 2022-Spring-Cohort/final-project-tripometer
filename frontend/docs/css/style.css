@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+
+body{
+    font-family: 'Nunito Sans', sans-serif;
+}
 
 li {
     list-style: none;
 }
 /*My Profile Style*/
+header{
+    background-image: linear-gradient(120deg, #155799, #159957);
+    padding: 1px;
+    margin: -10px;
+    opacity: 0.9;
+    font-weight:bold;
+    font-family:Arial;
+    color: azure;
+}
 
 .profile{
     display: flex;
@@ -31,7 +46,7 @@ header{
 }
 
 .nav p:hover{
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(240, 240, 240);
     cursor: default;
 }
 .OwnerName{
@@ -51,34 +66,38 @@ header{
 }
 .hero{
     object-fit: cover;
-    width: 100%;
+
+    width: 100vw;
+
 }
 
 
+
+
+.hero-image{
+margin-left: 2%;
+}
+
 .hero-text{
-    background-image: linear-gradient(10-deg,rgba(121,105,76,0),rgba(121,105,76,.9));
-    content: "";
-    height: 100%;
-    left: 0;
-    top: 0;
-    width: 100%;
     display: flex;
+    position: absolute;
     color: azure;
+    text-shadow: 1px 1px #0e0101;
+    height: 100%;
+    width: 100%;
+    max-width: 700px;
+    max-height:  700px;
+    bottom:50%;
     flex-direction: column;
-    height: 120%;
     justify-content: center;
     left: 0;
+    right:0;
     margin: 0 auto;
-    max-width: 700px;
-    padding-left: 15px;
-    padding-right: 15px;
-    position: absolute;
-    right: 0;
     top: 0;
-    width: 100%;
     font-weight:bold;
     font-family:Arial;
     margin-top: 100px;
+
 }
 
 
@@ -194,7 +213,9 @@ header{
 .receiptsView h3{
     text-align: center;
 }
-.Input{
+
+.Input {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -233,7 +254,6 @@ header{
 #footer{
     position:absolute;
     bottom: 0;
-
 }
 .AboutUs{
     display: grid;
@@ -310,3 +330,24 @@ ul{
     padding: 0;
     
 }
+
+
+
+
+.vehiclelist{
+  
+  
+  font-display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding-left: 10fr;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+
+  background-color: aliceblue;
+};
+
+
+

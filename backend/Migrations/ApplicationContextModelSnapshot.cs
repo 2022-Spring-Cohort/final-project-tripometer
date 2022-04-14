@@ -45,7 +45,7 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            FirstName = "Denzel",
+                            FirstName = "Denzale",
                             LastName = "Mclntyre",
                             UserId = 1
                         },
@@ -116,6 +116,7 @@ namespace TripometerAPI.Migrations
                     b.HasIndex("TripId");
 
                     b.ToTable("Receipts");
+<<<<<<< HEAD
 
                     b.HasData(
                         new
@@ -148,6 +149,8 @@ namespace TripometerAPI.Migrations
                             TotalCost = 800,
                             TripId = 1
                         });
+=======
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
@@ -157,14 +160,14 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DisembarkDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Distance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ETA")
-                        .HasColumnType("int");
+                    b.Property<double>("Distance")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("EmbarkDate")
                         .HasColumnType("datetime2");
@@ -172,17 +175,17 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("EndAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstimatedGasCost")
-                        .HasColumnType("int");
+                    b.Property<double>("EstimatedFuelUsage")
+                        .HasColumnType("float");
 
-                    b.Property<int>("EstimatedTotalCost")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MileageAfter")
-                        .HasColumnType("int");
+                    b.Property<decimal>("EstimatedGasCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
@@ -195,6 +198,7 @@ namespace TripometerAPI.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Trips");
+<<<<<<< HEAD
 
                     b.HasData(
                         new
@@ -309,6 +313,8 @@ namespace TripometerAPI.Migrations
                             StartAddress = "Shaker",
                             VehicleId = 2
                         });
+=======
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.User", b =>
@@ -332,37 +338,61 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$qMkpHUKPBshTg.btc.bjUe7qOVmAPngFn/1k9oWc4b7pDZcXbV8x6",
+=======
+                            PasswordHash = "$2a$11$tG2RdfO5WFiYY8JCbBf6feOrDiZftKZmIOpzHKGNcMrJnjEw0IWwu",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$EEc7ZTTsATW0AAtLS.GB2eJW1cbFbEEZBRr1bu4AEtTxLBMnVgTfa",
+=======
+                            PasswordHash = "$2a$11$/nVJe/WS/OGxB/KHpjWE0uWzUf1E7AF8bVgtJLedMLS8BiK3M1LRW",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$ZsI4FdGTvUJLclZPMjIqbelTwFtCiWLqLZGdhiKlmNT1FEcbLHF76",
+=======
+                            PasswordHash = "$2a$11$zQBmXi0546vy9VsoLMpsBOZXd868P2Yg0rKkG76ybBWn5y7vUzxI6",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$gqITJWULyajZ6oQjjSEOqe/zY31S6xyak53sdDCyocb0kOKXa31EC",
+=======
+                            PasswordHash = "$2a$11$rejtE2M/.tmtltZMGYPir.KpTxQ.BMI.uuOe6IX0o2kGCw.dbris6",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$PnPVQhMvsx35FjKtC4yhxOzL2JfTBCZ1d9PL9OeV79zQ3f2idj/hm",
+=======
+                            PasswordHash = "$2a$11$Rup6CECUzoFYZA67zXy4Lem6YLwcwsOuE10gOh2TL7FgLD5LAYdqK",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
+<<<<<<< HEAD
                             PasswordHash = "$2a$11$.yTWrUVepqInjbWFSSKVWuydIdktHkpdKb4x5gtQc6ZSm6wd/W1Ce",
+=======
+                            PasswordHash = "$2a$11$tSwXWJRHWJGpkrMEdenU8Oobz8Pw/sX7v6zPD4MaWnB96hABQEw4i",
+>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd
                             Username = "TestUser6"
                         });
                 });

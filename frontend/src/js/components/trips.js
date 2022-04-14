@@ -105,7 +105,7 @@ function TripView(trip){
     `;
 
     SetupForUpdateTrip(trip);
-    // Receipt.SetupForButtons(trip.receipts);
+    Receipt.SetupForButtons(trip.receipts); // need this for receipt.js Crud dont get rid of this
 }
 
 function DeleteTrip(id){
@@ -150,7 +150,7 @@ function UpdateTripView(trip){
 
         <span id="error" hidden>A number is needed here!</span>
         <label for="eTA">ETA</label>
-        <input type="text" id="eTA" value="${(trip.eTA==null||undefined)?'':trip.eTA}" placeholder="${(trip.eTA==null||undefined)?'':trip.eTA}">
+        <input type="text" id="eTA" value="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}" placeholder="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}">
         <label for="distance">Distance</label>
         <input type="text" id="distance" value="${trip.distance}" placeholder="${trip.distance}">
 
