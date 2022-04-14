@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220413160015_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +124,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-
-                            Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(5808),
-
+                            Date = new DateTime(2022, 4, 13, 12, 0, 14, 971, DateTimeKind.Local).AddTicks(2140),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -134,9 +134,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-
-                            Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8870),
-
+                            Date = new DateTime(2022, 4, 13, 12, 0, 14, 971, DateTimeKind.Local).AddTicks(3452),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -146,9 +144,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-
-                            Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8922),
-
+                            Date = new DateTime(2022, 4, 13, 12, 0, 14, 971, DateTimeKind.Local).AddTicks(3483),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -208,9 +204,7 @@ namespace TripometerAPI.Migrations
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-
-                            EmbarkDate = new DateTime(2022, 3, 30, 11, 54, 55, 789, DateTimeKind.Local).AddTicks(9636),
-
+                            EmbarkDate = new DateTime(2022, 3, 30, 12, 0, 14, 969, DateTimeKind.Local).AddTicks(3033),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -224,9 +218,7 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-
-                            EmbarkDate = new DateTime(2022, 4, 7, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(4565),
-
+                            EmbarkDate = new DateTime(2022, 4, 7, 12, 0, 14, 971, DateTimeKind.Local).AddTicks(1422),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -342,49 +334,37 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-
-                            PasswordHash = "$2a$11$eWlhPJdUDQeH6QqsrzBIjuLe6l4JmhFvZ/XY0E3p7PiUWJBybZFvm",
-
+                            PasswordHash = "$2a$11$jQ1YZyvWGNd5Wq.wgNpxtej4PkzyE7aPjG./7W3qLpcZxk2BCaf1m",
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
-
-                            PasswordHash = "$2a$11$7uLLgmT8Hpl0S3R.o6N7pOq7K8cR901xB6nr0KLjSJUE169HZ.1c2",
-
+                            PasswordHash = "$2a$11$TJaqwlTvgzWizoohk.6qsupqx8ZJpjbjwgw5yPcvWKt32haSIrRWK",
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
-
-                            PasswordHash = "$2a$11$DCuTnZ6C6u1/XYEhNqoWSORtkkD6Qu0Fb/zaTjjQGtSI6x4plmpKe",
-
+                            PasswordHash = "$2a$11$0gChnzGFC/gVLRuVC4eBJuKFI.eMCsnLYvrWSOxDoKZtlLVhPH5/i",
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
-
-                            PasswordHash = "$2a$11$06dbJ0LjJppL0hMC/BKsNe1B8AZ.RsDiPSQlgwrdDGxKnhmf5Ovvm",
-
+                            PasswordHash = "$2a$11$f6rRfDgK241tFyCNVas8juNcVjAw3LTB0vJQP75YFvTAndbv992lS",
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
-
-                            PasswordHash = "$2a$11$D.H8rIawUw.5OHY1QMyBNuu/FEzD5zyNbJTw0lwzo31NR1vtAI7se",
-
+                            PasswordHash = "$2a$11$OvwMrZF2TGsJf7yfa0Mvp.QW1fcM/6scMCQSigMVF8mbRpN653W/q",
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
-
-                            PasswordHash = "$2a$11$g43YHPcqVC08VumTFQdYyedwLEguqgjycw1mSYoIcGeYqiZXIM3um",
-
+                            PasswordHash = "$2a$11$lzO2YdB5uqrb8RSj.hq2B.0nhptiY1N5meNxqjZ2do/OQB418DBa.",
                             Username = "TestUser6"
                         });
                 });

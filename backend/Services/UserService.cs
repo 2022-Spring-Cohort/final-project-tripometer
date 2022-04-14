@@ -14,7 +14,7 @@ namespace TripometerAPI.Services
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         IEnumerable<User> GetAll();
         User GetById(int id);
-        void Register(RegisterRequest model);
+        User Register(RegisterRequest model);
         void Update(int id, UpdateRequest model);
         void Delete(int id);
     }
@@ -59,7 +59,7 @@ namespace TripometerAPI.Services
             return getUser(id);
         }
 
-        public void Register(RegisterRequest model)
+        public User Register(RegisterRequest model)
         {
             // validate
             if (_context.Users.Any(x => x.Username == model.Username))
@@ -74,6 +74,7 @@ namespace TripometerAPI.Services
             // save user
             _context.Users.Add(user);
             _context.SaveChanges();
+            return user;
         }
 
         public void Update(int id, UpdateRequest model)
