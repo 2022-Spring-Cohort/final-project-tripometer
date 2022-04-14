@@ -7,6 +7,7 @@
     <title>Tripometer</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/create-trip.css" rel="stylesheet" />
 </head>
 <body>
     <header id="header">
@@ -32,6 +33,7 @@
         //I checked these. They're all in alphabetical order except for FL (probably where the site/company originates)
         //Id 3 seems unused, 17 is probably DC as it lists wards and not counties
         const stateIdAAA = {Florida:1,Alabama:2,Alaska:4,Arizona:5,Arkansas:6,California:7,Colorado:8,Connecticut:9,Delaware:10,Georgia:11,Hawaii:12,Idaho:13,Illinois:14,Indiana:15,Iowa:16,Kansas:18,Kentucky:19,Louisiana:20,Maine:21,Maryland:22,Massachusetts:23,Michigan:24,Minnesota:25,Mississippi:26,Missouri:27,Montana:28,Nebraska:29,Nevada:30,"New Hampshire":31,"New Jersey":32,"New Mexico":33,"New York":34,"North Carolina":35,"North Dakota":36,Ohio:37,Oklahoma:38,Oregon:39,Pennsylvania:40,"Rhode Island":41,"South Carolina":42,"South Dakota":43,Tennessee:44,Texas:45,Utah:46,Vermont:47,Virginia:48,Washington:49,"West Virginia":50,Wisconsin:51,Wyoming:52,};
+        const countyColors = {};
         const gasPrices = {};
         function loadGasPrices(){  
             for (const [key,val] of Object.entries(stateIdAAA)){
@@ -39,8 +41,10 @@
                 script.src = `https://gasprices.aaa.com/index.php?premiumhtml5map_js_data=true&map_id=${val}&r=99827&ver=5.9.2`;
                 script.addEventListener('load',()=>{
                     gasPrices[key] = {};
+                    countyColors[key] = {};
                     for (const county of Object.values(window[`premiumhtml5map_map_cfg_${val}`].map_data)){
                         gasPrices[key][county.name] = county.comment || null;
+                        countyColors[key][county.name] = county["color_map"] || "#222222";
                     }
                     document.head.removeChild(script);
                 });

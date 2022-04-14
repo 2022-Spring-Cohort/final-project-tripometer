@@ -17,6 +17,9 @@ export default{
 }
 
 async function mapTrip(vehicle, request, map, departureDT, odometerReading, initFuelGaugeReading = 1, isRoundTrip = false, disembarkmentDT=null, isReturnTrip=false){
+    const infoWindow = new google.maps.InfoWindow({
+        pixelOffset: new google.maps.Size(0,-40)
+    });
     //let vehiclePromise = asyncRequest(`${VehicleController}${vehicleId}`);
     //hack
     if (isReturnTrip){
@@ -24,11 +27,19 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         console.log("REFULED VEHICLE!!!!",vehicle,request);
     }
     console.log('DEPARTURE',departureDT);
+    //polyLineOptions = new google.maps.Polyline()
     let directions = await map.directionsService.route(request);
-    map.directionsRenderer.setOptions({PolylineOptions:{
-        zIndex: 5
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map.map);
+    directionsRenderer.setOptions({
+        suppressMarkers: isReturnTrip, //hide markers if return trip //does not work...
+        polylineOptions:{
+        zIndex: (isReturnTrip) ? 4 : 5,
+        strokeColor: (isReturnTrip) ? "#00FF00" : "#0000FF",
+        strokeWeight: 5,
+        strokeOpacity: 0.5,
     }});
-    map.directionsRenderer.setDirections(directions);
+    directionsRenderer.setDirections(directions);
     let overviewPolyline = directions.routes[0].overview_polyline;
     console.log(directions);
     let isInComponents = decodePolyline(overviewPolyline,5);
@@ -50,6 +61,7 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
                 //filter points to avoid Marker hell
                 const displayedFeatures = [];
                 geojson.features.forEach(feature => {
+                    
                     if (feature.geometry.type == "Polygon"){
                         feature["style"] = {};
                         const countyState = feature.properties.wikipedia.match(/en:([a-z\s]+),\s([a-z\s]+)$/i);
@@ -57,23 +69,58 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
                         const state = countyState[2];
                         //console.log(state,county,gasPrices[state],gasPrices[state][county]);
                         const gasPrice = gasPrices[state][county];
-                        feature.style["title"] = `${county} County, ${state}: ${gasPrice}`;
+                        feature.properties["countyPrice"] = `${county} County, ${state}<br /> Avg. Gas Price: ${gasPrice}`;
+                        feature.properties["fill"] = countyColors[state][county]
                         displayedFeatures.push(feature);
                     }
                 });
                 
+
+
                 geojson.features = displayedFeatures;
                 const objectURL = URL.createObjectURL(new Blob([new TextEncoder().encode(JSON.stringify(geojson))], {type: "application/json; charset='application/json;charset=utf8'"}));
                 map.map.data.loadGeoJson(objectURL);
-                map.map.data.setStyle({
-                    fillColor: 'blue',
-                    fillOpacity: 0,
-                    zIndex: 1,
-                    strokeColor: 'green',
-                    strokeOpacity: 0.25,
-                    strpleWeight: 1,
-                    
+                map.map.data.setStyle(function(feature){
+                    const fillColor = feature.getProperty("fill");
+                    return {
+                        fillColor: fillColor,
+                        fillOpacity: 0.25,
+                        zIndex: 1,
+                        strokeColor: 'green',
+                        strokeOpacity: 0.50,
+                        strokeWeight: 1,
+                    }
                 });
+
+                
+
+                map.map.data.addListener('mouseover', function(e){
+                    //console.log(infoWindow);
+                    infoWindow.setContent(`
+                        <div style="font-size:2em">
+                            ${e.feature.getProperty("countyPrice")}
+                        </div>
+                    `);
+                    //infoWindow.setPosition(e.feature.getGeometry().get());
+                    //infoWindow.setPosition(e.latLng);
+                    infoWindow.open(map.map);
+
+                });
+
+                map.map.data.addListener('mouseout', function(e){
+                    //console.log(infoWindow);
+                    //infoWindow.setContent(e.feature.getProperty("countyPrice"));
+                    //infoWindow.setPosition(e.feature.getGeometry().get());
+                    //infoWindow.setPosition(e.latLng);
+                    infoWindow.close();
+                });
+
+                map.map.data.addListener('mousemove', function(e){
+                    //infoWindow.close();
+                    infoWindow.setPosition(e.latLng);
+                    //infoWindow.open(map.map);
+                });
+
                 
             });
     }
@@ -93,14 +140,17 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     let polylines = steps.map(step => step.polyline.points);
     let decodedPolylines = decodePolylines(polylines);
     let coordinates = getCoordinatesAtDistances(remainingDistances,decodedPolylines);
-    let startCoordinate = directions.routes[0].legs[0].start_location;
+    let startCoordinate = legs[0].start_location;
+    console.log("START COORDINATE", startCoordinate, legs[0].start_location);
     //in seconds
     let tripDuration = legs.map(leg => leg.duration.value).reduce((prev,next)=> prev+next);
-    let arrivalDate = departureDT.setSeconds(departureDT.getSeconds() + tripDuration);
+    let arrivalDate = new Date(departureDT);
+    arrivalDate = arrivalDate.setSeconds(arrivalDate.getSeconds() + tripDuration);
+    //let arrivalDate = departureDT.setSeconds(departureDT.getSeconds() + tripDuration);
     //remove null coordinates (happens if final fuel stop is at the destination)
     let coordinatesToGeocode = coordinates.filter(coordinate => coordinate != null);
     //console.log([startCoordinate, ...coordinatesToGeocode]);
-    map.addMarkers(coordinatesToGeocode);
+    map.addMarkers(coordinatesToGeocode, {icon: (isReturnTrip) ? "./images/green_markerF.png" : "./images/blue_MarkerF.png"});
     const allResults = await map.reverseGeocodeAll([startCoordinate, ...coordinatesToGeocode]);
     //let counties = [];
     if (isReturnTrip){
@@ -145,7 +195,8 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     const detailsId = (isReturnTrip) ? 'trip-disembarkment-details' : 'trip-embarkment-details';
     const tripDetails = document.getElementById(detailsId);
     tripDetails.innerHTML = `
-        <h2>${(isReturnTrip)?'Embarkment Details':'Disembarkment Details'}</h2>
+    <div class="result-item">
+        <h2>${(isReturnTrip)?'Disembarkment Details':'Embarkment Details'}</h2>
         <h3>Fuel Stops:</h3>
         <ol>
             ${fuelStops.map(fs=>{
@@ -162,27 +213,34 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         <h3>Total Fuel Usage: <strong>${totals.fuelUsage.toFixed(2)} gal.</strong></h3>
         <h3>Total Fuel Cost: <strong>$${totals.fuelCost.toFixed(2)}</strong></h3>
         <h3>Total Trip Duration: <strong>${utility.secondsToDhms(tripDuration)}</strong></h3>
+        </div>
     `;
-    const results = {startAddress: legs[0].startAddress,
-        endAddress: legs[legs.length - 1].endAddress,
+
+            console.log("DEPARTURE DT &&&& legs[0]", departureDT, legs[0], legs[0].state_address, legs[0].end_address, legs[0]["start_address"], legs[0]["end_address"]);
+            
+    const results = {
+        startAddress: legs[0]["start_address"],
+        endAddress: legs[legs.length - 1]["end_address"],
         mileageBefore: odometerReading,
-        embarkmentDate: departureDT,
+        embarkDate: departureDT,
         //mileageAfter: odometerReading + metersToMiles(tripDistance),
         arrivalDate: arrivalDate,
         distance: utility.metersToMiles(tripDistance),
         estimatedGasCost: totals.fuelCost,
         estimatedFuelUsage: totals.fuelUsage,
         vehicleId: vehicle.id,
-        disembarkmDate: disembarkmentDT,
-        returnDate: null};
-
-    let totalResults = Object.create(results);
+        disembarkDate: disembarkmentDT,
+        returnDate: null
+    };
+    console.log("INITIAL RESULTS", results);
+    
+    let totalResults = Object.assign({},results);
 
     if (isRoundTrip){
-        let nextRequest = Object.create(request);
+        let nextRequest = Object.assign({},request);
         nextRequest.origin = request.destination;
         nextRequest.destination = request.origin;
-        console.log('Before getring round trip results nextReq', nextRequest)
+        console.log('Before getting round trip results nextReq', nextRequest)
         const nextResults = await mapTrip(vehicle, nextRequest, map, disembarkmentDT, results.mileageAfter ,vehicle.gaugeReading, false, null, true);
         console.log(nextResults);
 
@@ -192,18 +250,23 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         totalResults.distance += nextResults.distance;
     }
     totalResults.arrivalDate = new Date(totalResults.arrivalDate).toISOString();
-    totalResults.embarkmentDate = new Date(totalResults.embarkmentDate).toISOString();
+    totalResults.embarkDate = new Date(totalResults.embarkDate).toISOString();
     totalResults.returnDate = (totalResults.returnDate) ? new Date(totalResults.returnDate).toISOString() : null;
-    totalResults.disembarkmDate = (totalResults.disembarkmentDate) ? new Date(totalResults.disembarkmentDate).toISOString() : null;
+    totalResults.disembarkDate = (totalResults.disembarkDate) ? new Date(totalResults.disembarkDate).toISOString() : null;
     console.log("POST RESULTS", totalResults);
 
     if (isReturnTrip == false){
+        
         const tripTotalsDetails = document.getElementById('trip-totals-details');
         console.log("PRINTING TRIP TOTALS",tripTotalsDetails);
-        tripTotalsDetails.innerHTML = `<h2>Round Trip Totals</h2>
+        tripTotalsDetails.innerHTML = `
+        <div class="result-item">
+        <h2>Round Trip Totals</h2>
         <h3>Total Distance: <strong>${totalResults.distance.toFixed(2)} mi.</strong></h3>
         <h3>Total Fuel Usage: <strong>${totalResults.estimatedFuelUsage.toFixed(2)} gal.</strong></h3>
-        <h3>Total Fuel Cost: <strong>$${totalResults.estimatedGasCost.toFixed(2)}</strong></h3>`
+        <h3>Total Fuel Cost: <strong>$${totalResults.estimatedGasCost.toFixed(2)}</strong></h3>
+        </div>
+        `;
 
         const saveButton = document.getElementById('save-button');
         saveButton.disabled = false;
@@ -231,25 +294,45 @@ const appDiv = document.getElementById("app");
 function view(){
     document.getElementById(appDiv);
     appDiv.innerHTML = `
-        <div id="container" style="min-height:100vh; display:flex">
-            <google-map id="map"></google-map>
-            <div id="sidebar" style="flex-basis: 15rem;flex-grow: 1;padding: 1rem;max-width: 30rem;height: 100%;box-sizing: border-box;overflow: auto;flex-direction: column;">
-                <select id="vehicle-select">
-                    <option selected disabled>---SELECT VEHICLE---</option>
-                </select>
-                <label for="departure-dt">Departure Date<label>
-                <input type="datetime-local" id="departure-dt" min="${new Date().toISOString()}" />
-                <label for="round-trip">Round Trip</label><input id="round-trip" type="checkbox" />
-                <input type="datetime-local" id="disembarkment-dt" disabled min="${new Date().toISOString()}" />
-                <label for="origin">Origin:</label><input id="origin" />
-                <label for="destination">Destination:</label><input id="destination" />
-                <label for="odometer-reading">Initial Odometer Reading:<label>
-                <input id="odometer-reading" />
-                <label for="fuel-gauge-reading">Initial Fuel Gauge Reading:<strong id="fuel-gauge-percentage">100%</strong></label>
-                <input id="fuel-gauge-reading" type="range" min="0.0" max="1.0" step="0.1" value="1.0" />
-                
-                <button id="submit-button">Submit</button>
-                <button id="save-button" disabled">Save</button>
+        <div id="create-trip-container" style="min-height:100vh; display:flex">
+            <google-map id="map" style="order: 2"></google-map>
+            <div id="sidebar" style="order: 1; flex-basis: 15rem;flex-grow: 1;padding: 1rem;max-width: 30rem;height: 100%;box-sizing: border-box;overflow: auto;flex-direction: column;">
+                <div class="trip-input">
+                    <select id="vehicle-select">
+                        <option selected disabled>---SELECT VEHICLE---</option>
+                    </select>
+                </div>
+                <div class="trip-input">
+                    <label for="departure-dt">Departure Date<label>
+                    <input type="datetime-local" id="departure-dt" min="${utility.localeDateTimeNow()}" value="${utility.localeDateTimeNow()}" />
+                </div>
+                <div class="trip-input">
+                    <label for="round-trip">Round Trip</label>
+                    <input id="round-trip" type="checkbox" />
+                </div>
+                <div class="trip-input">
+                    <label for="disembarkment-dt">Disembarment Date<label>
+                    <input type="datetime-local" id="disembarkment-dt" disabled min="${utility.localeDateTimeNow()}" value="${utility.localeDateTimeNow()}"/>
+                </div>
+                <div class="trip-input">
+                    <input id="origin" type="text" placeholder="Enter Origin Address" />
+                </div>
+                <div class="trip-input">
+                    <input id="destination" type="text" placeholder="Enter Destination Address"/>
+                </div>
+                <div class="trip-input">
+                    <input placeholder="Enter Odometer Mileage" type="text" id="odometer-reading" />
+                </div>
+                <div class="trip-input">
+                    <label for="fuel-gauge-reading">Initial Fuel Gauge Reading: <strong id="fuel-gauge-percentage">100%</strong></label>
+                </div>
+                <div class="trip-input"> 
+                    <input id="fuel-gauge-reading" type="range" min="0.0" max="1.0" step="0.1" value="1.0" />
+                </div>
+                <div class="trip-input">
+                    <button id="submit-button">Submit</button>
+                    <button id="save-button" disabled>Save</button>
+                </div>
                 <div id="car-details"></div>
                 <div id="trip-embarkment-details"></div>
                 <div id="trip-disembarkment-details"></div>

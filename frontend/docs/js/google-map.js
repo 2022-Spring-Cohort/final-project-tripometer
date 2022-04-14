@@ -73,7 +73,7 @@ class GoogleMap extends HTMLElement{
         marker.setMap(this.map);
     }
 
-    addMarkers(coordinates, options){
+    addMarkers(coordinates, options = {}){
         for (let i = 0; i < coordinates.length; i++){
             this.addMarker(coordinates[i], options);
         }

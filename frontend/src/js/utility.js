@@ -5,7 +5,8 @@ export default{
     Capitalize,
     populateSelect,
     metersToMiles,
-    secondsToDhms
+    secondsToDhms,
+    localeDateTimeNow
 }
 
 function isEmpty(str){
@@ -82,4 +83,9 @@ function secondsToDhms(seconds) {
     var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return dDisplay + hDisplay + mDisplay + sDisplay;
+}
+
+function localeDateTimeNow(){
+    const d = new Date();
+    return (new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString()).slice(0, -1)
 }

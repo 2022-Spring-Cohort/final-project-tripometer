@@ -28,10 +28,12 @@ export class Vehicle{
         //console.log("Vehicle trying to render to: " + this.target);
         if (this.target){
             this.target.innerHTML = `
+            <div class="result-item">
                 <h3>Fuel Efficiency: <strong id="fuel-efficiency">${this.fuelEfficiency} m.p.g.</strong></h3>
                 <h3>Fuel Capacity: <strong id="fuel-capacity">${this.fuelCapacity.toFixed(2)} gal.</strong></h3>
                 <h3>Current Fuel: <strong id="current-fuel">${this.fuel.toFixed(2)} gal.</strong></h3>
                 <h3>Max Distance: <strong id="max-distance">${this.maxDistance.toFixed(2)} mi.</strong></h3>
+            </div>
             `;
         }
     }
