@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
 
 #create-trip-container{
+    height:100%;
     overflow:hidden;
     font-family: 'Nunito Sans', sans-serif;
 }
 
 #sidebar{
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -15,19 +16,28 @@ google-map{
 }
 
 #create-trip-container input {
-    height: 1.25em;
-    font-size: 1em;
-    border-radius: 25px;
-    border-width: 3px;
-}
-
-#create-trip-container select {
-    height: 1.5em;
-    font-size: 1em;
+    height: 2em;
+    font-size: 1.5em;
+    border-color: black;
+    border-radius: 10px;
+    border-width: 2px;
     text-align: center;
 }
 
+#create-trip-container select {
+    height: 2em;
+    font-size: 1.5em;
+    border-color: black;
+    border-radius: 10px;
+    border-width: 2px;
+    text-align:center;
+}
+
 #create-trip-container input[type=text]{
+    width: 100%;
+}
+
+#create-trip-container input[type=datetime-local]{
     width: 100%;
 }
 
@@ -39,6 +49,10 @@ google-map{
     width: 100%;
 }
 
+#create-trip-container input[type=checkbox]{
+    vertical-align: middle;
+}
+
 .trip-input{
     text-align:center;
     margin-bottom: 1em;
@@ -46,13 +60,16 @@ google-map{
 }
 
 #sidebar button{
-    border-radius: 25px;
-    color: white;
-    background-color: black;
-    font-size: 1em;
-    height: 1.5em;
+    border-radius: 10px;
+    border-color: black;
+    border-width: 2px;
+    color: black;
+    background-color: white;
+    font-size: 1.5em;
+    height: 2em;
 }
 
 .result-item{
     border-top: 2px solid black;
+    overflow-y: scroll;
 }

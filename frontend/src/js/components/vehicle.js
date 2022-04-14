@@ -204,31 +204,39 @@ function AddVehicle() {
             
 
             appDiv.innerHTML = `
+    <div id="add-vehicle-container">
+    <div class="add-vehicle-op">
     <h2>Add a new Vehicle</h2>
-
-  
-    <label for="Make">Make of vehicle</label>
+    </div>
+    <div class="add-vehicle-op">
     <select class="MakeOptions" id="Make">
-    <option></option>
+    <option selected disabled>--Select Vehicle Make--</option>
     ${MakeOptions}
     </select>
-
-    <label for="Model">Model of vehicle</label>
+    </div>
+    
+    <div class="add-vehicle-op">
     <select class="ModelOptions" id="Model">
-    <option></option>
+    <option selected disabled>--Select Vehicle Model--</option>
     ${ModelOptions}
     </select> 
+    </div>
+    
+    <div class="add-vehicle-op">
+    <input type="number" id="Year" placeholder="Year" />
+    </div>
 
-    <label for="Model">Year of vehicle</label>
-    <input type="number" id="Year">
+    <div class="add-vehicle-op">
+    <input type="number" id="FuelEfficiency" placeholder="Fuel Efficiency (m.p.g.)" />
+    </div>
 
-    <label for="FuelEfficiency">Enter the mpg of vehicle </label>
-    <input type="number" id="FuelEfficiency">
-
-    <label for="FuelTank">enter the tank size of the vehicle </label>
-    <input type="number" id="FuelTank">
-
+    <div class="add-vehicle-op">
+    <input type="number" id="FuelTank" placeholder="Fuel Capacity (gal.)" />
+    </div>
+    <div class="add-vehicle-op">
     <button type="submit" id="createNewVehicleBtn">Submit</button>
+    </div>
+    </div>
 `;
             var MakeList = document.getElementById("Make");
 
