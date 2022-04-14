@@ -40,8 +40,7 @@ function DisplayAll(receipts){
                         <button class="DeleteReceipt"> Delete Receipt</button>
                         <button class="EditReceipt">Edit Receipt</button>
                     </section>
-                ------------------------------------------------------------------------ 
-                ------------------------------------------------------------------------ 
+                
             `;      
         }).join('')}
     </ul>

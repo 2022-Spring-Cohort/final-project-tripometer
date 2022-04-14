@@ -16,19 +16,23 @@ const appDiv = document.getElementById("app");
 function LoginVeiw(id){
 
     appDiv.innerHTML = `       
-        <h2>Log in to Tripometer</h2>    
-             
-        <div>
-       
-        <ul><label for="Username">Username</label></ul>
-        <ul><input type="text" id="Username"></ul>
+          
+    <section class="Input">    
+            <div class="Login">
+                <h2>Log in to Tripometer</h2>  
+            </div>
+            <div id="loginpage">
+                <lable class="Username logininfo" for="Username">Username</lable>
+                <input type="text" id="Username">
 
-        <ul><label for="Password">Password</label></ul>
-        <ul><input type="text" id="Password"></ul>
+                <label class="Password logininfo" for="Password">Password</label>
+                <input type="text" id="Password">
+            </div>
+            
+            <button id="LoginBtn">Log in</button>
+
         
-        <ul><button id="LoginBtn">Log in</button></ul>
-        
-        </div>
+    </section>
     `;
     LoginSubmit();
 }

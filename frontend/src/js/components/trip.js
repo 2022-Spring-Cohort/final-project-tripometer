@@ -8,6 +8,7 @@ import { getCoordinatesAtDistances } from "./geometry";
 import { getVehicle } from "./vehicle-model";
 import { getStepsAtDistances } from "./distance";
 import { getCountyGeometry } from "./overpass";
+
 import { TripController } from "../constants";
 import owner from "./owner";
 import trips from "./trips";
@@ -400,7 +401,7 @@ function init(){
 
     const odometerReading = document.getElementById("odometer-reading");
 
-    submitButton.addEventListener('click', function(){
+submitButton.addEventListener('click', function(){
         let request = {
             origin: origin.value,
             destination: destination.value,
