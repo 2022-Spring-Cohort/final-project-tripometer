@@ -26,7 +26,7 @@ function TripsView(trips){
     console.log(trips);
     appDiv.innerHTML = `
     <div class="tripsView">    
-        <button id="createNewReceiptBtn">Add a receipt to a trip</button>
+        
 
         <section class="trips-container">
             ${trips.map(t=>{
@@ -34,8 +34,9 @@ function TripsView(trips){
                 <ul id="${t.id}" class="trips">                   
                     <li class="trip">${t.startAddress} to ${t.endAddress}</li>
                     <li class="trip">${DateTime.FormatDate(t.embarkDate)} ${(t.disembarkDate == null)?" ":" to "+DateTime.FormatDate(t.disembarkDate)}</li>
-                    <li>${t.receipts.length} Receipts</li>   
-                    <button class="deleteTripBtn">Delete this trip</button> 
+                    <li>${t.receipts.length} Receipts</li>
+                    <button class="createNewReceiptBtn">Add Receipt</button>  
+                    <button class="deleteTripBtn">Delete</button> 
                     
                 </ul>        
                 `;
@@ -44,17 +45,19 @@ function TripsView(trips){
     </div>
     `;
 
-    SetupForCreatingNewReceipt();
+    //SetupForCreatingNewReceipt();
     SetupForViewingTrip();
 }
 
-function SetupForCreatingNewReceipt(){
-    const createNewReceiptBtn = document.getElementById('createNewReceiptBtn');
-    createNewReceiptBtn.addEventListener('click',function(){
+function SetupForCreatingNewReceipt(id){
+    // const createNewReceiptBtn = document.getElementById('createNewReceiptBtn');
+    // createNewReceiptBtn.addEventListener('click',function(){
         let ownerId = Owner.GetId();
-        AllRequest.allRequest(TripController + `?ownerId=${ownerId}`, Receipt.AddReceiptView);
+        AllRequest.allRequest(TripController + `?ownerId=${ownerId}`, () => {
+            Receipt.AddReceiptView(id);
+        });
         
-    });
+    //});
 }
 
 function SetupForViewingTrip(){
@@ -62,6 +65,7 @@ function SetupForViewingTrip(){
     Array.from(trips).forEach(t => {
         let trip = t.getElementsByClassName('trip')[0];
         let deleteTripBtn = t.getElementsByClassName('deleteTripBtn')[0];
+        let addReceiptBtn = t.getElementsByClassName('createNewReceiptBtn')[0];
         let id = t.id;
 
         console.log(id);
@@ -73,6 +77,12 @@ function SetupForViewingTrip(){
         deleteTripBtn.addEventListener('click',function(){
             DeleteTrip(id);
         }); 
+
+        addReceiptBtn.addEventListener('click',function(){
+            console.log("add clicked");
+            SetupForCreatingNewReceipt(id);
+        });
+
     });
 }
 
@@ -124,50 +134,63 @@ function SetupForUpdateTrip(trip){
 function UpdateTripView(trip){
     console.log("updating");
     appDiv.innerHTML = `
+    <div class="EditTripLayout">
         <h2>Edit trip from ${trip.startAddress} to ${trip.endAddress}</h2>
 
+        <section class="Input">
+        <div class="trip-input">
         <label for="embarkDate">Embark Date</label>
         <select id="monthOptions"></select>
         <select id="dateOptions"></select>
         <select id="yearOptions"></select>
         <select id="hourOptions"></select>
         <select id="minOptions"></select>
+        </div>
 
-
-      
+        <div class="trip-input">
         <label for="disembarkDate">Disembark Date</label>
         <input type="text" id="disembarkDate" value="${(trip.disembarkDate==null||undefined)?'':new Date(trip.embarkDate).getDate()}" placeholder="${(trip.disembarkDate==null||undefined)?'':new Date(trip.embarkDate).getDate()}">
-
+        </div>
+        <div class="trip-input">
         <label for="startAddress">StartAddress</label>
         <input type="text" id="startAddress" value="${trip.startAddress}" placeholder="${trip.startAddress}">
+        </div>
+        <div class="trip-input">
         <label for="endAddress">EndAddress</label>
         <input type="text" id="endAddress" value="${trip.endAddress}" placeholder="${trip.endAddress}">
-
+        </div>
+        <div class="trip-input">
         <label for="mileageBefore">MileageBefore</label>
         <input type="text" id="mileageBefore" value="${trip.mileageBefore}" placeholder="${trip.mileageBefore}">
+        </div>
+        <div class="trip-input">
         <label for="mileageAfter">MileageAfter</label>
         <input type="text" id="mileageAfter" value="${trip.mileageAfter}" placeholder="${trip.mileageAfter}">
-
+        </div>
+        <div class="trip-input">
         <span id="error" hidden>A number is needed here!</span>
         <label for="eTA">ETA</label>
         <input type="text" id="eTA" value="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}" placeholder="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}">
+        </div>
+        <div class="trip-input">
         <label for="distance">Distance</label>
         <input type="text" id="distance" value="${trip.distance}" placeholder="${trip.distance}">
-
+        </div>
+        <div class="trip-input">
         <label for="estimatedGasCost">EstimatedGasCost</label>
         <input type="text" id="estimatedGasCost" value="${trip.estimatedGasCost}" placeholder="${trip.estimatedGasCost}">
+        </div>
+        <div class="trip-input">
         <label for="estimatedTotalCost">EstimatedTotalCost</label>
         <input type="text" id="estimatedTotalCost" value="${trip.estimatedTotalCost}" placeholder="${trip.estimatedTotalCost}">
 
-
-
-
-
-
         <input id="vehicle" value="${trip.vehicleId}" hidden>
-        
-
-        <button type="submit" id="saveUpdateTripBtn">Save</button>   
+        </div>
+        <div class="trip-input">
+        <button type="submit" id="saveUpdateTripBtn">Save</button> 
+        </div>
+        </section>
+    </div>
     `;
     let year = new Date(trip.embarkDate).getFullYear();
     let month = (new Date(trip.embarkDate).getMonth()+1<10)?`0${new Date(trip.embarkDate).getMonth()+1}`:new Date(trip.embarkDate).getMonth()+1;

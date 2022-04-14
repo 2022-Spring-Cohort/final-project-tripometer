@@ -74,27 +74,26 @@ function SetupForButtons(receiptid){
  }
 
 
- function AddReceiptView(trips){
+ function AddReceiptView(tripId){
     appDiv.innerHTML = `
+
+        <section class="Input"> 
+        <div class="Login">
+            <h2>Enter Receipt Info</h2>
+        </div>
+        <div id="loginpage">
+        <input type="hidden" id="tripId" value="${tripId}" />
         <label for="PricePerGallon">PricePerGallon</label>
         <input type="text" id="PricePerGallon">
         <label for="TotalCost">TotalCost</label>
         <input type="text" id="TotalCost">
         <label for="GasStation">GasStation</label>
         <input type="text" id="GasStation">
-
-        <label for="Trip">Trip</label>
-        <select id="tripId">
-            ${trips.map(t=>{
-                return `
-                    <option value="${t.id}">From ${t.startAddress} To ${t.endAddress}</option>
-                `
-            }).join('')}
-            <option selected disabled>Please select a trip</option>
-        </select>
-
+        </div>
 
         <button type="submit" id="createNewReceiptBtn">Save</button>
+
+        </section>
     `;
 
 

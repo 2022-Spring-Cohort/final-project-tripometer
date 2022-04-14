@@ -64,19 +64,21 @@ function addEventListenerForVirtualLists(){
 
 
 function AddOwnerView(User){
-    console.log("add");
-    console.log(User);
+    // console.log("add");
+    // console.log(User);
     appDiv.innerHTML = `
-        <h2>Create Your Profile</h2>
+        <section class="Input">
+            <h2>Create Your Profile</h2>
 
-        <input type="hidden" id="UserId" name="UserId" value="${User.id}">
+            <input type="hidden" id="UserId" name="UserId" value="${User.id}">
 
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName">
 
-        <button type="submit" id="createNewProfileBtn">Save</button>
+            <button type="submit" id="createNewProfileBtn">Save</button>
+        </section>
     `;
     SetupForSubmitProfile();
 }
@@ -124,16 +126,21 @@ function UpdateProfile(id){
 
 function UpdateProfileView(owner){
     appDiv.innerHTML = `
-        <h2>Edit Your Profile</h2>
 
+    <section class="Input">
+    <div class="Login">
+        <h2>Edit Your Profile</h2>
+    </div>
+    <div id="loginpage">
         <input type="hidden" id="UserId" value="${GetId()}">
 
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" value="${owner.firstName}" placeholder="${owner.firstName}">
         <label for="lastName">Last Name</label>
         <input type="text" id="lastName" value="${owner.lastName}" placeholder="${owner.lastName}">
-
-        <button type="submit" id="saveUpdateProfileBtn">Save</button>   
+    </div>
+        <button type="submit" id="saveUpdateProfileBtn">Save</button>
+    </section>
     `;
     SetupForUpdateProfile(owner);
 }

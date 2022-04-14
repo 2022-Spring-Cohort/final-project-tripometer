@@ -43,20 +43,14 @@ function vehiclesList(NewVehicle) {
     vehicleButtonDiv.classList.add("addVehicleButtonDiv");
 
     let addvehicle= document.createElement('button');
-        addvehicle.classList.add("addVehicleButton");
+    addvehicle.classList.add("addVehicleButton");
 
-    let vehicleDiv = document.createElement("div");
-
-        let addvehicle=document.createElement('button');
-
-        addvehicle.innerHTML="Add Vehicle";
-        addvehicle.id= "Add-Vehicle-button";
+    addvehicle.innerHTML="Add Vehicle";
+    addvehicle.id= "Add-Vehicle-button";
 
     vehicleButtonDiv.appendChild(addvehicle);
 
-        vehicleView.appendChild(vehicleButtonDiv);
-
-        
+    vehicleView.appendChild(vehicleButtonDiv);
 
       
     for (let i = 0; i < NewVehicle.length; i++) {
@@ -140,24 +134,30 @@ function UpdateVehicleButton(id) {
 
 function UpdateVehicleView(EditVehicle) {
     appDiv.innerHTML = `
-    <h2>Edit Vehicle</h2>
+    <div id="add-vehicle-container">
+    <div class="add-vehicle-op">
+        <h2>Edit Vehicle</h2>
+    </div>
+    <div class="add-vehicle-op">
+        <input type="text" id="Make" value="${EditVehicle.make}" placeholder="${EditVehicle.make}">
+    </div>
 
-    <label for="Make">Make</label>
-    <input type="text" id="Make" value="${EditVehicle.make}" placeholder="${EditVehicle.make}">
-
-    <label for="Model">Model</label>
+    <div class="add-vehicle-op">
     <input type="text" id="Model" value="${EditVehicle.model}" placeholder="${EditVehicle.model}">
-
-    <label for="Year">Year</label>
+    </div>
+    <div class="add-vehicle-op">
     <input type="text" id="Year" value="${EditVehicle.year}" placeholder="${EditVehicle.year}">
-
-    <label for="FuelEfficiency">Fuel Efficiency</label>
+    </div>
+    <div class="add-vehicle-op">
     <input type="text" id="FuelEfficiency" value="${EditVehicle.fuelEfficiency}" placeholder="${EditVehicle.fuelEfficiency}">
-
-    <label for="FuelTank">Fuel tank size</label>
+    </div>
+    <div class="add-vehicle-op">
     <input type="text" id="FuelTank" value="${EditVehicle.fuelTank}" placeholder="${EditVehicle.fuelTank}">
-
-    <button type="submit" id="saveUpdateVehicleBtn">Update</button>   
+    </div>
+    <div class="add-vehicle-op">
+    <button type="submit" id="saveUpdateVehicleBtn">Update</button> 
+    </div>
+    </div> 
     `;
     SumbitEditVehicle(EditVehicle);
 
@@ -206,7 +206,7 @@ function AddVehicle() {
             appDiv.innerHTML = `
     <div id="add-vehicle-container">
     <div class="add-vehicle-op">
-    <h2>Add a new Vehicle</h2>
+    <h2>Add New Vehicle</h2>
     </div>
     <div class="add-vehicle-op">
     <select class="MakeOptions" id="Make">

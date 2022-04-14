@@ -21,12 +21,14 @@ function LoginVeiw(id){
             <div class="Login">
                 <h2>Log in to Tripometer</h2>  
             </div>
+            <div class="text-danger" id="ErrorMessage"></div>
             <div id="loginpage">
-                <lable class="Username logininfo" for="Username">Username</lable>
+                
+                <label class="Username logininfo" for="Username">Username</label>
                 <input type="text" id="Username">
 
                 <label class="Password logininfo" for="Password">Password</label>
-                <input type="text" id="Password">
+                <input type="password" id="Password">
             </div>
             
             <button id="LoginBtn">Log in</button>
@@ -50,9 +52,13 @@ function LoginSubmit(){
         Password: Password
     };
 
-    
+    if(Username == "" || Password == ""){
+        document.getElementById("ErrorMessage").innerText = "Invalid credentials.";
+    }else{
+
+        AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
+    }
    
-   AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
    
  });
 
@@ -72,7 +78,7 @@ if(!user.hasOwnProperty('message')){
 //login failed
 else{
 
-alert(user.message);
+    document.getElementById("ErrorMessage").innerText = "Your credentials don't match our records.";
 
 }
 

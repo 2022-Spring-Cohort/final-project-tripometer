@@ -3,6 +3,7 @@
 
 body{
     font-family: 'Nunito Sans', sans-serif;
+    overflow-x: hidden;
 }
 
 li {
@@ -40,6 +41,17 @@ header{
     padding-left: 2rem;
     padding-right: 2rem;
 }
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-image: linear-gradient(120deg, #155799, #159957);
+    color: white;
+    text-align: center;
+  }
+
 .nav{
     display:flex;
     gap: 1rem;
@@ -65,17 +77,18 @@ header{
     font-size: 20px;
 }
 .hero{
-    object-fit: cover;
-
-    width: 100vw;
-
+    width: 100%;
 }
 
-
-
-
 .hero-image{
-margin-left: 2%;
+    margin-left: 2%;
+    width:100%;
+    overflow-x: hidden;
+}
+
+.text-danger {
+    padding-top: 50px;
+    color: red;
 }
 
 .hero-text{
@@ -158,7 +171,7 @@ margin-left: 2%;
     cursor:default;
 }
 
-.deleteTripBtn, #createNewReceiptBtn, #updateTripBtn,.receipts button {
+.deleteTripBtn, .createNewReceiptBtn, #updateTripBtn,.receipts button {
     border:none;
     background-color: rgb(64, 90, 108);
     border-radius: 4px;
@@ -166,6 +179,13 @@ margin-left: 2%;
     padding:.4rem;
     cursor:pointer;
     z-index: 11;
+}
+
+.EditTripLayout {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* singletripView */
@@ -251,20 +271,15 @@ margin-left: 2%;
     font-size: 25px;
     margin-right: 2px;
 }
-#footer{
-    position:absolute;
-    bottom: 0;
-}
+
 .AboutUs{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-    "app app"
-    "linkedin thanks";
+    display: flex;
+    flex-direction: column;
     justify-items: center;
     /* align-items: center; */
    font-size: 20px;
     gap: 2rem .5rem;
+    padding-bottom: 150px;
 }
 .TopPart{
    grid-area: app;
@@ -281,16 +296,36 @@ margin-left: 2%;
    align-items: center;
 
 }
+
+.BottomPart {
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 1rem;
+    margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+    .BottomPart { grid-template-columns: repeat(1, 1fr); }
+}
+
+@media (min-width: 900px) {
+    .BottomPart { grid-template-columns: repeat(2, 1fr); column-gap: 5rem; }
+}
+
+.aboutus-info {
+    width: 50vw;
+    margin-top: -10px;
+}
+
 .TopPart ul{
     text-align: left;
 
 }
 .BottomLeft{
-    grid-area: linkedin;
-    align-self: flex-start;
+
     background-color: powderblue;
     border-radius: 8px;
-    width: 400px;
+    width: 50vw;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -308,13 +343,9 @@ margin-left: 2%;
     color: black;
 }
 .BottomRight{
-    grid-area: thanks;
-    display: flex;
-    flex-direction: column;
-
     background-color: powderblue;
     border-radius: 8px;
-    width: 400px;
+    width: 50vw;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -364,6 +395,7 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-color: rgb(228, 236, 240);
     font-size: 25px;
     box-shadow: 0px 0px 9px 0px rgba(118, 123, 124, 0.75);
@@ -386,6 +418,14 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 50px;
+    padding-bottom: 25px;
 }
 
+.hero-title {
+    padding-left: 50px;
+}
 
+.pd-lf-50 {
+    padding-left: 50px;
+}
