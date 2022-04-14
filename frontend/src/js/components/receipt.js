@@ -40,8 +40,7 @@ function DisplayAll(receipts){
                         <button class="DeleteReceipt"> Delete Receipt</button>
                         <button class="EditReceipt">Edit Receipt</button>
                     </section>
-                ------------------------------------------------------------------------ 
-                ------------------------------------------------------------------------ 
+                
             `;      
         }).join('')}
     </ul>
@@ -49,6 +48,7 @@ function DisplayAll(receipts){
    
 
  }
+
 
 function SetupForButtons(receiptid){
     let receipts = document.getElementsByClassName("receipts");
@@ -127,7 +127,7 @@ function SetupForSubmitReceipt(){
 }
 
 function GetReceipt(id){
-    
+    console.log("getReceipt");
     AllRequest.allRequest(ReceiptController+id,SetupForButtons )
 }
 

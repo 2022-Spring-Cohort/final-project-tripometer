@@ -6,8 +6,7 @@ import header from "./header";
 import Owner from "./owner"
 
 
-export default {
-   
+export default { 
     LoginVeiw
 }
 
@@ -15,22 +14,25 @@ export default {
 const appDiv = document.getElementById("app");
 
 function LoginVeiw(id){
-    console.log(UsersController);
-    console.log(id);
-    appDiv.innerHTML = `       
-        <h2>Log in to Tripometer</h2>    
-             
-        <div>
-       
-        <ul><label for="Username">Username</label></ul>
-        <ul><input type="text" id="Username"></ul>
 
-        <ul><label for="Password">Password</label></ul>
-        <ul><input type="text" id="Password"></ul>
+    appDiv.innerHTML = `       
+          
+    <section class="Input">    
+            <div class="Login">
+                <h2>Log in to Tripometer</h2>  
+            </div>
+            <div id="loginpage">
+                <lable class="Username logininfo" for="Username">Username</lable>
+                <input type="text" id="Username">
+
+                <label class="Password logininfo" for="Password">Password</label>
+                <input type="text" id="Password">
+            </div>
+            
+            <button id="LoginBtn">Log in</button>
+
         
-        <ul><button id="LoginBtn">Log in</button></ul>
-        
-        </div>
+    </section>
     `;
     LoginSubmit();
 }
@@ -46,12 +48,13 @@ function LoginSubmit(){
     let User = {
         Username: Username,
         Password: Password
-    }
+    };
 
     
    
    AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
- })
+   
+ });
 
 }
 
@@ -61,10 +64,10 @@ console.log(user);
 //login was sucess
 if(!user.hasOwnProperty('message')){
     cookie.setCookie("UserId",user.id,100);
-    cookie.setCookie("UserName",user.id,100);
+    cookie.setCookie("UserName",user.Username,100);
     let id = Owner.GetId();
     Owner.GetProfile(id);
-
+    header.setup();
 }
 //login failed
 else{

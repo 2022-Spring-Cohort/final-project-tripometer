@@ -10,9 +10,13 @@ export default{
     GetProfile,
     AddOwnerView,
     SetupForSubmitProfile,
-    GetId
+    GetId,
+    isLoggedIn
 }
 
+function isLoggedIn(){
+    return (cookie.getCookie("UserId") != undefined)
+}
 
 const appDiv = document.getElementById("app");
 
@@ -59,9 +63,13 @@ function addEventListenerForVirtualLists(){
 
 
 
-function AddOwnerView(){
+function AddOwnerView(User){
+    console.log("add");
+    console.log(User);
     appDiv.innerHTML = `
         <h2>Create Your Profile</h2>
+
+        <input type="hidden" id="UserId" name="UserId" value="${User.id}">
 
         <label for="firstName">First Name</label>
         <input type="text" id="firstName">
@@ -70,18 +78,21 @@ function AddOwnerView(){
 
         <button type="submit" id="createNewProfileBtn">Save</button>
     `;
+    SetupForSubmitProfile();
 }
 
 function ProcessUserInput(id,method){
     let firstName = document.getElementById('firstName').value;
     let lastName = document.getElementById('lastName').value;
+    let UserId = document.getElementById('UserId').value;
     if (!Utility.isEmpty(firstName) && !Utility.isEmpty(lastName)) {
         firstName = Utility.Capitalize(firstName.trim());
         lastName = Utility.Capitalize(lastName.trim());   
         
         let newOwner = {
             FirstName: firstName,
-            LastName: lastName
+            LastName: lastName,
+            UserId: UserId
             // FullName: firstName + " " + lastName
         }
         if (method == "PUT") {
@@ -114,6 +125,8 @@ function UpdateProfile(id){
 function UpdateProfileView(owner){
     appDiv.innerHTML = `
         <h2>Edit Your Profile</h2>
+
+        <input type="hidden" id="UserId" value="${GetId()}">
 
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" value="${owner.firstName}" placeholder="${owner.firstName}">

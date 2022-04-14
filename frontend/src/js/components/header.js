@@ -12,6 +12,11 @@ import Aboutus from "./Aboutus";
 import main from "../main";
 import login from "./login";
 import cookie from "./cookie";
+import owner from "./owner";
+import Register from "./Register";
+import SignOut from "./SignOut";
+
+
 
 
 
@@ -22,68 +27,87 @@ export default {
 const appDiv = document.getElementById('app');
 
 const element = document.getElementById('header');
-const html = `
+
+function setup(){
+    element.innerHTML = `
+
 
 
     <h1 class="logo">Tripometer</h1>
     
-    <section class="nav">
-        
-            <p id="login-button">Login</p>
-            <p id="new-trip-button">New Trip</p>
-            <p id="my-profile-button">My Profile</p>
+    <section class="nav" style="z-index: 100;">
+            ${owner.isLoggedIn()
+                ? `<p id="Sign-Out-button">Sign Out</p>
+                    <p id="new-trip-button">New Trip</p>
+                    <p id="my-profile-button">My Profile</p>`
+                : `<p id="Register-button">Register</p>
+                    <p id="login-button">Login</p>`
+            }
+            
             <p id="Aboutus">About Us</p>
             <p id="Home">Home</p>
+
     </section>
 
 
 `;
-
-
-function setup(){
-    element.innerHTML = html;
-    const newTripButton = document.getElementById('new-trip-button');
-    const myprofileButton = document.getElementById('my-profile-button');
+    let newTripButton = document.getElementById('new-trip-button');
+    let myprofileButton = document.getElementById('my-profile-button');
 
    
-    const HomeButton = document.getElementById('Home');
-    const AboutusButton = document.getElementById('Aboutus');
+    let HomeButton = document.getElementById('Home');
+    let AboutusButton = document.getElementById('Aboutus');
 
+    let RegisterButton = document.getElementById('Register-button');
+    let LoginButton = document.getElementById('login-button');
 
-
-    const LoginButton = document.getElementById('login-button');
+    let SignOutButton = document.getElementById('Sign-Out-button');
 
     //setup header navigation event listeners
-    newTripButton.addEventListener('click', function(){
-        trip.view();
-    });
-
-    myprofileButton.addEventListener('click', function(){
-        //ToDo: Link an user id to get the specific profile
-        let id = Owner.GetId();
-        Owner.GetProfile(id);
-
-    });
 
 
     AboutusButton.addEventListener('click', function(){
         console.log("works");
         Aboutus.SetupFooter();
-   
-        
     });
 
     HomeButton.addEventListener('click', function(){
         console.log("works");
         main.Home();
-   
-        
     });
+    console.log("CHECK LOGGED IN STATE",owner.isLoggedIn());
+    console.log("LOGIN BUTTON EL",LoginButton);
+    if (!owner.isLoggedIn()){
+        console.log("INSIDE IF STATEMENT: FALSE");
+            LoginButton.addEventListener('click', function(){
+            console.log("works");
+            login.LoginVeiw(); 
+        });
+        RegisterButton.addEventListener('click', function(){
+            console.log("works");
+            Register.RegisterView();
+        });
+    }
+    else {
+        console.log("INSIDE IF STATEMENT: TRUE");
+        SignOutButton.addEventListener('click', function(){
+            console.log("works");
+            let id = Owner.GetId();
+            SignOut.SignOut();
+            
+        });
+        newTripButton.addEventListener('click', function(){
+            trip.view();
+        });
+    
+        myprofileButton.addEventListener('click', function(){
+            //ToDo: Link an user id to get the specific profile
+            let id = Owner.GetId();
+            Owner.GetProfile(id);
+    
+        });
+    }
 
-    LoginButton.addEventListener('click', function(){
-        console.log("works");
-        login.LoginVeiw(); 
-    })
      
     //will talk about it later not working
     // const NavItems = document.getElementsByClassName('nav')[0];
