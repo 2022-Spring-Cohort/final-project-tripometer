@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using TripometerAPI.Models;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace TripometerAPI
 {
@@ -13,7 +14,7 @@ namespace TripometerAPI
 
         public DbSet<Vehicle> Vehicles { get; set; }
         
-
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
@@ -23,46 +24,61 @@ namespace TripometerAPI
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasData(
+                new User(){ Id = 1, Username = "TestUser1", PasswordHash = BCryptNet.HashPassword("letsgetgas") },
+                new User() { Id = 2, Username = "TestUser2", PasswordHash = BCryptNet.HashPassword("letsgetgas") },
+                new User() { Id = 3, Username = "TestUser3", PasswordHash = BCryptNet.HashPassword("letsgetgas") },
+                new User() { Id = 4, Username = "TestUser4", PasswordHash = BCryptNet.HashPassword("letsgetgas") },
+                new User() { Id = 5, Username = "TestUser5", PasswordHash = BCryptNet.HashPassword("letsgetgas") },
+                new User() { Id = 6, Username = "TestUser6", PasswordHash = BCryptNet.HashPassword("letsgetgas") }
+            );
+
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 1,
                 FirstName = "Denzel",
-                LastName = "Mclntyre"
+                LastName = "Mclntyre",
+                UserId = 1
             });
 
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id =2,
                 FirstName ="Jessica",
-                LastName = "Wang"
+                LastName = "Wang",
+                UserId = 2
             });
 
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 3,
                 FirstName = "Darius",
-                LastName = "Hammond"
+                LastName = "Hammond",
+                UserId = 3
             });
 
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 4,
                 FirstName = "Rimma",
-                LastName = "Girsheva"
+                LastName = "Girsheva",
+                UserId = 4
             });
 
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 5,
                 FirstName = "Qadriyyah",
-                LastName = "Johnson"
+                LastName = "Johnson",
+                UserId = 5
             });
 
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 6,
                 FirstName = "Brad",
-                LastName = "Weir"
+                LastName = "Weir",
+                UserId = 6
             });
 
             modelBuilder.Entity<Vehicle>().HasData(new Vehicle

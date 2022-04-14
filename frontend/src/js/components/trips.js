@@ -4,6 +4,7 @@ import Utility from "../utility";
 import AllRequest from "../allRequest";
 import Receipt from "./receipt";
 import Owner from "./owner";
+import DateTime from "./dataTime";
 
 
 //Gonna have to combine trip.js and trips.js for better format
@@ -31,7 +32,7 @@ function TripsView(trips){
                 return `
                 <ul id="${t.id}" class="trips">                   
                     <li class="trip">From ${t.startAddress} to ${t.endAddress}</li>
-                    <li class="trip">From ${t.embarkDate} to ${(t.disembarkDate == null)?"unfinished":t.disembarkDate}</li>
+                    <li class="trip">${DateTime.FormatDate(t.embarkDate)} ${(t.disembarkDate == null)?" ":" to "+DateTime.FormatDate(t.disembarkDate)}</li>
                     <li>${t.receipts.length} Receipts</li>   
                     <button class="deleteTripBtn">Delete this trip</button> 
                     <hr>  
@@ -40,19 +41,10 @@ function TripsView(trips){
             }).join('')}  
         </section> 
     `;
-    // SetupForViewingReceipts();
+
     SetupForCreatingNewReceipt();
     SetupForViewingTrip();
 }
-// function SetupForViewingReceipts(){
-//     let receipts = document.getElementsByClassName('receipts');
-//     for (let index = 0; index < receipts.length; index++) {
-//         receipts[index].addEventListener('click',function(){
-//             //Get all receipts
-//             Receipt.GetReceipts(receipts[index].id);
-//         });      
-//     }
-// }
 
 function SetupForCreatingNewReceipt(){
     const createNewReceiptBtn = document.getElementById('createNewReceiptBtn');
@@ -93,18 +85,18 @@ function TripView(trip){
 
 
         <p id="">From ${trip.startAddress} to ${trip.endAddress}</p>
-        <p>MileageBefore ${trip.mileageBefore}</p>
-        <p>MileageAfter ${trip.mileageAfter} </p>
+        <p>From ${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
+        <p>Mileage on vehilce before trip ${trip.mileageBefore} miles</p>
+        <p>Mileage on vehilce after trip ${trip.mileageAfter} miles</p>
         <p>ETA ${trip.eTA} </p>
-        <p>Distance ${trip.distance} </p>
-        <p>EstimatedGasCost ${trip.estimatedGasCost} </p>
+        <p>Total miles traveled for the trip ${trip.distance} miles</p>
+        <p>Amount of gas money needed to finish trip: $${trip.estimatedGasCost} </p>
         ${Receipt.DisplayAll(trip.receipts)}        
         <hr>  
     `;
 
-    
-    Receipt.SetupForButtons(trip.receipts);
-
+    SetupForUpdateTrip(trip);
+    Receipt.SetupForButtons(trip.receipts); // need this for receipt.js Crud dont get rid of this
 }
 
 function DeleteTrip(id){
@@ -121,15 +113,21 @@ function SetupForUpdateTrip(trip){
 
 
 function UpdateTripView(trip){
-    console.log("debugging");
-    console.log(trip);
+    console.log("updating");
     appDiv.innerHTML = `
         <h2>Edit trip from ${trip.startAddress} to ${trip.endAddress}</h2>
 
         <label for="embarkDate">Embark Date</label>
-        <input type="text" id="embarkDate" value="${trip.embarkDate}" placeholder="${trip.embarkDate}">
+        <select id="monthOptions"></select>
+        <select id="dateOptions"></select>
+        <select id="yearOptions"></select>
+        <select id="hourOptions"></select>
+        <select id="minOptions"></select>
+
+
+      
         <label for="disembarkDate">Disembark Date</label>
-        <input type="text" id="disembarkDate" value="${(trip.disembarkDate==null||undefined)?'':trip.eTA}" placeholder="${(trip.disembarkDate==null||undefined)?'':trip.eTA}">
+        <input type="text" id="disembarkDate" value="${(trip.disembarkDate==null||undefined)?'':new Date(trip.embarkDate).getDate()}" placeholder="${(trip.disembarkDate==null||undefined)?'':new Date(trip.embarkDate).getDate()}">
 
         <label for="startAddress">StartAddress</label>
         <input type="text" id="startAddress" value="${trip.startAddress}" placeholder="${trip.startAddress}">
@@ -158,12 +156,48 @@ function UpdateTripView(trip){
 
 
         <input id="vehicle" value="${trip.vehicleId}" hidden>
-        <input id="owner" value="${trip.ownerId}" hidden>
+        
 
         <button type="submit" id="saveUpdateTripBtn">Save</button>   
     `;
+    let year = new Date(trip.embarkDate).getFullYear();
+    let month = (new Date(trip.embarkDate).getMonth()+1<10)?`0${new Date(trip.embarkDate).getMonth()+1}`:new Date(trip.embarkDate).getMonth()+1;
+    let date = (new Date(trip.embarkDate).getDate()<10)?`0${new Date(trip.embarkDate).getDate()}`:new Date(trip.embarkDate).getDate();
+    let hour = (new Date(trip.embarkDate).getHours()<10)?`0${new Date(trip.embarkDate).getHours()}`:new Date(trip.embarkDate).getHours();
+    console.log(`controller hour ${hour}`);
+    let min = (new Date(trip.embarkDate).getMinutes()<10)?`0${new Date(trip.embarkDate).getMinutes()}`:new Date(trip.embarkDate).getMinutes();
+    console.log(`controller min ${min}`);
+   
+    const monthOptions = document.getElementById('monthOptions');
+    const yearOptions = document.getElementById('yearOptions');
+    const dateOptions = document.getElementById('dateOptions');
+    const hourOptions = document.getElementById('hourOptions');
+    const minOptions = document.getElementById('minOptions');
+    DateTime.PopulateMonth(monthOptions,month);
+    DateTime.PopulateYear(yearOptions,year);
+    DateTime.PopulateHour(hourOptions,hour);
+    DateTime.PopulateMin(minOptions,min);
+    DateTime.PopulateDates(date,year,month,dateOptions);
     
+    SetupForDatePopulation();
     SetupForUpdateProfile(trip.id);
+}
+
+function SetupForDatePopulation(){
+    const monthOptions = document.getElementById('monthOptions');
+    const yearOptions = document.getElementById('yearOptions');
+    const dateOptions = document.getElementById('dateOptions');
+  
+    monthOptions.addEventListener('focusout',function(){
+        let month = monthOptions.value;
+        let year = yearOptions.value;
+        DateTime.PopulateDates(100,year,month,dateOptions);
+    });
+    yearOptions.addEventListener('focusout',function(){
+        let month = monthOptions.value;
+        let year = yearOptions.value;
+        DateTime.PopulateDates(100,year,month,dateOptions);
+    });
 }
 
 function SetupForUpdateProfile(tripId){
@@ -174,8 +208,15 @@ function SetupForUpdateProfile(tripId){
 }
 
 function UpdateTrip(tripId){
+    const monthOptions = document.getElementById('monthOptions').value;
+    const yearOptions = document.getElementById('yearOptions').value;
+    const dateOptions = document.getElementById('dateOptions').value;
+    const hourOptions = document.getElementById('hourOptions').value;
+    const minOptions = document.getElementById('minOptions').value;
+    let embarkDate = `${yearOptions}-${monthOptions}-${dateOptions}T${hourOptions}:${minOptions}:00.0000000`;
+
     const error = document.getElementById('error');
-    let embarkDate = document.getElementById('embarkDate').value;
+    // let embarkDate = document.getElementById('embarkDate').value;
     // const disembarkDate = document.getElementById('disembarkDate').value;
     let startAddress = document.getElementById('startAddress').value;
     let endAddress = document.getElementById('endAddress').value;
@@ -185,10 +226,10 @@ function UpdateTrip(tripId){
     let distance = document.getElementById('distance').value;
     let estimatedGasCost = document.getElementById('estimatedGasCost').value;
     let estimatedTotalCost = document.getElementById('estimatedTotalCost').value;
-    let owner = document.getElementById('owner').value; 
-    let vehicle = document.getElementById('vehicle').value;
+    // let owner = document.getElementById('owner').value; 
+    let vehicleId = document.getElementById('vehicle').value;
     //excluded disembarkdate
-    let values = [embarkDate,startAddress,endAddress,mileageBefore,mileageAfter,eTA,distance,estimatedGasCost,estimatedTotalCost];
+    let values = [startAddress,endAddress,mileageBefore,mileageAfter,eTA,distance,estimatedGasCost,estimatedTotalCost];
     let undefinedCount = 0;
     for (let i = 0; i < values.length; i++) {
         if(values[i] == null){
@@ -207,11 +248,10 @@ function UpdateTrip(tripId){
             Distance:distance,
             EstimatedGasCost:estimatedGasCost,
             EstimatedTotalCost:estimatedTotalCost,
-            OwnerId:owner,
-            VehicleId:vehicle,
+            VehicleId:vehicleId,
             Id:tripId
         }
-        // console.log(newTrip);
+        console.log(newTrip);
         AllRequest.allRequest(TripController+tripId,TripView,"PUT",newTrip);
     }else{
         //error view
@@ -219,3 +259,5 @@ function UpdateTrip(tripId){
         // AllRequest.allRequest(TripController+tripId,TripView);
     }
 }
+
+

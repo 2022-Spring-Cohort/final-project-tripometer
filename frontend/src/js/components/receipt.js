@@ -26,9 +26,9 @@ AllRequest.allRequest(ReceiptController + tripId, DisplayAll);
 
 
 function DisplayAll(receipts){
-
-   
-
+    if (receipts == null) {
+        receipts = [];
+    }
     return`
     <ul>
         ${receipts.map(receipt=>{
@@ -49,6 +49,7 @@ function DisplayAll(receipts){
    
 
  }
+
 
 function SetupForButtons(receiptid){
     let receipts = document.getElementsByClassName("receipts");
@@ -127,7 +128,7 @@ function SetupForSubmitReceipt(){
 }
 
 function GetReceipt(id){
-    
+    console.log("getReceipt");
     AllRequest.allRequest(ReceiptController+id,SetupForButtons )
 }
 

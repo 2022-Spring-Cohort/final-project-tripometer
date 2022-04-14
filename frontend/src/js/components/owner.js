@@ -3,6 +3,7 @@ import Utility from "../utility";
 import AllRequest from "../allRequest";
 import Trip from "./trips";
 import Vehicle from "./vehicle";
+import cookie from "./cookie";
 
 
 export default{
@@ -24,13 +25,18 @@ function GetProfile(id){
 
 function ProfileView(owner){
     console.log(owner);
-    appDiv.innerHTML = `       
-        <h2>${owner.fullName}</h2>    
+    appDiv.innerHTML = `
+      
+        <section class="profile">
+         <div class="OwnerName">
+             <h2>Hello, ${owner.fullName}</h2>
+         </div>    
         
-        <p id="myVehicles">My Vehicles</p>
-        <p id="myTrips">My trips</p>
+         <p id="myVehicles">My Vehicles</p>
+         <p id="myTrips">My Trips</p>
         
-        <button id="updateProfileBtn">Update Profile</button>
+         <p id="updateProfileBtn">Update Profile</p>
+        </section>
     `;
     addEventListenerForVirtualLists();
     UpdateProfile(owner.id);
@@ -53,9 +59,13 @@ function addEventListenerForVirtualLists(){
 
 
 
-function AddOwnerView(){
+function AddOwnerView(User){
+    console.log("add");
+    console.log(User);
     appDiv.innerHTML = `
         <h2>Create Your Profile</h2>
+
+        <input type="hidden" id="UserId" name="UserId" value="${User.id}">
 
         <label for="firstName">First Name</label>
         <input type="text" id="firstName">
@@ -64,18 +74,21 @@ function AddOwnerView(){
 
         <button type="submit" id="createNewProfileBtn">Save</button>
     `;
+    SetupForSubmitProfile();
 }
 
 function ProcessUserInput(id,method){
     let firstName = document.getElementById('firstName').value;
     let lastName = document.getElementById('lastName').value;
+    let UserId = document.getElementById('UserId').value;
     if (!Utility.isEmpty(firstName) && !Utility.isEmpty(lastName)) {
         firstName = Utility.Capitalize(firstName.trim());
         lastName = Utility.Capitalize(lastName.trim());   
         
         let newOwner = {
             FirstName: firstName,
-            LastName: lastName
+            LastName: lastName,
+            UserId: UserId
             // FullName: firstName + " " + lastName
         }
         if (method == "PUT") {
@@ -109,6 +122,8 @@ function UpdateProfileView(owner){
     appDiv.innerHTML = `
         <h2>Edit Your Profile</h2>
 
+        <input type="hidden" id="UserId" value="${GetId()}">
+
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" value="${owner.firstName}" placeholder="${owner.firstName}">
         <label for="lastName">Last Name</label>
@@ -129,7 +144,7 @@ function SetupForUpdateProfile(owner){
 
 //Todo: Get Id from coockies later
 function GetId(){
-    return 1;
+    return cookie.getCookie("UserId");
 }
 
 
