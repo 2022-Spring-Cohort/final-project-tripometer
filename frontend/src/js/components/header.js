@@ -18,6 +18,8 @@ import SignOut from "./SignOut";
 
 
 
+
+
 export default {
     setup
 }
@@ -26,6 +28,7 @@ const appDiv = document.getElementById('app');
 
 const element = document.getElementById('header');
 const html = `
+
 
 
     <h1 class="logo">Tripometer</h1>

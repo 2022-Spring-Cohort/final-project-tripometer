@@ -16,7 +16,7 @@ const appDiv = document.getElementById("app");
 
 
 function GetVehicleList(ownerId) {
-    console.log("Getvehicle() called");
+    //console.log("Getvehicle() called");
     AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesList)
 }
 
@@ -34,10 +34,6 @@ function DeleteVehicle(id) {
 
 
 function vehiclesList(NewVehicle) {
-    console.log(NewVehicle);
-    console.log(NewVehicle.length);
-
-
     let vehicleDiv = document.createElement("div");
 
         let addvehicle=document.createElement('button');
@@ -66,6 +62,7 @@ function vehiclesList(NewVehicle) {
     }
 
     appDiv.innerHTML = vehicleDiv.innerHTML;
+
 
 
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
@@ -99,9 +96,7 @@ function vehiclesList(NewVehicle) {
 
 
 function vehiclesDetails(NewVehicle) {
-    console.log(NewVehicle);
-    console.log(VehicleController);
-  
+
     appDiv.innerHTML = `
     <div class="vehiclelist">
     <p>Make: ${NewVehicle.make}</p>
@@ -151,7 +146,6 @@ function UpdateVehicleView(EditVehicle) {
 function SumbitEditVehicle(EditVehicle) {
     const saveUpdateVehicleBtn = document.getElementById('saveUpdateVehicleBtn');
 
-    console.log("EditVehicle");
 
     saveUpdateVehicleBtn.addEventListener('click', function () {
         VehicleUserInput(EditVehicle.id, "PUT");
@@ -234,6 +228,7 @@ function AddVehicle() {
 
 
 
+
 } //end of function
 
 
@@ -246,6 +241,7 @@ function VehicleUserInput(id, method) {
     let Year = document.getElementById('Year').value;
     let FuelEfficiency = document.getElementById('FuelEfficiency').value;
     let FuelTank = document.getElementById('FuelTank').value;
+
 
     let NewVehicle = {
         Make: Make,
