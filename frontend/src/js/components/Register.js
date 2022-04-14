@@ -50,11 +50,13 @@ function RegisterSubmit(){
     
    
    AllRequest.allRequest(UsersController + "register", postRegister ,"POST",User );
- })
+
+ });
 
 }
 
 function postRegister(User){
     console.log(User);
     owner.AddOwnerView(User);
+    header.setup();
 }

@@ -44,12 +44,13 @@ function LoginSubmit(){
     let User = {
         Username: Username,
         Password: Password
-    }
+    };
 
     
    
    AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
- })
+   
+ });
 
 }
 
@@ -62,6 +63,7 @@ if(!user.hasOwnProperty('message')){
     cookie.setCookie("UserName",user.Username,100);
     let id = Owner.GetId();
     Owner.GetProfile(id);
+    header.setup();
 }
 //login failed
 else{

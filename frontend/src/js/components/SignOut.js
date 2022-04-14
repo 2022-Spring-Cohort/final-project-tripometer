@@ -3,6 +3,7 @@ import AllRequest from "../allRequest";
 import {UsersController} from "../constants";
 import cookie from "./cookie";
 import main from "../main";
+import header from "./header";
 
 
 
@@ -18,5 +19,6 @@ function SignOut(){
    cookie.deleteCookie("UserName");  
    cookie.deleteCookie("UserId"); 
    main.Home();
+   header.setup();
 }
     
