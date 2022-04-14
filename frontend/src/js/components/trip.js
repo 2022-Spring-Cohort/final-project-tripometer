@@ -9,6 +9,7 @@ import { getCoordinatesAtDistances } from "./geometry";
 import { Vehicle } from "./vehicle-model"
 import { getStepsAtDistances } from "./distance";
 import { getCountyGeometry } from "./overpass";
+import owner from "./owner";
 
 export default{
     view,
@@ -181,7 +182,7 @@ function init(){
             avoidTolls: avoidTolls.checked
         };
 
-        let ownerId = getSelectedOwnerId();
+        let ownerId = owner.GetId();
         let vehicleId = vehicleSelect.value;
         let trip = new Trip(ownerId,vehicleId,request,map);
         console.log(trip);
@@ -191,7 +192,7 @@ function init(){
 //populate vehicle select
 //create cards for vehicle info
 async function vehicleSelectInit(vehicleSelect){
-    let ownerId = getSelectedOwnerId();
+    let ownerId = owner.GetId();
     console.log('ownerId',ownerId);
     let vehicles = await asyncRequest(`${VehicleController}?ownerId=${ownerId}`);
     console.log('vehicles',vehicles);

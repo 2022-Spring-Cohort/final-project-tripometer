@@ -24,10 +24,12 @@ appDiv.innerHTML = `
 
 
 <section class ="hero">
+
+<div class="hero-image">
 <img src="https://selectregistry.com/wp-content/uploads/2019/05/Couple-on-Road-Trip-1800x650.jpg" width="1800" height="600"> 
+<div>
+
 <div class="hero-text">
-
-
 <h2>We hope this would help plan driving trips from family vacation to busniess trips</h2>
  <h4>by predicting how many miles would be driven</h4>
  <p> how long it would take and the cost of gas for the trip.</p>

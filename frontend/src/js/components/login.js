@@ -32,6 +32,7 @@ function LoginVeiw(id){
             </div>
             
             <button id="LoginBtn">Log in</button>
+
         
     </section>
     `;
