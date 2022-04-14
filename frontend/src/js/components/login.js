@@ -26,7 +26,7 @@ function LoginVeiw(id){
         <ul><input type="text" id="Username"></ul>
 
         <ul><label for="Password">Password</label></ul>
-        <ul><input type="text" id="Password"></ul>
+        <ul><input type="Password" id="Password"></ul>
         
         <ul><button id="LoginBtn">Log in</button></ul>
         

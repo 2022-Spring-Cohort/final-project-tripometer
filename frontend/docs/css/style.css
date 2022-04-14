@@ -58,11 +58,6 @@ header{
 
 .hero-text{
     background-image: linear-gradient(10-deg,rgba(121,105,76,0),rgba(121,105,76,.9));
-    content: "";
-    height: 100%;
-    left: 0;
-    top: 0;
-    width: 100%;
     display: flex;
     color: azure;
     flex-direction: column;
@@ -73,12 +68,10 @@ header{
     max-width: 700px;
     padding-left: 15px;
     padding-right: 15px;
-    position: absolute;
     right: 0;
     top: 0;
     width: 100%;
     font-weight:bold;
     font-family:Arial;
-
 }
 
