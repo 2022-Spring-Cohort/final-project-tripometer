@@ -6,8 +6,7 @@ import header from "./header";
 import Owner from "./owner"
 
 
-export default {
-   
+export default { 
     LoginVeiw
 }
 
@@ -15,8 +14,7 @@ export default {
 const appDiv = document.getElementById("app");
 
 function LoginVeiw(id){
-    console.log(UsersController);
-    console.log(id);
+
     appDiv.innerHTML = `       
           
     <section class="Input">    
@@ -50,12 +48,13 @@ function LoginSubmit(){
     let User = {
         Username: Username,
         Password: Password
-    }
+    };
 
     
    
    AllRequest.allRequest(UsersController + "authenticate",postLogin,"POST",User);
- })
+   
+ });
 
 }
 
@@ -65,10 +64,10 @@ console.log(user);
 //login was sucess
 if(!user.hasOwnProperty('message')){
     cookie.setCookie("UserId",user.id,100);
-    cookie.setCookie("UserName",user.id,100);
+    cookie.setCookie("UserName",user.Username,100);
     let id = Owner.GetId();
     Owner.GetProfile(id);
-
+    header.setup();
 }
 //login failed
 else{

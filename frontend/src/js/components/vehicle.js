@@ -16,7 +16,7 @@ const appDiv = document.getElementById("app");
 
 
 function GetVehicleList(ownerId) {
-    console.log("Getvehicle() called");
+    //console.log("Getvehicle() called");
     AllRequest.allRequest(`${VehicleController}?ownerId=${ownerId}`, vehiclesList)
 }
 
@@ -34,10 +34,6 @@ function DeleteVehicle(id) {
 
 
 function vehiclesList(NewVehicle) {
-    console.log(NewVehicle);
-    console.log(NewVehicle.length);
-
-
     let vehicleDiv = document.createElement("div");
 
         let addvehicle=document.createElement('button');
@@ -68,6 +64,7 @@ function vehiclesList(NewVehicle) {
     appDiv.innerHTML = vehicleDiv.innerHTML;
 
 
+
     const NewVehicleButton = document.getElementById('Add-Vehicle-button');
 
     NewVehicleButton.addEventListener('click', function(){
@@ -76,13 +73,6 @@ function vehiclesList(NewVehicle) {
     });
 
     
-
-    for (let i = 0; i < NewVehicle.length; i++) {
-    let VehicleList = document.getElementById(i);
-    let DeleteVehicles = document.getElementById('DeleteVehicleBtn'+i);
-   let NewVehicleButton = document.getElementById('Add-Vehicle-button');
-
-
     for (let i = 0; i < NewVehicle.length; i++) {
         let VehicleList = document.getElementById(i);
         let DeleteVehicles = document.getElementById('DeleteVehicleBtn' + i);
@@ -101,32 +91,22 @@ function vehiclesList(NewVehicle) {
     }
 
 
-    DeleteVehicles.addEventListener('click', function () {
-        console.log("Delete was click");
-         console.log(NewVehicle[i].id);
-         DeleteVehicle(NewVehicle[i].id);
-    })
-    }    
-
-  
-    
-
+     
 }
 
 
 function vehiclesDetails(NewVehicle) {
-    console.log(NewVehicle);
-    console.log(VehicleController);
 
     appDiv.innerHTML = `
-    
+    <div class="vehiclelist">
     <p>Make: ${NewVehicle.make}</p>
     <p>Model: ${NewVehicle.model}</p>
     <p>Year: ${NewVehicle.year}</p>
     <p>Fuel Efficiency: ${NewVehicle.fuelEfficiency}</p>
-    <p>Fuel Tank: ${NewVehicle.fuelTank}</p>
-
+    <p>Size of fuel tank: ${NewVehicle.fuelTank} gallons</p>
+    
     <button id='UpdateVehicleBtn'>Update Vehicle</button>
+    </div>
     `;
     UpdateVehicleButton(NewVehicle.id);
 }
@@ -154,7 +134,7 @@ function UpdateVehicleView(EditVehicle) {
     <label for="FuelEfficiency">Fuel Efficiency</label>
     <input type="text" id="FuelEfficiency" value="${EditVehicle.fuelEfficiency}" placeholder="${EditVehicle.fuelEfficiency}">
 
-    <label for="FuelTank">Fuel Tank</label>
+    <label for="FuelTank">Fuel tank size</label>
     <input type="text" id="FuelTank" value="${EditVehicle.fuelTank}" placeholder="${EditVehicle.fuelTank}">
 
     <button type="submit" id="saveUpdateVehicleBtn">Update</button>   
@@ -166,7 +146,6 @@ function UpdateVehicleView(EditVehicle) {
 function SumbitEditVehicle(EditVehicle) {
     const saveUpdateVehicleBtn = document.getElementById('saveUpdateVehicleBtn');
 
-    console.log("EditVehicle");
 
     saveUpdateVehicleBtn.addEventListener('click', function () {
         VehicleUserInput(EditVehicle.id, "PUT");
@@ -205,7 +184,7 @@ function AddVehicle() {
             
 
             appDiv.innerHTML = `
-    <h2>Add Vehicle</h2>
+    <h2>Add a new Vehicle</h2>
 
   
     <label for="Make">Make of vehicle</label>
@@ -226,7 +205,7 @@ function AddVehicle() {
     <label for="FuelEfficiency">Enter the mpg of vehicle </label>
     <input type="number" id="FuelEfficiency">
 
-    <label for="FuelTank">Enter the mpg of vehicle </label>
+    <label for="FuelTank">enter the tank size of the vehicle </label>
     <input type="number" id="FuelTank">
 
     <button type="submit" id="createNewVehicleBtn">Submit</button>
@@ -249,6 +228,7 @@ function AddVehicle() {
 
 
 
+
 } //end of function
 
 
@@ -261,6 +241,7 @@ function VehicleUserInput(id, method) {
     let Year = document.getElementById('Year').value;
     let FuelEfficiency = document.getElementById('FuelEfficiency').value;
     let FuelTank = document.getElementById('FuelTank').value;
+
 
     let NewVehicle = {
         Make: Make,

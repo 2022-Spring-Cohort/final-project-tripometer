@@ -73,7 +73,7 @@ class GoogleMap extends HTMLElement{
         marker.setMap(this.map);
     }
 
-    addMarkers(coordinates, options){
+    addMarkers(coordinates, options = {}){
         for (let i = 0; i < coordinates.length; i++){
             this.addMarker(coordinates[i], options);
         }
@@ -114,6 +114,7 @@ class GoogleMap extends HTMLElement{
     }
 
     async reverseGeocodeAll(coordinates){
+        console.log(coordinates);
         return Promise.all(coordinates.map(coordinate => this.reverseGeocode(coordinate)));
     }
 }

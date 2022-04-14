@@ -45,7 +45,7 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            FirstName = "Denzel",
+                            FirstName = "Denzale",
                             LastName = "Mclntyre",
                             UserId = 1
                         },
@@ -116,40 +116,6 @@ namespace TripometerAPI.Migrations
                     b.HasIndex("TripId");
 
                     b.ToTable("Receipts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AdditionalCosts = 1200,
-
-
-                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 76, DateTimeKind.Local).AddTicks(9641),
-                            GasStation = "Cleveland",
-                            PricePerGallon = 4,
-                            TotalCost = 800,
-                            TripId = 2
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 12, 10, 51, 49, 361, DateTimeKind.Local).AddTicks(976),
-                            GasStation = "Shaker",
-                            PricePerGallon = 5,
-                            TotalCost = 800,
-                            TripId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 77, DateTimeKind.Local).AddTicks(7403),
-                            GasStation = "Shaker",
-                            PricePerGallon = 6,
-                            TotalCost = 800,
-                            TripId = 1
-                        });
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
@@ -159,14 +125,14 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DisembarkDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Distance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ETA")
-                        .HasColumnType("int");
+                    b.Property<double>("Distance")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("EmbarkDate")
                         .HasColumnType("datetime2");
@@ -174,17 +140,17 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("EndAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstimatedGasCost")
-                        .HasColumnType("int");
+                    b.Property<double>("EstimatedFuelUsage")
+                        .HasColumnType("float");
 
-                    b.Property<int>("EstimatedTotalCost")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MileageAfter")
-                        .HasColumnType("int");
+                    b.Property<decimal>("EstimatedGasCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReturnDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
@@ -197,120 +163,6 @@ namespace TripometerAPI.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Trips");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 29, 10, 51, 49, 357, DateTimeKind.Local).AddTicks(7944),
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 6, 10, 51, 49, 360, DateTimeKind.Local).AddTicks(2950),
-                            EndAddress = "Miami",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Shaker",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "NYC",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Kent",
-                            VehicleId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "Cincinnati",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Cleveland",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "Columbus",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Chicago",
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Distance = 200,
-                            ETA = 60,
-                            EmbarkDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndAddress = "Miami",
-                            EstimatedGasCost = 5,
-                            EstimatedTotalCost = 1000,
-                            MileageAfter = 20400,
-                            MileageBefore = 20000,
-                            StartAddress = "Shaker",
-                            VehicleId = 2
-                        });
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.User", b =>
@@ -334,37 +186,37 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "$2a$11$ZOfV2BPbwVskqvpLvQIrNOKyKDLop/aNe85wsGYhIoopYOlov9JmW",
+                            PasswordHash = "$2a$11$tG2RdfO5WFiYY8JCbBf6feOrDiZftKZmIOpzHKGNcMrJnjEw0IWwu",
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
-                            PasswordHash = "$2a$11$efQ5qtr2OkZM9wwS3Sd0YutEOzZ35fknVfqs9XgsSVwFxZyoRkQqe",
+                            PasswordHash = "$2a$11$/nVJe/WS/OGxB/KHpjWE0uWzUf1E7AF8bVgtJLedMLS8BiK3M1LRW",
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
-                            PasswordHash = "$2a$11$nf4sPylIYl/zUWXeUI.RJOfsxR58HCBrI1UCzUSPtIARaFYAW4gD.",
+                            PasswordHash = "$2a$11$zQBmXi0546vy9VsoLMpsBOZXd868P2Yg0rKkG76ybBWn5y7vUzxI6",
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
-                            PasswordHash = "$2a$11$fFqCadVQpq2gX7cBl9poXeaDmWKPJWyFR1TKubjCkvdYhO8ePXlmi",
+                            PasswordHash = "$2a$11$rejtE2M/.tmtltZMGYPir.KpTxQ.BMI.uuOe6IX0o2kGCw.dbris6",
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
-                            PasswordHash = "$2a$11$s5fdIRyZrBKtUt9ia3bWLOm8wiRrLZLARBuvzaR1kbZQZ4yudfuNK",
+                            PasswordHash = "$2a$11$Rup6CECUzoFYZA67zXy4Lem6YLwcwsOuE10gOh2TL7FgLD5LAYdqK",
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
-                            PasswordHash = "$2a$11$2n3jOBI2PRru7o8a0WfSEeeO2/cAXKgOD4TW54uT3qLQ5XDfjtN1a",
+                            PasswordHash = "$2a$11$tSwXWJRHWJGpkrMEdenU8Oobz8Pw/sX7v6zPD4MaWnB96hABQEw4i",
                             Username = "TestUser6"
                         });
                 });

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+
+body{
+    font-family: 'Nunito Sans', sans-serif;
+}
 
 li {
     list-style: none;
@@ -60,6 +66,7 @@ header{
 }
 .hero{
     object-fit: cover;
+
     width: 100vw;
 
 }
@@ -242,4 +249,22 @@ margin-left: 2%;
     position:absolute;
     bottom: 0;
 
+
 }
+
+.vehiclelist{
+  
+  
+  font-display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  padding-left: 10fr;
+  align-items: center;
+  text-align: center;
+  font-size: x-large;
+
+  background-color: aliceblue;
+};
+
+
