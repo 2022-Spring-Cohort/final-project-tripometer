@@ -122,9 +122,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-
-
-                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 76, DateTimeKind.Local).AddTicks(9641),
+                            Date = new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(4084),
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -134,7 +132,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 12, 10, 51, 49, 361, DateTimeKind.Local).AddTicks(976),
+                            Date = new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(6866),
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -144,7 +142,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-                            Date = new DateTime(2022, 4, 11, 14, 38, 46, 77, DateTimeKind.Local).AddTicks(7403),
+                            Date = new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(6925),
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
@@ -204,7 +202,7 @@ namespace TripometerAPI.Migrations
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 3, 29, 10, 51, 49, 357, DateTimeKind.Local).AddTicks(7944),
+                            EmbarkDate = new DateTime(2022, 3, 31, 7, 21, 21, 539, DateTimeKind.Local).AddTicks(6243),
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -218,7 +216,7 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-                            EmbarkDate = new DateTime(2022, 4, 6, 10, 51, 49, 360, DateTimeKind.Local).AddTicks(2950),
+                            EmbarkDate = new DateTime(2022, 4, 8, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(2780),
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -334,37 +332,37 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "$2a$11$ZOfV2BPbwVskqvpLvQIrNOKyKDLop/aNe85wsGYhIoopYOlov9JmW",
+                            PasswordHash = "$2a$11$qMkpHUKPBshTg.btc.bjUe7qOVmAPngFn/1k9oWc4b7pDZcXbV8x6",
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
-                            PasswordHash = "$2a$11$efQ5qtr2OkZM9wwS3Sd0YutEOzZ35fknVfqs9XgsSVwFxZyoRkQqe",
+                            PasswordHash = "$2a$11$EEc7ZTTsATW0AAtLS.GB2eJW1cbFbEEZBRr1bu4AEtTxLBMnVgTfa",
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
-                            PasswordHash = "$2a$11$nf4sPylIYl/zUWXeUI.RJOfsxR58HCBrI1UCzUSPtIARaFYAW4gD.",
+                            PasswordHash = "$2a$11$ZsI4FdGTvUJLclZPMjIqbelTwFtCiWLqLZGdhiKlmNT1FEcbLHF76",
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
-                            PasswordHash = "$2a$11$fFqCadVQpq2gX7cBl9poXeaDmWKPJWyFR1TKubjCkvdYhO8ePXlmi",
+                            PasswordHash = "$2a$11$gqITJWULyajZ6oQjjSEOqe/zY31S6xyak53sdDCyocb0kOKXa31EC",
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
-                            PasswordHash = "$2a$11$s5fdIRyZrBKtUt9ia3bWLOm8wiRrLZLARBuvzaR1kbZQZ4yudfuNK",
+                            PasswordHash = "$2a$11$PnPVQhMvsx35FjKtC4yhxOzL2JfTBCZ1d9PL9OeV79zQ3f2idj/hm",
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
-                            PasswordHash = "$2a$11$2n3jOBI2PRru7o8a0WfSEeeO2/cAXKgOD4TW54uT3qLQ5XDfjtN1a",
+                            PasswordHash = "$2a$11$.yTWrUVepqInjbWFSSKVWuydIdktHkpdKb4x5gtQc6ZSm6wd/W1Ce",
                             Username = "TestUser6"
                         });
                 });
