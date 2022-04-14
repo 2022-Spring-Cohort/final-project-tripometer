@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripometerAPI;
 
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220413155456_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,9 +124,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 1,
                             AdditionalCosts = 1200,
-
                             Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(5808),
-
                             GasStation = "Cleveland",
                             PricePerGallon = 4,
                             TotalCost = 800,
@@ -134,9 +134,7 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 2,
                             AdditionalCosts = 1200,
-
                             Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8870),
-
                             GasStation = "Shaker",
                             PricePerGallon = 5,
                             TotalCost = 800,
@@ -146,15 +144,12 @@ namespace TripometerAPI.Migrations
                         {
                             Id = 3,
                             AdditionalCosts = 1200,
-
                             Date = new DateTime(2022, 4, 13, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(8922),
-
                             GasStation = "Shaker",
                             PricePerGallon = 6,
                             TotalCost = 800,
                             TripId = 1
                         });
-
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Trip", b =>
@@ -164,14 +159,14 @@ namespace TripometerAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime?>("DisembarkDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Distance")
-                        .HasColumnType("float");
+                    b.Property<int>("Distance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ETA")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("EmbarkDate")
                         .HasColumnType("datetime2");
@@ -179,17 +174,17 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("EndAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("EstimatedFuelUsage")
-                        .HasColumnType("float");
+                    b.Property<int>("EstimatedGasCost")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("EstimatedGasCost")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("EstimatedTotalCost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MileageAfter")
+                        .HasColumnType("int");
 
                     b.Property<int>("MileageBefore")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("ReturnDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("StartAddress")
                         .HasColumnType("nvarchar(max)");
@@ -203,16 +198,13 @@ namespace TripometerAPI.Migrations
 
                     b.ToTable("Trips");
 
-
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Distance = 200,
                             ETA = 60,
-
                             EmbarkDate = new DateTime(2022, 3, 30, 11, 54, 55, 789, DateTimeKind.Local).AddTicks(9636),
-
                             EndAddress = "Columbus",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -226,9 +218,7 @@ namespace TripometerAPI.Migrations
                             Id = 2,
                             Distance = 200,
                             ETA = 60,
-
                             EmbarkDate = new DateTime(2022, 4, 7, 11, 54, 55, 794, DateTimeKind.Local).AddTicks(4565),
-
                             EndAddress = "Miami",
                             EstimatedGasCost = 5,
                             EstimatedTotalCost = 1000,
@@ -321,7 +311,6 @@ namespace TripometerAPI.Migrations
                             StartAddress = "Shaker",
                             VehicleId = 2
                         });
-
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.User", b =>
@@ -345,49 +334,37 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-
                             PasswordHash = "$2a$11$eWlhPJdUDQeH6QqsrzBIjuLe6l4JmhFvZ/XY0E3p7PiUWJBybZFvm",
-
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
-
                             PasswordHash = "$2a$11$7uLLgmT8Hpl0S3R.o6N7pOq7K8cR901xB6nr0KLjSJUE169HZ.1c2",
-
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
-
                             PasswordHash = "$2a$11$DCuTnZ6C6u1/XYEhNqoWSORtkkD6Qu0Fb/zaTjjQGtSI6x4plmpKe",
-
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
-
                             PasswordHash = "$2a$11$06dbJ0LjJppL0hMC/BKsNe1B8AZ.RsDiPSQlgwrdDGxKnhmf5Ovvm",
-
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
-
                             PasswordHash = "$2a$11$D.H8rIawUw.5OHY1QMyBNuu/FEzD5zyNbJTw0lwzo31NR1vtAI7se",
-
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
-
                             PasswordHash = "$2a$11$g43YHPcqVC08VumTFQdYyedwLEguqgjycw1mSYoIcGeYqiZXIM3um",
-
                             Username = "TestUser6"
                         });
                 });

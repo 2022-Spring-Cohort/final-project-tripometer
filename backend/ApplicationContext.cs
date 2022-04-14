@@ -36,7 +36,7 @@ namespace TripometerAPI
             modelBuilder.Entity<Owner>().HasData(new Owner
             {
                 Id = 1,
-                FirstName = "Denzel",
+                FirstName = "Denzale",
                 LastName = "Mclntyre",
                 UserId = 1
             });
