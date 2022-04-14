@@ -10,9 +10,13 @@ export default{
     GetProfile,
     AddOwnerView,
     SetupForSubmitProfile,
-    GetId
+    GetId,
+    isLoggedIn
 }
 
+function isLoggedIn(){
+    return (cookie.getCookie("UserId") != undefined)
+}
 
 const appDiv = document.getElementById("app");
 

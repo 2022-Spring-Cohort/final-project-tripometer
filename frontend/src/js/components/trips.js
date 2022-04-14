@@ -88,7 +88,7 @@ function TripView(trip){
         <p>From ${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
         <p>Mileage on vehilce before trip ${trip.mileageBefore} miles</p>
         <p>Mileage on vehilce after trip ${trip.mileageAfter} miles</p>
-        <p>ETA ${trip.eTA} </p>
+        <p>ETA ${trip.arrivalDate} </p>
         <p>Total miles traveled for the trip ${trip.distance} miles</p>
         <p>Amount of gas money needed to finish trip: $${trip.estimatedGasCost} </p>
         ${Receipt.DisplayAll(trip.receipts)}        
@@ -141,7 +141,7 @@ function UpdateTripView(trip){
 
         <span id="error" hidden>A number is needed here!</span>
         <label for="eTA">ETA</label>
-        <input type="text" id="eTA" value="${(trip.eTA==null||undefined)?'':trip.eTA}" placeholder="${(trip.eTA==null||undefined)?'':trip.eTA}">
+        <input type="text" id="eTA" value="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}" placeholder="${(trip.arrivalDate==null||undefined)?'':trip.arrivalDate}">
         <label for="distance">Distance</label>
         <input type="text" id="distance" value="${trip.distance}" placeholder="${trip.distance}">
 

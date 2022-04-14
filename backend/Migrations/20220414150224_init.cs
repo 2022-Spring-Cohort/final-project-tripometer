@@ -8,17 +8,38 @@ namespace TripometerAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Owners",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Owners", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Owners_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,16 +120,29 @@ namespace TripometerAPI.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Owners",
-                columns: new[] { "Id", "FirstName", "LastName" },
+                table: "Users",
+                columns: new[] { "Id", "PasswordHash", "Username" },
                 values: new object[,]
                 {
-                    { 1, "Denzel", "Mclntyre" },
-                    { 2, "Jessica", "Wang" },
-                    { 3, "Darius", "Hammond" },
-                    { 4, "Rimma", "Girsheva" },
-                    { 5, "Qadriyyah", "Johnson" },
-                    { 6, "Brad", "Weir" }
+                    { 1, "$2a$11$tG2RdfO5WFiYY8JCbBf6feOrDiZftKZmIOpzHKGNcMrJnjEw0IWwu", "TestUser1" },
+                    { 2, "$2a$11$/nVJe/WS/OGxB/KHpjWE0uWzUf1E7AF8bVgtJLedMLS8BiK3M1LRW", "TestUser2" },
+                    { 3, "$2a$11$zQBmXi0546vy9VsoLMpsBOZXd868P2Yg0rKkG76ybBWn5y7vUzxI6", "TestUser3" },
+                    { 4, "$2a$11$rejtE2M/.tmtltZMGYPir.KpTxQ.BMI.uuOe6IX0o2kGCw.dbris6", "TestUser4" },
+                    { 5, "$2a$11$Rup6CECUzoFYZA67zXy4Lem6YLwcwsOuE10gOh2TL7FgLD5LAYdqK", "TestUser5" },
+                    { 6, "$2a$11$tSwXWJRHWJGpkrMEdenU8Oobz8Pw/sX7v6zPD4MaWnB96hABQEw4i", "TestUser6" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Owners",
+                columns: new[] { "Id", "FirstName", "LastName", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Denzale", "Mclntyre", 1 },
+                    { 2, "Jessica", "Wang", 2 },
+                    { 3, "Darius", "Hammond", 3 },
+                    { 4, "Rimma", "Girsheva", 4 },
+                    { 5, "Qadriyyah", "Johnson", 5 },
+                    { 6, "Brad", "Weir", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -128,6 +162,11 @@ namespace TripometerAPI.Migrations
                     { 10, 30f, 14.5f, "Volkswagen", "EOS", 5, 2016 },
                     { 11, 28f, 12.4f, "Honda", "Civic Type-R", 6, 2022 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Owners_UserId",
+                table: "Owners",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Receipts_TripId",
@@ -158,6 +197,9 @@ namespace TripometerAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Owners");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

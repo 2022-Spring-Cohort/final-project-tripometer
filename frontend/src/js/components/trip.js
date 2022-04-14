@@ -1,5 +1,5 @@
 import { asyncRequest } from "../allRequest";
-//import { VehicleController } from "../constants";
+import { VehicleController } from "../constants";
 import utility from "../utility";
 import { getSelectedOwnerId } from "./header";;
 import { decodePolyline } from "./decode-polyline";
@@ -9,8 +9,10 @@ import { getVehicle } from "./vehicle-model";
 import { getStepsAtDistances } from "./distance";
 import { getCountyGeometry } from "./overpass";
 import { TripController } from "../constants";
+import owner from "./owner";
+import trips from "./trips";
 
-const VEHICLECONTROLLER = "https://localhost:44376/api/Vehicle"
+//const VEHICLECONTROLLER = "https://localhost:44376/api/Vehicle"
 
 export default{
     view,
@@ -20,13 +22,14 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     const infoWindow = new google.maps.InfoWindow({
         pixelOffset: new google.maps.Size(0,-40)
     });
+
     //let vehiclePromise = asyncRequest(`${VehicleController}${vehicleId}`);
     //hack
     if (isReturnTrip){
         vehicle.refuel();
-        console.log("REFULED VEHICLE!!!!",vehicle,request);
+
     }
-    console.log('DEPARTURE',departureDT);
+
     //polyLineOptions = new google.maps.Polyline()
     let directions = await map.directionsService.route(request);
     const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -41,7 +44,7 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     }});
     directionsRenderer.setDirections(directions);
     let overviewPolyline = directions.routes[0].overview_polyline;
-    console.log(directions);
+    //console.log(directions);
     let isInComponents = decodePolyline(overviewPolyline,5);
     if (!isReturnTrip){
         getCountyGeometry(isInComponents)
@@ -127,9 +130,9 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     let legs = directions.routes[0].legs;
     let tripDistance = legs.map(leg => leg.distance.value).reduce((prev,next)=> prev+next);
     let refuelDistances = vehicle.getRefuelDistances(tripDistance);
-    if (isReturnTrip){
-        console.log("RETURN TRIP VEHICLE INFO", vehicle,refuelDistances);
-    }
+    // if (isReturnTrip){
+    //     console.log("RETURN TRIP VEHICLE INFO", vehicle,refuelDistances);
+    // }
     
     let distances = refuelDistances.map(refuelDistance => refuelDistance.distance);
     let fuelUsages = refuelDistances.map(refuelDistance => refuelDistance.fuel);
@@ -141,7 +144,7 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     let decodedPolylines = decodePolylines(polylines);
     let coordinates = getCoordinatesAtDistances(remainingDistances,decodedPolylines);
     let startCoordinate = legs[0].start_location;
-    console.log("START COORDINATE", startCoordinate, legs[0].start_location);
+    //console.log("START COORDINATE", startCoordinate, legs[0].start_location);
     //in seconds
     let tripDuration = legs.map(leg => leg.duration.value).reduce((prev,next)=> prev+next);
     let arrivalDate = new Date(departureDT);
@@ -153,9 +156,9 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     map.addMarkers(coordinatesToGeocode, {icon: (isReturnTrip) ? "./images/green_markerF.png" : "./images/blue_MarkerF.png"});
     const allResults = await map.reverseGeocodeAll([startCoordinate, ...coordinatesToGeocode]);
     //let counties = [];
-    if (isReturnTrip){
-        console.log('RETURN TRIP ALL RESULTS', allResults);
-    }
+    // if (isReturnTrip){
+    //     console.log('RETURN TRIP ALL RESULTS', allResults);
+    // }
     
     let fuelStops = [];
     for (let i = 0; i < distances.length; i++){
@@ -169,9 +172,9 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         fuelStops.push({fuelUsage: fuelUsage, distance: distance, county: county, state: state, gasPrice: gasPrice, gasCost: gasPrice*fuelUsage});
     }
 
-    if (isReturnTrip){
-        console.log('fuel stops!', fuelStops);
-    }
+    // if (isReturnTrip){
+    //     console.log('fuel stops!', fuelStops);
+    // }
 
     // for (let results of allResults){
     //     const countyComponents = results[results.length-3].address_components;
@@ -216,8 +219,8 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         </div>
     `;
 
-            console.log("DEPARTURE DT &&&& legs[0]", departureDT, legs[0], legs[0].state_address, legs[0].end_address, legs[0]["start_address"], legs[0]["end_address"]);
-            
+            // console.log("DEPARTURE DT &&&& legs[0]", departureDT, legs[0], legs[0].state_address, legs[0].end_address, legs[0]["start_address"], legs[0]["end_address"]);
+            // console.log("VEHICLE ID BEING ADDED TO RESULTS", vehicle.id);
     const results = {
         startAddress: legs[0]["start_address"],
         endAddress: legs[legs.length - 1]["end_address"],
@@ -232,7 +235,8 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         disembarkDate: disembarkmentDT,
         returnDate: null
     };
-    console.log("INITIAL RESULTS", results);
+    // console.log("VEHICLE ID ADDED TO RESULTS", results.vehicleId);
+    // console.log("INITIAL RESULTS", results);
     
     let totalResults = Object.assign({},results);
 
@@ -240,9 +244,9 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         let nextRequest = Object.assign({},request);
         nextRequest.origin = request.destination;
         nextRequest.destination = request.origin;
-        console.log('Before getting round trip results nextReq', nextRequest)
+        // console.log('Before getting round trip results nextReq', nextRequest)
         const nextResults = await mapTrip(vehicle, nextRequest, map, disembarkmentDT, results.mileageAfter ,vehicle.gaugeReading, false, null, true);
-        console.log(nextResults);
+        // console.log(nextResults);
 
         totalResults.estimatedGasCost += nextResults.estimatedGasCost;
         totalResults.estimatedFuelUsage += nextResults.estimatedFuelUsage;
@@ -253,12 +257,14 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
     totalResults.embarkDate = new Date(totalResults.embarkDate).toISOString();
     totalResults.returnDate = (totalResults.returnDate) ? new Date(totalResults.returnDate).toISOString() : null;
     totalResults.disembarkDate = (totalResults.disembarkDate) ? new Date(totalResults.disembarkDate).toISOString() : null;
-    console.log("POST RESULTS", totalResults);
+    
+    
+    // console.log("POST RESULTS", totalResults);
 
     if (isReturnTrip == false){
         
         const tripTotalsDetails = document.getElementById('trip-totals-details');
-        console.log("PRINTING TRIP TOTALS",tripTotalsDetails);
+        // console.log("PRINTING TRIP TOTALS",tripTotalsDetails);
         tripTotalsDetails.innerHTML = `
         <div class="result-item">
         <h2>Round Trip Totals</h2>
@@ -267,12 +273,15 @@ async function mapTrip(vehicle, request, map, departureDT, odometerReading, init
         <h3>Total Fuel Cost: <strong>$${totalResults.estimatedGasCost.toFixed(2)}</strong></h3>
         </div>
         `;
-
+        
         const saveButton = document.getElementById('save-button');
         saveButton.disabled = false;
     
         saveButton.addEventListener('click',function(){
-            asyncRequest(TripController, "POST", totalResults);
+            totalResults.vehicleId = document.getElementById('vehicle-select').value;
+            asyncRequest(TripController, "POST", totalResults).then((trip)=>{
+                trips.TripView(trip);
+            });
         });
     }
     else {
@@ -377,8 +386,10 @@ function init(){
             .then(v => {
                 vehicle=v;
                 vehicle.render();
+                console.log("VEHICLE SELECTED", vehicle);
                 });
-    })
+                
+    });
 
     fuelGaugeReading.addEventListener('change', function(){
         if (vehicle){
@@ -400,7 +411,7 @@ function init(){
         };
 
         const roundTripDate = (roundTrip.checked) ? new Date(disembarkmentDT.value) : null;
-
+        console.log("SUBMIT VEHICLE:", vehicle);
         mapTrip(vehicle, request, map, new Date(departureDT.value), odometerReading.value, fuelGaugeReading.value, roundTrip.checked, roundTripDate);
     });
 }
@@ -408,8 +419,8 @@ function init(){
 //populate vehicle select
 //create cards for vehicle info
 async function vehicleSelectInit(vehicleSelect){
-    let ownerId = getSelectedOwnerId();
-    let vehicles = await asyncRequest(`${VEHICLECONTROLLER}?ownerId=${ownerId}`);
+    let ownerId = owner.GetId();
+    let vehicles = await asyncRequest(`${VehicleController}?ownerId=${ownerId}`);
     let options = {
         attributes: {"data-id": "id", "value": "id"},
         properties: {"text": "yearMakeModel"}

@@ -10,7 +10,7 @@ using TripometerAPI;
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220413185640_init")]
+    [Migration("20220414150224_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,12 @@ namespace TripometerAPI.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Owners");
 
@@ -42,38 +47,44 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            FirstName = "Denzel",
-                            LastName = "Mclntyre"
+                            FirstName = "Denzale",
+                            LastName = "Mclntyre",
+                            UserId = 1
                         },
                         new
                         {
                             Id = 2,
                             FirstName = "Jessica",
-                            LastName = "Wang"
+                            LastName = "Wang",
+                            UserId = 2
                         },
                         new
                         {
                             Id = 3,
                             FirstName = "Darius",
-                            LastName = "Hammond"
+                            LastName = "Hammond",
+                            UserId = 3
                         },
                         new
                         {
                             Id = 4,
                             FirstName = "Rimma",
-                            LastName = "Girsheva"
+                            LastName = "Girsheva",
+                            UserId = 4
                         },
                         new
                         {
                             Id = 5,
                             FirstName = "Qadriyyah",
-                            LastName = "Johnson"
+                            LastName = "Johnson",
+                            UserId = 5
                         },
                         new
                         {
                             Id = 6,
                             FirstName = "Brad",
-                            LastName = "Weir"
+                            LastName = "Weir",
+                            UserId = 6
                         });
                 });
 
@@ -154,6 +165,62 @@ namespace TripometerAPI.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Trips");
+                });
+
+            modelBuilder.Entity("TripometerAPI.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PasswordHash = "$2a$11$tG2RdfO5WFiYY8JCbBf6feOrDiZftKZmIOpzHKGNcMrJnjEw0IWwu",
+                            Username = "TestUser1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PasswordHash = "$2a$11$/nVJe/WS/OGxB/KHpjWE0uWzUf1E7AF8bVgtJLedMLS8BiK3M1LRW",
+                            Username = "TestUser2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PasswordHash = "$2a$11$zQBmXi0546vy9VsoLMpsBOZXd868P2Yg0rKkG76ybBWn5y7vUzxI6",
+                            Username = "TestUser3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PasswordHash = "$2a$11$rejtE2M/.tmtltZMGYPir.KpTxQ.BMI.uuOe6IX0o2kGCw.dbris6",
+                            Username = "TestUser4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            PasswordHash = "$2a$11$Rup6CECUzoFYZA67zXy4Lem6YLwcwsOuE10gOh2TL7FgLD5LAYdqK",
+                            Username = "TestUser5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PasswordHash = "$2a$11$tSwXWJRHWJGpkrMEdenU8Oobz8Pw/sX7v6zPD4MaWnB96hABQEw4i",
+                            Username = "TestUser6"
+                        });
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Vehicle", b =>
@@ -298,6 +365,17 @@ namespace TripometerAPI.Migrations
                             OwnerId = 6,
                             Year = 2022
                         });
+                });
+
+            modelBuilder.Entity("TripometerAPI.Models.Owner", b =>
+                {
+                    b.HasOne("TripometerAPI.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TripometerAPI.Models.Receipt", b =>

@@ -8,6 +8,7 @@ const METERS_PER_MILE = 1609.34;
 //returns vehicle
 export async function getVehicle(vehicleId, initialGaugeReading = 1, target=null){
     let vehicleModel = await asyncRequest(`${VehicleController}${vehicleId}`);
+    console.log("GOT VEHICLE MODEL", vehicleModel);
     return new Vehicle(vehicleModel.ownerId, vehicleModel.id, vehicleModel.fuelEfficiency, vehicleModel.fuelTank, initialGaugeReading, target);
 }
 
