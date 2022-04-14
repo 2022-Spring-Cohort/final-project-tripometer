@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TripometerAPI.Migrations
 {
-    public partial class init : Migration
+    public partial class InIt : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -124,12 +124,21 @@ namespace TripometerAPI.Migrations
                 columns: new[] { "Id", "PasswordHash", "Username" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:backend/Migrations/20220414142122_InIt.cs
+                    { 1, "$2a$11$qMkpHUKPBshTg.btc.bjUe7qOVmAPngFn/1k9oWc4b7pDZcXbV8x6", "TestUser1" },
+                    { 2, "$2a$11$EEc7ZTTsATW0AAtLS.GB2eJW1cbFbEEZBRr1bu4AEtTxLBMnVgTfa", "TestUser2" },
+                    { 3, "$2a$11$ZsI4FdGTvUJLclZPMjIqbelTwFtCiWLqLZGdhiKlmNT1FEcbLHF76", "TestUser3" },
+                    { 4, "$2a$11$gqITJWULyajZ6oQjjSEOqe/zY31S6xyak53sdDCyocb0kOKXa31EC", "TestUser4" },
+                    { 5, "$2a$11$PnPVQhMvsx35FjKtC4yhxOzL2JfTBCZ1d9PL9OeV79zQ3f2idj/hm", "TestUser5" },
+                    { 6, "$2a$11$.yTWrUVepqInjbWFSSKVWuydIdktHkpdKb4x5gtQc6ZSm6wd/W1Ce", "TestUser6" }
+========
                     { 1, "$2a$11$tG2RdfO5WFiYY8JCbBf6feOrDiZftKZmIOpzHKGNcMrJnjEw0IWwu", "TestUser1" },
                     { 2, "$2a$11$/nVJe/WS/OGxB/KHpjWE0uWzUf1E7AF8bVgtJLedMLS8BiK3M1LRW", "TestUser2" },
                     { 3, "$2a$11$zQBmXi0546vy9VsoLMpsBOZXd868P2Yg0rKkG76ybBWn5y7vUzxI6", "TestUser3" },
                     { 4, "$2a$11$rejtE2M/.tmtltZMGYPir.KpTxQ.BMI.uuOe6IX0o2kGCw.dbris6", "TestUser4" },
                     { 5, "$2a$11$Rup6CECUzoFYZA67zXy4Lem6YLwcwsOuE10gOh2TL7FgLD5LAYdqK", "TestUser5" },
                     { 6, "$2a$11$tSwXWJRHWJGpkrMEdenU8Oobz8Pw/sX7v6zPD4MaWnB96hABQEw4i", "TestUser6" }
+>>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd:backend/Migrations/20220414150224_init.cs
                 });
 
             migrationBuilder.InsertData(
@@ -163,6 +172,39 @@ namespace TripometerAPI.Migrations
                     { 11, 28f, 12.4f, "Honda", "Civic Type-R", 6, 2022 }
                 });
 
+<<<<<<<< HEAD:backend/Migrations/20220414142122_InIt.cs
+            migrationBuilder.InsertData(
+                table: "Trips",
+                columns: new[] { "Id", "DisembarkDate", "Distance", "ETA", "EmbarkDate", "EndAddress", "EstimatedGasCost", "EstimatedTotalCost", "MileageAfter", "MileageBefore", "StartAddress", "VehicleId" },
+                values: new object[,]
+                {
+                    { 1, null, 200, 60, new DateTime(2022, 3, 31, 7, 21, 21, 539, DateTimeKind.Local).AddTicks(6243), "Columbus", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 2, null, 200, 60, new DateTime(2022, 4, 8, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(2780), "Miami", 5, 1000, 20400, 20000, "Shaker", 1 },
+                    { 3, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
+                    { 5, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 6, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cincinnati", 5, 1000, 20400, 20000, "Cleveland", 1 },
+                    { 7, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Columbus", 5, 1000, 20400, 20000, "Chicago", 1 },
+                    { 4, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "NYC", 5, 1000, 20400, 20000, "Kent", 2 },
+                    { 8, null, 200, 60, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miami", 5, 1000, 20400, 20000, "Shaker", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Receipts",
+                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
+                values: new object[] { 2, 1200, new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(6866), "Shaker", 5, 800, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Receipts",
+                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
+                values: new object[] { 3, 1200, new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(6925), "Shaker", 6, 800, 1 });
+
+            migrationBuilder.InsertData(
+                table: "Receipts",
+                columns: new[] { "Id", "AdditionalCosts", "Date", "GasStation", "PricePerGallon", "TotalCost", "TripId" },
+                values: new object[] { 1, 1200, new DateTime(2022, 4, 14, 7, 21, 21, 542, DateTimeKind.Local).AddTicks(4084), "Cleveland", 4, 800, 2 });
+
+========
+>>>>>>>> 8a2f1a85cabb108cc5d3c9ad046ae4e4744217cd:backend/Migrations/20220414150224_init.cs
             migrationBuilder.CreateIndex(
                 name: "IX_Owners_UserId",
                 table: "Owners",

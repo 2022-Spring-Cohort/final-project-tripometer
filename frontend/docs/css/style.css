@@ -72,28 +72,32 @@ header{
 }
 
 
+
+
 .hero-image{
 margin-left: 2%;
 }
 
 .hero-text{
-        display: flex;
-        position: absolute;
-        color: azure;
-        text-shadow: 1px 1px #0e0101;
-        height: 100%;
-        width: 100%;
-        max-width: 700px;
-        max-height:  700px;
-        bottom:50%;
-        flex-direction: column;
-        justify-content: center;
-        left: 0;
-        right:0;
-        margin: 0 auto;
-        top: 0;
-        font-weight:bold;
-        font-family:Arial;
+    display: flex;
+    position: absolute;
+    color: azure;
+    text-shadow: 1px 1px #0e0101;
+    height: 100%;
+    width: 100%;
+    max-width: 700px;
+    max-height:  700px;
+    bottom:50%;
+    flex-direction: column;
+    justify-content: center;
+    left: 0;
+    right:0;
+    margin: 0 auto;
+    top: 0;
+    font-weight:bold;
+    font-family:Arial;
+    margin-top: 100px;
+
 }
 
 
@@ -209,7 +213,9 @@ margin-left: 2%;
 .receiptsView h3{
     text-align: center;
 }
+
 .Input {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -248,9 +254,85 @@ margin-left: 2%;
 #footer{
     position:absolute;
     bottom: 0;
-
+}
+.AboutUs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "app app"
+    "linkedin thanks";
+    justify-items: center;
+    /* align-items: center; */
+   font-size: 20px;
+    gap: 2rem .5rem;
+}
+.TopPart{
+   grid-area: app;
+   height: max-content;
+   width: 100vw;
+   background-color: powderblue;
+   align-self: left;
+   text-align: center;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   text-justify: inter-word;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 
 }
+.TopPart ul{
+    text-align: left;
+
+}
+.BottomLeft{
+    grid-area: linkedin;
+    align-self: flex-start;
+    background-color: powderblue;
+    border-radius: 8px;
+    width: 400px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.BottomLeft section{
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.BottomLeft a{
+    text-decoration: none; 
+    color: black;
+}
+.BottomRight{
+    grid-area: thanks;
+    display: flex;
+    flex-direction: column;
+
+    background-color: powderblue;
+    border-radius: 8px;
+    width: 400px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.BottomRight ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul{
+    padding: 0;
+    
+}
+
+
+
 
 .vehiclelist{
   
@@ -266,6 +348,7 @@ margin-left: 2%;
 
   background-color: aliceblue;
 };
+
 
 
 .vehicleView {
@@ -304,4 +387,5 @@ margin-left: 2%;
     justify-content: center;
     align-items: center;
 }
+
 
