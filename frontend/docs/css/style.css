@@ -2,8 +2,15 @@
 
 
 body{
+    margin:0;
+    /*display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 5em min(calc(100vh-64px));
+    grid-template-areas: "header"
+                        "main"; */
     font-family: 'Nunito Sans', sans-serif;
     overflow-x: hidden;
+    height:100vh;
 }
 
 li {
@@ -11,14 +18,43 @@ li {
 }
 /*My Profile Style*/
 header{
+    height: 64px;
+    min-height: 64px;
+    /* grid-area: header; */
     background-image: linear-gradient(120deg, #155799, #159957);
-    padding: 1px;
-    margin: -10px;
+
+
     opacity: 0.9;
     font-weight:bold;
     font-family:Arial;
     color: azure;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
 }
+
+main {
+    height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px);
+    max-height: calc(100vh - 96px);
+}
+
+footer {
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    font-weight:bold;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    width: 100%;
+    background-image: linear-gradient(120deg, #155799, #159957);
+    color: white;
+    text-align: center;
+  }
 
 .profile{
     display: flex;
@@ -33,31 +69,30 @@ header{
     cursor: pointer;
 }
 
-
-header{
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    padding-left: 2rem;
-    padding-right: 2rem;
+#app{
+    height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px);
+    overflow-y:auto;
+    overflow-x:hidden;
 }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-image: linear-gradient(120deg, #155799, #159957);
-    color: white;
-    text-align: center;
-  }
+
+.logo{
+    align-self: center
+}
 
 .nav{
     display:flex;
     gap: 1rem;
+    align-self:center;
+    
+}
+.nav p {
+    border-bottom: 2px solid rgba(240, 240, 240,0);
 }
 
 .nav p:hover{
+    align-self:center;
     border-bottom: 2px solid rgb(240, 240, 240);
     cursor: default;
 }
@@ -81,9 +116,10 @@ header{
 }
 
 .hero-image{
-    margin-left: 2%;
-    width:100%;
-    overflow-x: hidden;
+    background-image: url("https://selectregistry.com/wp-content/uploads/2019/05/Couple-on-Road-Trip-1800x650.jpg");
+    background-size: cover;
+    height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px);
 }
 
 .text-danger {
@@ -92,24 +128,22 @@ header{
 }
 
 .hero-text{
+    height: calc(100vh-64px);
+    min-height: calc(100vh-64px);
     display: flex;
-    position: absolute;
+
     color: azure;
     text-shadow: 1px 1px #0e0101;
     height: 100%;
     width: 100%;
-    max-width: 700px;
-    max-height:  700px;
-    bottom:50%;
+
     flex-direction: column;
     justify-content: center;
-    left: 0;
-    right:0;
+
     margin: 0 auto;
-    top: 0;
+
     font-weight:bold;
     font-family:Arial;
-    margin-top: 100px;
 
 }
 
@@ -257,34 +291,28 @@ header{
     
     cursor: pointer;
 }
-#loginpage{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    width: 200px;
-    gap: 1rem;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-    
-}
+
 .logininfo{
     font-size: 25px;
-    margin-right: 2px;
+}
+
+#LoginBtn{
+    margin-top:2em;
 }
 
 .AboutUs{
+    height: calc(100vh - 96px);
+    min-height: calc(100vh - 96px);
+    max-height: calc(100vh - 96px);
     display: flex;
     flex-direction: column;
     justify-items: center;
     /* align-items: center; */
    font-size: 20px;
     gap: 2rem .5rem;
-    padding-bottom: 150px;
+    overflow-y:auto;
 }
 .TopPart{
-   grid-area: app;
-   height: max-content;
-   width: 100vw;
    background-color: powderblue;
    align-self: left;
    text-align: center;
@@ -302,6 +330,8 @@ header{
     grid-template-columns: auto;
     row-gap: 1rem;
     margin: 0 auto;
+    margin-bottom:2rem;
+    column-gap:2rem;
 }
 
 @media (min-width: 600px) {
@@ -313,7 +343,7 @@ header{
 }
 
 .aboutus-info {
-    width: 50vw;
+
     margin-top: -10px;
 }
 
@@ -325,7 +355,7 @@ header{
 
     background-color: powderblue;
     border-radius: 8px;
-    width: 50vw;
+
     height: 280px;
     display: flex;
     flex-direction: column;

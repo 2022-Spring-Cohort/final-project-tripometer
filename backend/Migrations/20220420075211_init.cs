@@ -124,12 +124,12 @@ namespace TripometerAPI.Migrations
                 columns: new[] { "Id", "PasswordHash", "Username" },
                 values: new object[,]
                 {
-                    { 1, "$2a$11$0IGan0vPPWHgyB2T91dfgOSv/Q54yMm9rfApXPLpsH1RVNr.VXFwa", "TestUser1" },
-                    { 2, "$2a$11$7vD78Cw6CWj9ahAz2jIqyOFOMeSBnTtWvUmzlrba1Fw0ruWk5dfAS", "TestUser2" },
-                    { 3, "$2a$11$bvLfdN9XY51/2XJVQ3QgKeu9awGnSB.AUcJuhmexcBsMwaJpvRq/y", "TestUser3" },
-                    { 4, "$2a$11$IGO2kTX3KZ2B2e3Q0g5E/u4Fq.CvYzUA80H0LVyWNOOTAfNQCbg5K", "TestUser4" },
-                    { 5, "$2a$11$ZsvDte1Hjqmw8RbLdg8CV.LSWA36d8ECi6wMqQciPDtFXYVs3RC8a", "TestUser5" },
-                    { 6, "$2a$11$tKhYa.BIpNQrvwkWvyrJduDOHIsyOdVZa1vT4PIH0oT21SD636kgy", "TestUser6" }
+                    { 1, "$2a$11$eVPg/8u9q.Na0MAb2p4Vre3cm9UY5HK6GAWLhqVPnJiGKh6HJfYyW", "TestUser1" },
+                    { 2, "$2a$11$oJYxq2rDZ0ukwdw3V8ug5u5oytr7074Ftr5/WLwukCpE2FcSHFY1G", "TestUser2" },
+                    { 3, "$2a$11$8fY2DMq/mWxFbfnhdXFzW.pSMnC7evddqEWjfDlKY6Mh.0cglyS2i", "TestUser3" },
+                    { 4, "$2a$11$uKFT1ja3y0c4WEdWGpA0xeYKzdYz8ls2zy7t/b26PigWcMy5iRaVi", "TestUser4" },
+                    { 5, "$2a$11$2jm2S/Bq9/fomVfjkEa1SO3ELSoTXjRS9/m3x1DwQgQbTi84UPTh6", "TestUser5" },
+                    { 6, "$2a$11$JeOasAZhBPRYW1NT5ExE1uFc4zcxel0Ip8SDXjhkor/BvviumQUje", "TestUser6" }
                 });
 
             migrationBuilder.InsertData(

@@ -101,10 +101,10 @@ function TripView(trip){
                 
                   
                     <p>${DateTime.FormatDate(trip.embarkDate)} ${(trip.disembarkDate == null)?" ":" to "+DateTime.FormatDate(trip.disembarkDate)}</p>
-                    <p>MileageBefore: ${trip.mileageBefore}</p>
-                    <p>MileageAfter: ${trip.mileageAfter} </p>
-                    <p>Distance ${trip.distance} </p>
-                    <p>EstimatedGasCost ${trip.estimatedGasCost} </p>
+                    <p>MileageBefore: ${trip.mileageBefore.toFixed(2)}</p>
+                    <p>MileageAfter: ${trip.mileageAfter.toFixed(2)} </p>
+                    <p>Distance ${trip.distance.toFixed(2)} </p>
+                    <p>EstimatedGasCost ${trip.estimatedGasCost.toFixed(2)} </p>
              
             </div>
             <div class="receiptsView"> 
@@ -181,8 +181,8 @@ function UpdateTripView(trip){
         <input type="text" id="estimatedGasCost" value="${trip.estimatedGasCost}" placeholder="${trip.estimatedGasCost}">
         </div>
         <div class="trip-input">
-        <label for="estimatedTotalCost">EstimatedTotalCost</label>
-        <input type="text" id="estimatedTotalCost" value="${trip.estimatedTotalCost}" placeholder="${trip.estimatedTotalCost}">
+        <label for="estimatedFuelUsage">estimatedFuelUsage</label>
+        <input type="text" id="estimatedFuelUsage" value="${trip.estimatedFuelUsage}" placeholder="${trip.estimatedFuelUsage}">
 
         <input id="vehicle" value="${trip.vehicleId}" hidden>
         </div>
@@ -257,11 +257,11 @@ function UpdateTrip(tripId){
     let eTA = document.getElementById('eTA').value;
     let distance = document.getElementById('distance').value;
     let estimatedGasCost = document.getElementById('estimatedGasCost').value;
-    let estimatedTotalCost = document.getElementById('estimatedTotalCost').value;
+    let estimatedFuelUsage = document.getElementById('estimatedFuelUsage').value;
     // let owner = document.getElementById('owner').value; 
     let vehicleId = document.getElementById('vehicle').value;
     //excluded disembarkdate
-    let values = [startAddress,endAddress,mileageBefore,mileageAfter,eTA,distance,estimatedGasCost,estimatedTotalCost];
+    let values = [startAddress,endAddress,mileageBefore,mileageAfter,eTA,distance,estimatedGasCost,estimatedFuelUsage];
     let undefinedCount = 0;
     for (let i = 0; i < values.length; i++) {
         if(values[i] == null){
@@ -279,7 +279,7 @@ function UpdateTrip(tripId){
             // ETA:eTA,
             Distance:distance,
             EstimatedGasCost:estimatedGasCost,
-            EstimatedTotalCost:estimatedTotalCost,
+            estimatedFuelUsage:estimatedFuelUsage,
             VehicleId:vehicleId,
             Id:tripId
         }

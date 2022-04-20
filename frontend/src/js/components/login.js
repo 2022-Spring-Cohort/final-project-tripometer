@@ -22,11 +22,12 @@ function LoginVeiw(id){
                 <h2>Log in to Tripometer</h2>  
             </div>
             <div class="text-danger" id="ErrorMessage"></div>
-            <div id="loginpage">
+            <div>
                 
                 <label class="Username logininfo" for="Username">Username</label>
                 <input type="text" id="Username">
-
+            </div>
+            <div>
                 <label class="Password logininfo" for="Password">Password</label>
                 <input type="password" id="Password">
             </div>

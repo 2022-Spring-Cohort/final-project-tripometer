@@ -27,7 +27,7 @@ function SetupFooter() {
                     </ul>
                 </div>
             </div>    
-        <div class="BottomPart">
+            <div class="BottomPart">
                 <div class="BottomLeft">    
                     
                     <h3>Connect with us:</h3>
@@ -48,7 +48,7 @@ function SetupFooter() {
                     <li>Kevin McDonald- Career Advancement Advisor</li>
                     </ul>
                 <sup><strong>Staff of the WCCI program</strong></sup>
-                </div>   
+            </div>   
         </div>
     `;
 }
