@@ -10,7 +10,7 @@ using TripometerAPI;
 namespace TripometerAPI.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220414192823_init")]
+    [Migration("20220420075211_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -188,37 +188,37 @@ namespace TripometerAPI.Migrations
                         new
                         {
                             Id = 1,
-                            PasswordHash = "$2a$11$0IGan0vPPWHgyB2T91dfgOSv/Q54yMm9rfApXPLpsH1RVNr.VXFwa",
+                            PasswordHash = "$2a$11$eVPg/8u9q.Na0MAb2p4Vre3cm9UY5HK6GAWLhqVPnJiGKh6HJfYyW",
                             Username = "TestUser1"
                         },
                         new
                         {
                             Id = 2,
-                            PasswordHash = "$2a$11$7vD78Cw6CWj9ahAz2jIqyOFOMeSBnTtWvUmzlrba1Fw0ruWk5dfAS",
+                            PasswordHash = "$2a$11$oJYxq2rDZ0ukwdw3V8ug5u5oytr7074Ftr5/WLwukCpE2FcSHFY1G",
                             Username = "TestUser2"
                         },
                         new
                         {
                             Id = 3,
-                            PasswordHash = "$2a$11$bvLfdN9XY51/2XJVQ3QgKeu9awGnSB.AUcJuhmexcBsMwaJpvRq/y",
+                            PasswordHash = "$2a$11$8fY2DMq/mWxFbfnhdXFzW.pSMnC7evddqEWjfDlKY6Mh.0cglyS2i",
                             Username = "TestUser3"
                         },
                         new
                         {
                             Id = 4,
-                            PasswordHash = "$2a$11$IGO2kTX3KZ2B2e3Q0g5E/u4Fq.CvYzUA80H0LVyWNOOTAfNQCbg5K",
+                            PasswordHash = "$2a$11$uKFT1ja3y0c4WEdWGpA0xeYKzdYz8ls2zy7t/b26PigWcMy5iRaVi",
                             Username = "TestUser4"
                         },
                         new
                         {
                             Id = 5,
-                            PasswordHash = "$2a$11$ZsvDte1Hjqmw8RbLdg8CV.LSWA36d8ECi6wMqQciPDtFXYVs3RC8a",
+                            PasswordHash = "$2a$11$2jm2S/Bq9/fomVfjkEa1SO3ELSoTXjRS9/m3x1DwQgQbTi84UPTh6",
                             Username = "TestUser5"
                         },
                         new
                         {
                             Id = 6,
-                            PasswordHash = "$2a$11$tKhYa.BIpNQrvwkWvyrJduDOHIsyOdVZa1vT4PIH0oT21SD636kgy",
+                            PasswordHash = "$2a$11$JeOasAZhBPRYW1NT5ExE1uFc4zcxel0Ip8SDXjhkor/BvviumQUje",
                             Username = "TestUser6"
                         });
                 });

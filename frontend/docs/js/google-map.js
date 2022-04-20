@@ -4,7 +4,7 @@ console.log("loading google-map.js...");
 //center lat/lng USA
 const DEFAULT_LATITUDE = 41.850033;
 const DEFAULT_LONGITUDE = -87.6500523;
-const DEFAULT_ZOOM = 10;
+const DEFAULT_ZOOM = 4;
  
  const ICON_PATH = "https://maps.gstatic.com/consumer/images/icons/2x/"
  const ICON_SUFFIX = "_grey800_18dp.png";
@@ -32,8 +32,8 @@ class GoogleMap extends HTMLElement{
         this.directionsRenderer = new google.maps.DirectionsRenderer(directionsRendererOptions);
         this.style.display = "block";
         this.style.flexBasis = "0";
-        this.style.flexGrow = "4";
-        this.style.minHeight = "100%";
+        this.style.flexGrow = "1";
+        // this.style.minHeight = "100%";
         
         this.markers = [];
         this.polyline = null;

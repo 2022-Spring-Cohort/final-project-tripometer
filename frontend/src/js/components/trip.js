@@ -304,9 +304,9 @@ const appDiv = document.getElementById("app");
 function view(){
     document.getElementById(appDiv);
     appDiv.innerHTML = `
-        <div id="create-trip-container" style="min-height:100vh; display:flex">
-            <google-map id="map" style="order: 2"></google-map>
-            <div id="sidebar" style="order: 1; flex-basis: 15rem;flex-grow: 1;padding: 1rem;max-width: 30rem;height: 100%;box-sizing: border-box;overflow: auto;flex-direction: column;">
+        <div id="create-trip-container">
+            <google-map id="map"></google-map>
+            <div id="sidebar">
                 <div class="trip-input">
                     <select id="vehicle-select">
                         <option selected disabled>---SELECT VEHICLE---</option>
