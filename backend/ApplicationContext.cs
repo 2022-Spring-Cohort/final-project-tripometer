@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using TripometerAPI.Models;
 using BCryptNet = BCrypt.Net.BCrypt;
@@ -16,9 +17,13 @@ namespace TripometerAPI
         
         public DbSet<User> Users { get; set; }
 
+        private readonly IConfiguration _configuration;
+
+        public ApplicationContext(IConfiguration configuration) { _configuration = configuration; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=(localdb)\\mssqllocaldb; Database = TripometerAPI; Trusted_connection=True");
+            builder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
             builder.UseLazyLoadingProxies();
         }
 

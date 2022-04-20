@@ -1,4 +1,4 @@
-export const APIPATH = "https://localhost:44376/api";
+export const APIPATH = "http://wccieducation-001-site3.itempurl.com/data/api";
 
 
 export const OwnerController = `${APIPATH}/owner/`;

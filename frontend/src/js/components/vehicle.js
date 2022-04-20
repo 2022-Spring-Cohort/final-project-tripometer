@@ -1,6 +1,7 @@
 import { VehicleController } from "../constants";
 import Utility from "../utility";
 import AllRequest from "../allRequest";
+import owner from "./owner";
 
 
 
@@ -277,7 +278,7 @@ function VehicleUserInput(id, method) {
         Year: Year,
         FuelEfficiency: FuelEfficiency,
         FuelTank: FuelTank,
-        ownerId: 1
+        ownerId: owner.GetId()
     }
 
     if (method == "PUT") {
